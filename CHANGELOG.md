@@ -2,6 +2,10 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.14
+
+- Mercenary Warrants are priced the way Awakened PoE Trade shows them: each skill of the mercenary is a group with its icon and its linked supports, opened with the arrow; supports show their tier and Req / N-1; the 6-Link filter and the "None of" group have their proper texts. Fix: opening a skill showed only the 6-Link line and none of its supports.
+
 ## v0.1.13
 
 - **Themes**: Settings → Overlay → Theme. Besides ours there is **Awakened PoE Trade**: APT's colours and fonts in every window and APT's price check, laid out as APT does it (one column as tall as the game, next to the inventory or the stash, related items beside it), over Price of Exile's own price check. "Centre of the game" and "Opposite the cursor" apply to both themes.
