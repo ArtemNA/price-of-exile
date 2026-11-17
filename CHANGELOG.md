@@ -2,6 +2,10 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.15
+
+- Game data for 3.30 (Covens), taken from Awakened PoE Trade 3.30.101: new items and mods, and the price check reads rolls whose range the game now writes as "(...)". Threads get poe.ninja prices. Items removed from the game in 3.30 (Scarabs, Sacrifice and Mortal fragments, …) are no longer recognized.
+
 ## v0.1.14
 
 - Mercenary Warrants are priced the way Awakened PoE Trade shows them: each skill of the mercenary is a group with its icon and its linked supports, opened with the arrow; supports show their tier and Req / N-1; the 6-Link filter and the "None of" group have their proper texts. Fix: opening a skill showed only the 6-Link line and none of its supports.
