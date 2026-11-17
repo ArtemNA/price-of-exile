@@ -9,6 +9,7 @@ export type AptIconName =
   | 'warning'
   | 'chevron-up'
   | 'chevron-down'
+  | 'chevron-right'
   | 'toggle-on'
   | 'toggle-off'
   | 'arrow-right'
@@ -48,6 +49,9 @@ export type AptIconName =
         @case ('warning') {
           <path fill="currentColor" fill-rule="evenodd"
             d="M8 .9c.5 0 1 .3 1.2.7l6.5 11.3c.5.9-.1 2-1.2 2H1.5c-1 0-1.7-1.1-1.2-2L6.8 1.6C7 1.2 7.5.9 8 .9zM7 5v4.5h2V5zm0 5.8v1.9h2v-1.9z" />
+        }
+        @case ('chevron-right') {
+          <path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5.5 2.5 11 8l-5.5 5.5" />
         }
         @case ('chevron-up') {
           <path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M2.5 11 8 5.5l5.5 5.5" />

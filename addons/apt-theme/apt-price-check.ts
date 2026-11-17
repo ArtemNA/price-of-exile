@@ -23,6 +23,7 @@ import { PriceCheckPanel } from '../../src/app/price-check/price-check-panel';
 import { Currency } from '../../src/app/shared/currency';
 import { host } from '../../src/app/host';
 import { AptIcon } from './apt-icon';
+import { isMiniFilter, mercTier, rollOptions } from '../../src/app/price-check/filter-view';
 import { AptTitleBar } from './apt-title-bar';
 
 /** APT's related items panel beside the column: max-width 24 rem. */
@@ -347,12 +348,14 @@ export class AptPriceCheck extends PriceCheckPanel {
     return { cls: `apt-tag-${filter.tag}`, text: t(`filters.tag_${filter.tag.replace('-', '_')}`) + count };
   }
 
-  /** "Tier 1" / "Tier 2" badges (APT `FilterModifierTiers.vue`). */
+  /** "Tier 1" / "Tier 2" badges (APT `FilterModifierTiers.vue`), mercenary support tiers first. */
   protected tiers(filter: StatFilter): Array<{ cls: string; tier: number }> {
     const category = this.item().category;
     const out: Array<{ cls: string; tier: number }> = [];
+    const merc = mercTier(filter);
+    if (merc) out.push({ cls: `apt-${merc.kind}`, tier: merc.tier });
     for (const source of filter.sources) {
-      const tier = source.modifier.info.tier;
+      const tier = source.modifier.info?.tier;
       if (!tier) continue;
       const plain = filter.tag === FilterTag.Explicit || filter.tag === FilterTag.Pseudo || filter.tag === FilterTag.Property;
       const jewel = [ItemCategory.Jewel, ItemCategory.ClusterJewel, ItemCategory.MemoryLine, ItemCategory.Idol].includes(category!);
@@ -366,12 +369,23 @@ export class AptPriceCheck extends PriceCheckPanel {
     return out.sort((a, b) => a.tier - b.tier);
   }
 
+  /** One compact line (mercenary supports, its 6-Link, gems…): APT `miniFilter`. */
+  protected isMini(filter: StatFilter): boolean {
+    return isMiniFilter(filter, this.item());
+  }
+
+  protected rollOptionsOf(filter: StatFilter) {
+    return rollOptions(filter);
+  }
+
   protected readonly emptyAffixKeys = ['filters.option_empty_affix', 'filters.option_empty_prefix', 'filters.option_empty_suffix'];
 
   /** Mods on: the mods behind the filter under it while hovered (APT `showSourceInfo`). */
   protected showSourceInfo(filter: StatFilter): boolean {
     if (!this.showSources() || !filter.sources.length || filter.option != null) return false;
+    // Mercenary support families have sources without mod info (APT encodeFamilyToSource).
     const first = filter.sources[0].modifier.info;
+    if (!first) return false;
     return filter.tag === FilterTag.Pseudo || filter.sources.length >= 2 || first.name != null || first.tier != null || first.rank != null;
   }
 

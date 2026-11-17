@@ -196,3 +196,50 @@ Item Level: 68
 --------
 Unidentified
 `;
+
+/** Mercenary Warrant (3.29 Mercenaries): skill groups with supports and tiers, a "None of" group. */
+export const MERCENARY_WARRANT = `Item Class: Map Fragments
+Rarity: Normal
+Mercenary Warrant
+--------
+Tavielle, the Tenth
+--------
+Build: Kineticist
+Mercenary Level: 81
+--------
+Elemental Weakness
+Greater Curse Effect (Tier: 3)
+Increased Area of Effect (Tier: 2)
+--------
+Flame Wall
+Faster Casting (Tier: 2)
+Increased Area of Effect (Tier: 2)
+More Duration (Tier: 2)
+--------
+Greater Kinetic Blast
+Greater Cooldown Recovery (Tier: 3)
+Greater Multiple Projectiles (Tier: 3)
+Critical Damage (Tier: 2)
+Added Lightning (Tier: 2)
+Second Wind (Tier: 3)
+--------
+Kinetic Blast of Clustering
+Greater Elemental Damage with Attacks (Tier: 3)
+Greater Added Lightning (Tier: 3)
+Greater Multiple Projectiles (Tier: 3)
+Greater Critical Damage (Tier: 3)
+Added Cold (Tier: 2)
+--------
+Inspiring Cry
+Warcry Speed (Tier: 2)
+More Duration (Tier: 2)
+--------
+Flame Dash
+More Duration (Tier: 2)
+Cooldown Recovery (Tier: 2)
+--------
+Right click this item to view Mercenary details.
+Open a portal to the Proving Grounds by using this item in a personal Map Device. This previously fought Mercenary will reappear in the area for a rematch. While viewing your Atlas, Right-click this item to pinpoint its location.
+--------
+Note: ~b/o 5 divine
+`;

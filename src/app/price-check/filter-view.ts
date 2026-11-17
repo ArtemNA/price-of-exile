@@ -3,8 +3,15 @@
 // header's base / corrupted switches. The filter objects stay APT's; only the view is ours.
 
 import { STAT_GROUP_OTHER, STAT_GROUPS } from '../constants';
-import { tr } from '../core/i18n';
-import type { FilterOrGroup, ItemFilters, StatFilter } from '../../lib/apt/web/price-check/filters/interfaces';
+import { t, tr } from '../core/i18n';
+import { ItemCategory, type ParsedItem } from '@/parser';
+import {
+  type FilterGroup,
+  type FilterOrGroup,
+  INTERNAL_TRADE_IDS,
+  type ItemFilters,
+  type StatFilter,
+} from '../../lib/apt/web/price-check/filters/interfaces';
 
 export type CorruptedState = 'any' | 'not' | 'only';
 
@@ -52,7 +59,7 @@ export function groupStats(stats: FilterOrGroup[]): { groups: StatGroup[]; hidde
 
 /** Best (lowest) tier among the mods behind a filter: T1 is the top roll range. */
 export function statTier(filter: StatFilter): number | null {
-  const tiers = filter.sources.map((source) => source.modifier.info.tier).filter((tier): tier is number => tier != null);
+  const tiers = filter.sources.map((source) => source.modifier.info?.tier).filter((tier): tier is number => tier != null);
   return tiers.length ? Math.min(...tiers) : null;
 }
 
@@ -72,7 +79,7 @@ export function sourceLines(filter: StatFilter): SourceLine[] {
   return filter.sources.map((source) => {
     const roll = source.stat.roll?.value;
     const text = statLine(source.stat.translation.string, source.stat.stat.ref, roll);
-    const type = source.modifier.info.type;
+    const type = source.modifier.info?.type;
     const adds = source.contributes?.value;
     return {
       text,
@@ -116,4 +123,94 @@ export function baseSwitch(filters: ItemFilters): { category: string; base: stri
 
 export function setExactBase(filters: ItemFilters, exact: boolean): void {
   if (filters.searchRelaxed) filters.searchRelaxed.disabled = exact;
+}
+
+// Mercenary warrants (APT FilterGroup.vue, FilterModifier.vue "miniFilter", FilterModifierLinks.vue,
+// FilterModifierTiers.vue, FilterModifierOptions.vue): a group per skill of the mercenary with its
+// supports, and a "None of" group of skills it must not have.
+
+/** The text of a filter: APT's own ids ("6-Link with # Support Gems of Tier 3", "None of") come from i18n. */
+export function filterText(filter: StatFilter): string {
+  return INTERNAL_TRADE_IDS.includes(filter.tradeId[0]) ? t(filter.tradeId[0], '#', '#') : filter.text;
+}
+
+/** Filters shown on one compact line (supports of a mercenary skill, its 6-Link, gems, …). */
+export function isMiniFilter(filter: StatFilter, item: ParsedItem): boolean {
+  if (filter.hidden) return false;
+  const name = item.info.refName;
+  return (
+    filter.tag === 'mercenary-support' ||
+    (filter.tag === 'property' && name === 'Mercenary Warrant') ||
+    name === 'Chronicle of Atzoatl' ||
+    name === 'Mirrored Tablet' ||
+    name === 'Filled Coffin' ||
+    item.category === ItemCategory.Gem
+  );
+}
+
+/** Choices of a filter with an option: a support Required / N-1 (optional), an empty affix kind. */
+export function rollOptions(filter: StatFilter): Array<{ key: string; value: number }> | null {
+  if (filter.tag === 'mercenary-support' && filter.option) {
+    return [
+      { key: 'filters.option_merc_required', value: 1 },
+      { key: 'filters.option_merc_optional', value: 0 },
+    ];
+  }
+  if (filter.tradeId[0] === 'item.has_empty_modifier') {
+    return [
+      { key: 'filters.option_empty_affix', value: 0 },
+      { key: 'filters.option_empty_prefix', value: 1 },
+      { key: 'filters.option_empty_suffix', value: 2 },
+    ];
+  }
+  return null;
+}
+
+/** APT's option click: the chosen one again turns the filter on / off, another one picks it and turns it on. */
+export function pickRollOption(filter: StatFilter, value: number): void {
+  if (!filter.option) return;
+  if (filter.option.value === value) {
+    filter.disabled = !filter.disabled;
+  } else {
+    filter.option.value = value;
+    filter.disabled = false;
+  }
+}
+
+export type MercTierKind = 'tier-1' | 'tier-2' | 'not-tier-1' | 'merc-gilded';
+
+/** The tier mark of a mercenary support: 3 is the best (gold), 4 gilded, 2 / 1 by whether it is the top one. */
+export function mercTier(filter: StatFilter): { kind: MercTierKind; tier: number } | null {
+  const tier = filter.mercenary?.tier;
+  if (!tier) return null;
+  const kind: MercTierKind = tier === 4 ? 'merc-gilded' : tier === 3 ? 'tier-1' : filter.mercenary!.maxTier ? 'tier-2' : 'not-tier-1';
+  return { kind, tier };
+}
+
+export interface MercLink {
+  skill: boolean;
+  /** The skill with 5 supports: a 6-link. */
+  sixlink?: boolean;
+  tier3?: boolean;
+  gilded?: boolean;
+  /** Searched for: the skill (and 6-link) or the support is on. */
+  checked: boolean;
+}
+
+/** The skill and its supports as linked sockets, as APT draws them on the group's line. */
+export function mercLinks(group: FilterGroup): MercLink[] {
+  const supports = group.stats.filter((stat) => stat.mercenary);
+  const metaOn = !group.meta.disabled;
+  const sixlinkOn = group.stats.some(
+    (stat) => !stat.disabled && ((stat.not && supports.length === 5) || stat.tradeId[0] === 'item.mercenary_6link'),
+  );
+  return [
+    { skill: true, sixlink: supports.length === 5, checked: metaOn && sixlinkOn },
+    ...supports.map((gem) => ({
+      skill: false,
+      tier3: gem.mercenary!.tier === 3,
+      gilded: gem.mercenary!.tier === 4,
+      checked: metaOn && !gem.disabled,
+    })),
+  ];
 }

@@ -134,3 +134,5 @@ shot shows the Search button. Live prices and listings differ from the APT shots
 | `apt-theme-related-beside-right.png` | The same with the item in the stash: the column next to the stash panel, related items on its right |
 | `apt-theme-centred.png` | APT theme, "Centre of the game": the column in the centre of the game, related items on its right |
 | `apt-theme-full-height.png` | APT theme: the price check from the top to the bottom of the game window |
+| `22-mercenary-warrant.png` | Mercenary Warrant: "Mercenary skills" with skill icons and linked-socket marks; Greater Kinetic Blast open: 6-Link, supports with T3 / T2 and Req / N-1, supports it must not have ("not") |
+| `22-mercenary-warrant-apt-theme.png` | The same in the APT theme, as APT draws it (FilterGroup, FilterModifierLinks, Tier badges, Req / N-1) |

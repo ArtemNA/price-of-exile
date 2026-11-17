@@ -108,9 +108,12 @@
           }
           @for (entry of aptStats(); track $index) {
             @if (isGroup(entry)) {
-              <ng-container *ngTemplateOutlet="statRow; context: { $implicit: entry.meta }" />
-              @for (stat of entry.stats; track $index) {
-                <div class="pl-5"><ng-container *ngTemplateOutlet="statRow; context: { $implicit: stat }" /></div>
+              <!-- FilterGroup.vue: the skill (or "None of"), folded; its supports under it when expanded -->
+              <ng-container *ngTemplateOutlet="statRow; context: { $implicit: entry.meta, group: entry }" />
+              @if (entry.expanded) {
+                @for (stat of entry.stats; track $index) {
+                  <ng-container *ngTemplateOutlet="statRow; context: { $implicit: stat, grouped: true }" />
+                }
               }
             } @else {
               <ng-container *ngTemplateOutlet="statRow; context: { $implicit: asStat(entry) }" />
@@ -297,9 +300,11 @@
 </ng-template>
 
 <!-- FilterModifier.vue -->
-<ng-template #statRow let-stat>
+<ng-template #statRow let-stat let-group="group" let-grouped="grouped">
   @let text = parts(filterText(stat), stat.roll?.value);
-  <div class="apt-filter">
+  @let mini = isMini(stat);
+  @let options = rollOptionsOf(stat);
+  <div class="apt-filter" [class.apt-grouped]="grouped">
     @if (showSourceInfo(stat)) {
       <div class="apt-mods">
         @for (source of stat.sources; track $index) {
@@ -320,14 +325,54 @@
     }
     <div class="flex min-w-0 flex-1 flex-col">
       <div class="flex items-baseline justify-between pb-px">
-        <button class="flex min-w-0 items-baseline text-left" type="button" (click)="toggleStat(stat)">
-          <apt-icon [name]="stat.disabled ? 'square' : 'check-square'" class="w-5 shrink-0" [class.text-[#a0aec0]]="stat.disabled" />
-          <div class="apt-search-text relative mr-1 flex min-w-0 flex-1" style="line-height: 1rem">
-            <span class="truncate"><ng-container *ngTemplateOutlet="modText; context: { $implicit: text }" /></span>
-            <span class="apt-search-text-full whitespace-pre-wrap"><ng-container *ngTemplateOutlet="modText; context: { $implicit: text }" /></span>
+        <div class="mr-2 flex min-w-0 items-baseline">
+          <button class="flex min-w-0 items-baseline text-left" type="button" (click)="toggleStat(stat)">
+            <apt-icon [name]="stat.disabled ? 'square' : 'check-square'" class="w-5 shrink-0" [class.text-[#a0aec0]]="stat.disabled" />
+            @if (stat.mercenary?.icon; as icon) {
+              <img [src]="icon" alt="" class="mr-1 w-4 shrink-0 self-center" />
+            }
+            @if (stat.not && mini) {
+              <span class="apt-tag apt-tag-not mr-1">{{ 'filters.tag_not' | t }}</span>
+            }
+            <div class="apt-search-text relative mr-1 flex min-w-0 flex-1" style="line-height: 1rem">
+              <span class="truncate"><ng-container *ngTemplateOutlet="modText; context: { $implicit: text }" /></span>
+              <span class="apt-search-text-full whitespace-pre-wrap"><ng-container *ngTemplateOutlet="modText; context: { $implicit: text }" /></span>
+            </div>
+          </button>
+          @if (group) {
+            <button class="apt-expand-btn" type="button" [attr.aria-expanded]="group.expanded" (click)="toggleGroup(group)">
+              <apt-icon [name]="group.expanded ? 'chevron-down' : 'chevron-right'" />
+            </button>
+          }
+        </div>
+        @if (mini && !stat.roll) {
+          @let miniTiers = tiers(stat);
+          @if (miniTiers.length) {
+            <div class="flex items-center gap-x-1 text-xs leading-none" [class.mr-4]="!!options">
+              @for (tier of miniTiers; track $index) {
+                <span [class]="tier.cls">{{ (tier.cls === 'apt-merc-gilded' ? 'filters.tier_gilded' : 'filters.tier') | t: tier.tier }}</span>
+              }
+            </div>
+          }
+        }
+        @if (group?.group === 'mercenary') {
+          <!-- FilterModifierLinks.vue: the skill and its supports as linked sockets -->
+          <div class="apt-links ml-auto">
+            @for (link of mercLinks(group); track $index) {
+              <div [class]="link.skill ? 'apt-link-skill' : 'apt-link-support'" [class.apt-link-sixlink]="link.sixlink"
+                [class.apt-link-tier3]="link.tier3" [class.apt-link-gilded]="link.gilded" [class.apt-link-checked]="link.checked"></div>
+            }
           </div>
-        </button>
-        <div class="flex items-baseline gap-x-1">
+        } @else if (mini && !stat.roll && options) {
+          <!-- FilterModifierOptions.vue: "Req" / "N-1" -->
+          <div class="apt-roll-options" [class.apt-roll-options-checked]="!stat.disabled">
+            @for (option of options; track option.value) {
+              <button class="apt-roll-option" type="button" [class.apt-roll-option-checked]="option.value === stat.option.value"
+                (click)="pickOption(stat, option.value)">{{ option.key | t }}</button>
+            }
+          </div>
+        } @else {
+        <div class="ml-auto flex items-baseline gap-x-1">
           @if (q20(stat); as quality) {
             <div class="rounded px-2 text-center text-[#a0aec0]">{{ quality }}</div>
           }
@@ -340,7 +385,9 @@
             </div>
           }
         </div>
+        }
       </div>
+      @if (!mini) {
       <div class="flex">
         <div class="flex w-5 items-start">
           @if (stat.hidden) {
@@ -386,6 +433,7 @@
         }
         <div style="width: calc(2 * 3rem + 1px)"></div>
       </div>
+      }
     </div>
   </div>
 </ng-template>

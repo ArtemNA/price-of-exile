@@ -57,7 +57,12 @@ import {
   baseSwitch,
   corruptedState,
   type CorruptedState,
+  filterText,
   groupStats,
+  mercLinks,
+  mercTier,
+  pickRollOption,
+  rollOptions,
   setCorrupted,
   setExactBase,
   sourceLines,
@@ -208,6 +213,26 @@ export class PriceCheckPanel {
   }
 
   /** "1 Empty or Crafted Modifier": which affix has to be free (APT `ItemHasEmptyModifier`). */
+  // Mercenary warrants: skill groups with linked supports (filter-view.ts, APT FilterGroup.vue).
+
+  protected mercLinks(group: Group) {
+    return mercLinks(group);
+  }
+
+  protected mercTier(filter: StatFilter) {
+    return mercTier(filter);
+  }
+
+  /** Required / N-1 of a mercenary support (empty affixes have their own Any / Prefix / Suffix). */
+  protected mercOptions(filter: StatFilter) {
+    return filter.tag === 'mercenary-support' ? rollOptions(filter) : null;
+  }
+
+  protected pickOption(filter: StatFilter, value: number): void {
+    pickRollOption(filter, value);
+    this.markChanged();
+  }
+
   protected emptyAffix(filter: StatFilter): number | null {
     return filter.tradeId[0] === 'item.has_empty_modifier' && filter.option ? filter.option.value : null;
   }
@@ -590,7 +615,7 @@ export class PriceCheckPanel {
   }
 
   protected statText(filter: StatFilter): string {
-    return statLine(filter.text, filter.statRef, filter.roll?.value);
+    return statLine(filterText(filter), filter.statRef, filter.roll?.value);
   }
 
   /** Short tag before non-explicit stats ("implicit", "crafted", …); none for item properties (APT `showTag`). */

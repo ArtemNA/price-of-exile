@@ -505,12 +505,31 @@
 
 <ng-template #entryRow let-entry>
   @if (isGroup(entry)) {
-    <div class="flex items-center gap-2 px-1 py-1">
-      <input type="checkbox" class="size-3.5 accent-gold" [checked]="!entry.meta.disabled" (change)="toggleStat(entry.meta)" />
-      <span class="w-6 flex-none"></span>
-      <button class="min-w-0 flex-1 truncate text-left font-display text-[13px] text-mod" (click)="toggleGroup(entry)">
-        {{ entry.expanded ? '▾' : '▸' }} {{ entry.meta.text }}
+    <div class="flex items-center gap-2 px-1 py-1" [class.bg-mod/[0.06]]="!entry.meta.disabled">
+      <input type="checkbox" class="size-3.5 flex-none accent-gold" [checked]="!entry.meta.disabled" (change)="toggleStat(entry.meta)" />
+      @if (entry.meta.mercenary?.icon; as icon) {
+        <img [src]="icon" alt="" class="size-6 flex-none object-contain" />
+      } @else {
+        <span class="w-6 flex-none"></span>
+      }
+      <button class="flex min-w-0 flex-1 items-center gap-1.5 text-left" [attr.aria-expanded]="entry.expanded" (click)="toggleGroup(entry)">
+        <span class="flex-none text-[10px] text-muted">{{ entry.expanded ? '▾' : '▸' }}</span>
+        <span class="min-w-0 truncate font-display text-[13px]" [class]="entry.meta.disabled ? 'text-mod-off' : 'text-mod'">{{ statText(entry.meta) }}</span>
+        @if (statTag(entry.meta); as tag) {
+          <span class="flex-none border border-line-strong px-1 text-[10px] leading-[14px] text-muted">{{ tag }}</span>
+        }
       </button>
+      @if (entry.group === 'mercenary') {
+        <!-- The skill and its supports as linked sockets: gold = tier 3, filled ring = searched for. -->
+        <span class="relative flex flex-none items-center gap-2.5 pr-1" [title]="'Linked supports' | tr">
+          <span class="absolute inset-x-1 top-1/2 h-0.5 -translate-y-1/2 bg-line"></span>
+          @for (link of mercLinks(entry); track $index) {
+            <span class="relative size-2.5 shadow-[0_0_1px_1px_rgb(0_0_0/50%)]"
+              [class]="link.skill ? 'rotate-45 ' + (link.sixlink ? 'bg-tier1' : 'bg-muted') : 'rounded-full ' + (link.tier3 ? 'bg-tier1' : link.gilded ? 'bg-bronze' : 'bg-line-strong')"
+              [class.outline]="link.checked" [class.outline-offset-2]="link.checked" [class.outline-gold]="link.checked"></span>
+          }
+        </span>
+      }
     </div>
     @if (entry.expanded) {
       @for (stat of entry.stats; track $index) {
@@ -525,17 +544,38 @@
 <ng-template #statRow let-stat let-nested="nested">
   <label class="flex items-center gap-2 px-1 py-[3px]" [class.pl-5]="nested" [class.bg-mod/[0.06]]="!stat.disabled">
     <input type="checkbox" class="size-3.5 flex-none accent-gold" [checked]="!stat.disabled" (change)="toggleStat(stat)" />
-    @let level = tier(stat);
-    <span class="flex h-4 w-6 flex-none items-center justify-center text-[10px] font-bold"
-      [class]="level === 1 ? 'bg-tier1 text-tier1-text' : level === 2 ? 'bg-tier2 text-tier2-text' : level ? 'border border-line text-muted' : ''">
-      {{ level ? 'T' + level : '' }}
-    </span>
+    @if (stat.mercenary?.icon; as icon) {
+      <img [src]="icon" alt="" class="size-6 flex-none object-contain" />
+    } @else if (mercTier(stat); as merc) {
+      <!-- Mercenary support tiers: 3 is the best (gold), 4 gilded, the top tier of a lower family in bronze. -->
+      <span class="flex h-4 w-6 flex-none items-center justify-center text-[10px] font-bold"
+        [class]="merc.kind === 'tier-1' ? 'bg-tier1 text-tier1-text' : merc.kind === 'tier-2' ? 'bg-tier2 text-tier2-text' : merc.kind === 'merc-gilded' ? 'bg-bronze text-bright' : 'border border-line text-muted'"
+        [title]="(merc.kind === 'merc-gilded' ? 'filters.tier_gilded' : 'filters.tier') | t: merc.tier">{{ 'T' + merc.tier }}</span>
+    } @else {
+      @let level = tier(stat);
+      <span class="flex h-4 w-6 flex-none items-center justify-center text-[10px] font-bold"
+        [class]="level === 1 ? 'bg-tier1 text-tier1-text' : level === 2 ? 'bg-tier2 text-tier2-text' : level ? 'border border-line text-muted' : ''">
+        {{ level ? 'T' + level : '' }}
+      </span>
+    }
     <span class="flex min-w-0 flex-1 items-center gap-1.5">
       <span class="min-w-0 truncate font-display text-[13px]" [class]="stat.disabled ? 'text-mod-off' : 'text-mod'" [title]="statText(stat)">{{ statText(stat) }}</span>
+      @if (stat.not) {
+        <span class="flex-none border border-bad-line px-1 text-[10px] leading-[14px] text-bad">{{ 'filters.tag_not' | t }}</span>
+      }
       @if (statTag(stat); as tag) {
         <span class="flex-none border border-line-strong px-1 text-[10px] leading-[14px] text-muted">{{ tag }}</span>
       }
     </span>
+    @if (mercOptions(stat); as options) {
+      <span class="flex h-5 flex-none border border-line-strong text-[11px]" (click)="$event.preventDefault()">
+        @for (option of options; track option.value) {
+          <button class="px-1.5 not-last:border-r not-last:border-line-strong"
+            [class]="option.value === stat.option.value && !stat.disabled ? 'bg-selected text-gold-soft' : 'text-muted hover:text-text'"
+            (click)="pickOption(stat, option.value)">{{ option.key | t }}</button>
+        }
+      </span>
+    }
     @if (fracturedState(stat); as fractured) {
       <button class="flex h-[18px] flex-none items-center gap-1 rounded-[9px] border border-fractured-line pr-1.5 pl-0.5 text-[10px] leading-none"
         [class]="fractured === 'on' ? 'bg-fractured text-fractured-text' : 'text-muted opacity-60 hover:opacity-100'"

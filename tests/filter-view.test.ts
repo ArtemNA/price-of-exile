@@ -1,9 +1,15 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { parseClipboard, type ParsedItem } from '@/parser';
-import type { StatFilter } from '../src/lib/apt/web/price-check/filters/interfaces';
+import type { FilterGroup, StatFilter } from '../src/lib/apt/web/price-check/filters/interfaces';
 import { activePreset, createItemPresets } from '../src/app/price-check/price-check';
 import {
   baseSwitch,
+  filterText,
+  isMiniFilter,
+  mercLinks,
+  mercTier,
+  pickRollOption,
+  rollOptions,
   corruptedState,
   groupStats,
   setCorrupted,
@@ -108,5 +114,57 @@ describe('corrupted and base switches', () => {
     expect(baseSwitch(filters)!.category).toMatch(/^Any /);
     setExactBase(filters, true);
     expect(baseSwitch(filters)!.exact).toBe(true);
+  });
+});
+
+describe('mercenary warrants', () => {
+  const groups = () => preset(items.MERCENARY_WARRANT).stats.filter((e) => e.group) as FilterGroup[];
+
+  it('groups each skill with its supports and adds a "None of" group', () => {
+    const all = groups();
+    expect(all.map((g) => g.group)).toEqual(['mercenary', 'mercenary', 'mercenary', 'mercenary', 'mercenary', 'mercenary', 'not']);
+    expect(all[0].meta.mercenary?.icon).toBeTruthy();
+    expect(filterText(all[6].meta)).not.toBe(all[6].meta.text); // "None of", from i18n
+  });
+
+  it('draws a 6-link with tier 3 supports as APT does', () => {
+    const blast = groups()[2];
+    const links = mercLinks(blast);
+    expect(links.length).toBe(6);
+    expect(links[0]).toMatchObject({ skill: true, sixlink: true, checked: false });
+    expect(links.filter((l) => l.tier3).length).toBe(3);
+    const sixlink = blast.stats.find((s) => s.tradeId[0] === 'item.mercenary_6link')!;
+    expect(filterText(sixlink)).not.toBe('6-Link');
+    blast.meta.disabled = false;
+    sixlink.disabled = false;
+    expect(mercLinks(blast)[0].checked).toBe(true);
+  });
+
+  it('marks support tiers and offers Required / N-1', () => {
+    const supports = groups()[0].stats;
+    expect(mercTier(supports[0])).toEqual({ kind: 'tier-1', tier: 3 });
+    expect(mercTier(supports[1])).toEqual({ kind: 'not-tier-1', tier: 2 });
+    expect(rollOptions(supports[0])!.map((o) => o.value)).toEqual([1, 0]);
+    expect(isMiniFilter(supports[0], parse(items.MERCENARY_WARRANT))).toBe(true);
+  });
+
+  it('picks an option like APT: another one turns the filter on, the same one toggles it', () => {
+    const support = groups()[0].stats[0];
+    pickRollOption(support, 0);
+    expect(support).toMatchObject({ option: { value: 0 }, disabled: false });
+    pickRollOption(support, 0);
+    expect(support.disabled).toBe(true);
+  });
+});
+
+describe('mercenary support families', () => {
+  it('have sources without mod info: tiers and source lines must not throw', () => {
+    const blast = (preset(items.MERCENARY_WARRANT).stats.filter((e) => e.group) as FilterGroup[])[2];
+    const not = blast.stats.filter((s) => s.not);
+    expect(not.length).toBeGreaterThan(0);
+    for (const stat of blast.stats) {
+      expect(() => statTier(stat)).not.toThrow();
+      expect(() => sourceLines(stat)).not.toThrow();
+    }
   });
 });

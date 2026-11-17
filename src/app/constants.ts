@@ -103,6 +103,8 @@ export const STAT_GROUPS: ReadonlyArray<{ name: string; tags: readonly string[] 
     tags: ['explicit', 'fractured', 'veiled', 'explicit-shaper', 'explicit-elder', 'explicit-crusader', 'explicit-hunter', 'explicit-redeemer', 'explicit-warlord', 'explicit-delve', 'explicit-incursion'],
   },
   { name: 'Crafted', tags: ['crafted'] },
+  // Mercenary warrants: a group per skill, and the "None of" group of skills it must not have.
+  { name: 'Mercenary skills', tags: ['mercenary-primary', 'mercenary-secondary', 'mercenary-utility', 'filter-group', 'brick'] },
 ];
 export const STAT_GROUP_OTHER = 'Other';
 
