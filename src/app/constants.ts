@@ -161,7 +161,7 @@ export const POE_NINJA_REFRESH_MS = 10 * 60 * 1000;
  */
 export const POE_NINJA_BULK_TYPES = [
   'Essence', 'Fossil', 'Resonator', 'Scarab', 'Oil', 'Vial', 'DeliriumOrb', 'Invitation', 'Fragment',
-  'DivinationCard', 'Omen', 'Tattoo', 'AllflameEmber', 'Runegraft', 'Wombgift', 'Artifact',
+  'DivinationCard', 'Omen', 'Tattoo', 'AllflameEmber', 'Runegraft', 'Wombgift', 'Artifact', 'Thread',
 ];
 
 /** poe.ninja item pages: `${POE_NINJA_SITE}/${league slug}/${overview url}/${details id}`. */
@@ -198,6 +198,7 @@ export const POE_NINJA_NAMESPACES: ReadonlyArray<{ ns: string; url: string; type
   { ns: 'ITEM', url: 'ducats', type: 'Ducat' },
   { ns: 'ITEM', url: 'enshrouding-crystals', type: 'EnshroudingCrystal' },
   { ns: 'ITEM', url: 'corpses', type: 'Corpse' },
+  { ns: 'ITEM', url: 'threads', type: 'Thread' },
   { ns: 'DIVINATION_CARD', url: 'divination-cards', type: 'DivinationCard' },
   { ns: 'CAPTURED_BEAST', url: 'beasts', type: 'Beast' },
   { ns: 'UNIQUE', url: 'unique-jewels', type: 'UniqueJewel' },

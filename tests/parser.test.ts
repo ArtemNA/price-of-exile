@@ -49,6 +49,13 @@ describe('parseClipboard', () => {
     expect(life?.info).toMatchObject({ generation: 'prefix', tier: 4 });
   });
 
+  it('reads a roll whose range the game describes as text, "(...)" (3.30)', () => {
+    const item = parse(items.RARE_RING.replace('+68(60-69) to maximum Life', '+68(...) to maximum Life'));
+    expect(item.unknownModifiers).toEqual([]);
+    const life = item.statsByType.find((s) => s.stat.ref === '+# to maximum Life');
+    expect(life?.sources[0].contributes?.value).toBe(68);
+  });
+
   // Since 3.29 the game always copies advanced descriptions, and APT dropped
   // parsing mods without `{ ... }` headers. The base is still recognized.
   it('recognizes the base but not the mods of pre-3.29 text', () => {

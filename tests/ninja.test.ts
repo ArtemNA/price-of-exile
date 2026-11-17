@@ -17,7 +17,7 @@ import * as items from './items';
 
 beforeAll(loadGameDataFromDisk);
 
-/** Lines of the real poe.ninja dense overviews, Standard 27.10.2026. */
+/** Lines of the real poe.ninja dense overviews, Standard 27.10.2026 (fragments 17.11.2026). */
 const NINJA = JSON.parse(readFileSync(new URL('./fixtures/ninja-standard.json', import.meta.url), 'utf-8'));
 const DB = priceDbFromNinja(NINJA);
 
@@ -25,11 +25,9 @@ function parse(text: string): ParsedItem {
   return parseClipboard(text)._unsafeUnwrap();
 }
 
-const SACRIFICE_AT_DAWN = `Item Class: Map Fragments
+const FRAGMENT_OF_THE_CHIMERA = `Item Class: Map Fragments
 Rarity: Normal
-Sacrifice at Dawn
---------
-Stack Size: 1/10
+Fragment of the Chimera
 --------
 Can be used in a personal Map Device.
 `;
@@ -87,17 +85,19 @@ describe('poe.ninja prices', () => {
   });
 
   it('lists the set and its rewards with prices', () => {
-    const query = findItemPrice(DB, parse(SACRIFICE_AT_DAWN))!.query;
+    const query = findItemPrice(DB, parse(FRAGMENT_OF_THE_CHIMERA))!.query;
     const group = relatedItems(`${query.ns}::${query.name}`, DB);
     if (!group || 'error' in group) throw new Error(`unexpected ${JSON.stringify(group)}`);
     expect(group.related.map((e) => e.name)).toEqual([
-      'Sacrifice at Dawn',
-      'Sacrifice at Midnight',
-      'Sacrifice at Noon',
-      'Sacrifice at Dusk',
+      'Fragment of the Minotaur',
+      'Fragment of the Chimera',
+      'Fragment of the Phoenix',
+      'Fragment of the Hydra',
     ]);
-    expect(group.related[0]).toMatchObject({ highlight: true, chaos: expect.any(Number) });
-    expect(group.items.find((e) => e.name === 'Mortal Ignorance')?.chaos).toEqual(expect.any(Number));
+    // poe.ninja has no Minotaur line today: the set is still listed, without a price.
+    expect(group.related[0]).toMatchObject({ highlight: false, chaos: undefined });
+    expect(group.related[1]).toMatchObject({ highlight: true, chaos: 90.48 });
+    expect(group.items.find((e) => e.name === 'Fragment of Knowledge')?.chaos).toEqual(expect.any(Number));
     expect(relatedItems('GEM::Arc // 20/20', DB)).toBeNull();
   });
 });
