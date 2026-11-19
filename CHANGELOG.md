@@ -2,6 +2,18 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.16
+
+Game data and price check updates from Awakened PoE Trade 3.30.102.
+
+- **Not Catalysed** filter for rings, amulets and belts without quality.
+- Chronicle of Atzoatl: the 3.30 rooms (Cradle of Creation, renamed rooms) and what each room does, under its line.
+- Twice Corrupted items: the corrupted switch says so, and a once corrupted item is searched without twice corrupted ones.
+- Rare-only mods are recognized as prefixes or suffixes and tagged.
+- Maps: Atlas Drops and More Threads are read, Atlas Drops can be searched, and maps with 9 mods get the mod count filter.
+- Viscera are prepared for, and will be recognized once the game data has them.
+- Game data 3.30.0.3.
+
 ## v0.1.15
 
 - Game data for 3.30 (Covens), taken from Awakened PoE Trade 3.30.101: new items and mods, and the price check reads rolls whose range the game now writes as "(...)". Threads get poe.ninja prices. Items removed from the game in 3.30 (Scarabs, Sacrifice and Mortal fragments, …) are no longer recognized.
