@@ -23,7 +23,7 @@ import { PriceCheckPanel } from '../../src/app/price-check/price-check-panel';
 import { Currency } from '../../src/app/shared/currency';
 import { host } from '../../src/app/host';
 import { AptIcon } from './apt-icon';
-import { isMiniFilter, mercTier, rollOptions } from '../../src/app/price-check/filter-view';
+import { isMiniFilter, isTwiceCorrupted, mercTier, rollOptions } from '../../src/app/price-check/filter-view';
 import { AptTitleBar } from './apt-title-bar';
 
 /** APT's related items panel beside the column: max-width 24 rem. */
@@ -138,6 +138,10 @@ export class AptPriceCheck extends PriceCheckPanel {
 
   /** APT 3.29 has two states: Not Corrupted / Corrupted. */
   protected readonly isCorrupted = computed(() => this.active()?.filters.corrupted?.value ?? false);
+  protected readonly isTwiceCorrupted = computed(() => {
+    const active = this.active();
+    return active ? isTwiceCorrupted(active.filters) : false;
+  });
 
   protected toggleCorrupted(): void {
     this.setCorruptedState(this.corrupted() === 'not' ? 'only' : 'not');
@@ -158,7 +162,11 @@ export class AptPriceCheck extends PriceCheckPanel {
   });
 
   /** No poe.ninja line: APT still shows "icon → ?" for items that are not crafting bases. */
-  protected readonly ninjaUnknown = computed(() => !this.ninjaValue() && !this.item().info.craftable);
+  protected readonly ninjaUnknown = computed(() => {
+    const info = this.item().info;
+    // APT `PriceTrend.vue` showFallback: warrants need the vertical space, Viscera have no icons.
+    return !this.ninjaValue() && !info.craftable && info.refName !== 'Mercenary Warrant' && info.refName !== 'Viscera';
+  });
 
   /** APT sizes the item picture by its inventory cells: 2 tall, 2 wide or 1×1. */
   protected readonly itemImgSize = computed(() => {
@@ -233,6 +241,10 @@ export class AptPriceCheck extends PriceCheckPanel {
     numeric('whiteSockets', 'item.white_sockets');
     numeric('gemLevel', 'item.gem_level');
     numeric('quality', 'item.quality');
+    const notCatalysed = filters.notCatalysed;
+    if (notCatalysed) {
+      chips.push({ kind: 'logical', key: 'notCatalysed', text: t('item.not_catalysed'), active: !notCatalysed.disabled, toggle: () => (notCatalysed.disabled = !notCatalysed.disabled) });
+    }
     for (const influence of filters.influences ?? []) {
       chips.push({
         kind: 'logical',

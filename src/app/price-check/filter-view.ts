@@ -106,6 +106,11 @@ export function corruptedState(filters: ItemFilters): CorruptedState | null {
   return corrupted.exact ? 'only' : 'any';
 }
 
+/** The item is Twice Corrupted (3.30): "Corrupted" then also takes twice corrupted ones (APT `FilterName.vue`). */
+export function isTwiceCorrupted(filters: ItemFilters): boolean {
+  return Boolean(filters.corrupted?.value && filters.corrupted.twice);
+}
+
 export function setCorrupted(filters: ItemFilters, state: CorruptedState): void {
   if (!filters.corrupted) return;
   filters.corrupted.value = state !== 'not';
@@ -141,9 +146,9 @@ export function isMiniFilter(filter: StatFilter, item: ParsedItem): boolean {
   return (
     filter.tag === 'mercenary-support' ||
     (filter.tag === 'property' && name === 'Mercenary Warrant') ||
-    name === 'Chronicle of Atzoatl' ||
     name === 'Mirrored Tablet' ||
     name === 'Filled Coffin' ||
+    name === 'Viscera' ||
     item.category === ItemCategory.Gem
   );
 }

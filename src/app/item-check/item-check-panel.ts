@@ -25,7 +25,7 @@ export class ItemCheckPanel {
 
   protected readonly plate = computed(() => RARITY_COLORS[this.view().rarity] ?? RARITY_COLORS['Normal']);
   protected readonly flags = computed(() =>
-    [this.item().isCorrupted && 'Corrupted', this.item().isMirrored && 'Mirrored', this.item().isUnidentified && 'Unidentified']
+    [this.item().isCorrupted && (this.item().isCorrupted?.twice ? 'Twice corrupted' : 'Corrupted'), this.item().isMirrored && 'Mirrored', this.item().isUnidentified && 'Unidentified']
       .filter((flag): flag is string => Boolean(flag))
       .map((flag) => tr(flag)),
   );

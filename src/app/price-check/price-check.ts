@@ -72,6 +72,7 @@ export function shouldSearchImmediately(item: ParsedItem, presets: Presets): boo
       item.category === ItemCategory.SanctumRelic ||
       item.category === ItemCategory.Charm ||
       item.category === ItemCategory.Idol ||
+      item.info.refName === 'Viscera' ||
       (!CATEGORY_TO_TRADE_ID.has(item.category!) && item.info.refName !== 'Mercenary Warrant') ||
       item.isUnidentified ||
       item.isVeiled,

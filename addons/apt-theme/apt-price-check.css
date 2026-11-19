@@ -278,6 +278,7 @@
 .apt-price-check .apt-tag-explicit-delve::before { background-image: url('./images/delve.png'); }
 .apt-price-check .apt-tag-explicit-veiled::before { background-image: url('./images/veiled.png'); }
 .apt-price-check .apt-tag-explicit-incursion::before { background-image: url('./images/incursion.png'); }
+.apt-price-check .apt-tag-explicit-rareonly::before { background-image: url('./images/rareonly.png'); }
 
 /* Tier badges (FilterModifierTiers.vue) */
 .apt-price-check .apt-tier-1,
@@ -602,3 +603,10 @@
 .apt-price-check .apt-table tbody td {
   height: 22px;
 }
+
+/* FilterModifier.vue reminderText: one line, the rest shows on hover */
+.apt-price-check .apt-reminder-text { position: relative; font-style: italic; white-space: pre; cursor: default; }
+.apt-price-check .apt-reminder-text > div { min-width: min-content; box-sizing: content-box; padding-right: 0.5rem; color: #a0aec0; background: #2d3748; }
+.apt-price-check .apt-reminder-text::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to left, #2d3748, transparent 6rem); }
+.apt-price-check .apt-filter:not(:hover) .apt-reminder-text { overflow: hidden; }
+.apt-price-check .apt-filter:hover .apt-reminder-text::after { opacity: 0; }

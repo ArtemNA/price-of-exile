@@ -59,6 +59,11 @@ export function itemFilterChips(filters: ItemFilters): ItemFilterChip[] {
     });
   }
 
+  const notCatalysed = filters.notCatalysed;
+  if (notCatalysed) {
+    chips.push({ key: 'notCatalysed', label: t('item.not_catalysed'), enabled: !notCatalysed.disabled, toggle: () => (notCatalysed.disabled = !notCatalysed.disabled) });
+  }
+
   const corrupted = filters.corrupted;
   if (corrupted) {
     chips.push({

@@ -39,7 +39,7 @@
         }
         @if (corrupted(); as state) {
           <div class="flex h-6 border border-line-strong" role="group" [attr.aria-label]="'Corrupted' | tr">
-            @for (option of corruptedOptions; track option.value) {
+            @for (option of corruptedOptions(); track option.value) {
               <button class="px-2 not-last:border-r not-last:border-line-strong"
                 [class]="option.value !== state ? 'text-muted hover:text-text' : option.value === 'not' ? 'bg-positive-bg text-positive' : option.value === 'only' ? 'bg-corrupted-bg text-bad' : 'bg-selected text-gold-soft'"
                 [attr.aria-pressed]="option.value === state" (click)="setCorruptedState(option.value)">{{ option.label | tr }}</button>
@@ -599,6 +599,9 @@
         (valueChange)="setRoll(stat, 'max', $event)" (submit)="runSearch()" />
     }
   </label>
+  @if (stat.reminderText) {
+    <div class="truncate py-px pl-[54px] text-[12px] text-muted italic" [title]="stat.reminderText">{{ stat.reminderText }}</div>
+  }
   @for (line of sources(stat); track $index) {
     <div class="flex items-center gap-1.5 py-px pl-[54px] text-[12px] text-muted">
       <span class="min-w-0 truncate">{{ line.text }}</span>

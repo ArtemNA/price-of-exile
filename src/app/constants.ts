@@ -100,7 +100,7 @@ export const STAT_GROUPS: ReadonlyArray<{ name: string; tags: readonly string[] 
   { name: 'Eldritch implicits', tags: ['eldritch'] },
   {
     name: 'Explicit',
-    tags: ['explicit', 'fractured', 'veiled', 'explicit-shaper', 'explicit-elder', 'explicit-crusader', 'explicit-hunter', 'explicit-redeemer', 'explicit-warlord', 'explicit-delve', 'explicit-incursion'],
+    tags: ['explicit', 'fractured', 'veiled', 'explicit-shaper', 'explicit-elder', 'explicit-crusader', 'explicit-hunter', 'explicit-redeemer', 'explicit-warlord', 'explicit-delve', 'explicit-incursion', 'explicit-rareonly'],
   },
   { name: 'Crafted', tags: ['crafted'] },
   // Mercenary warrants: a group per skill, and the "None of" group of skills it must not have.
@@ -160,7 +160,7 @@ export const POE_NINJA_REFRESH_MS = 10 * 60 * 1000;
  * Uniques, gems, bases and maps are left out: one name has many variants there.
  */
 export const POE_NINJA_BULK_TYPES = [
-  'Essence', 'Fossil', 'Resonator', 'Scarab', 'Oil', 'Vial', 'DeliriumOrb', 'Invitation', 'Fragment',
+  'Essence', 'Fossil', 'Resonator', 'Oil', 'Vial', 'DeliriumOrb', 'Invitation', 'Fragment',
   'DivinationCard', 'Omen', 'Tattoo', 'AllflameEmber', 'Runegraft', 'Wombgift', 'Artifact', 'Thread',
 ];
 
@@ -175,7 +175,6 @@ export const POE_NINJA_NAMESPACES: ReadonlyArray<{ ns: string; url: string; type
   { ns: 'ITEM', url: 'currency', type: 'Currency' },
   { ns: 'ITEM', url: 'fragments', type: 'Fragment' },
   { ns: 'ITEM', url: 'delirium-orbs', type: 'DeliriumOrb' },
-  { ns: 'ITEM', url: 'scarabs', type: 'Scarab' },
   { ns: 'ITEM', url: 'artifacts', type: 'Artifact' },
   { ns: 'ITEM', url: 'base-types', type: 'BaseType' },
   { ns: 'ITEM', url: 'fossils', type: 'Fossil' },

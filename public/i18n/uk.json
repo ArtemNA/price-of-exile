@@ -107,8 +107,11 @@
       "not_mirrored": "Not mirrored",
       "split": "Розділений",
       "not_split": "Не розділений",
+      "not_catalysed": "Not Catalysed",
       "map_foil_reward": "Особлива {0}",
-      "chart_sulphur": "Сірка мерця: {0}%"
+      "chart_sulphur": "Сірка мерця: {0}%",
+      "map_atlas_drops": "Нагороди в Атласі: {0}%",
+      "twice_corrupted": "Twice Corrupted"
     },
     "item_category": {
       "prop": "Категорія: {0}",
@@ -153,7 +156,11 @@
       "azmeri_charm": "Оберіг",
       "idol": "Ідол",
       "graft": "Наріст",
-      "chart": "Морська мапа"
+      "chart": "Морська мапа",
+      "viscera_arm": "Верхня кінцівка",
+      "viscera_leg": "Нижня кінцівка",
+      "viscera_head": "Голова",
+      "viscera_body": "Тулуб"
     },
     "filters": {
       "selected_some": "Властивості: {0} з {1}",
@@ -209,7 +216,8 @@
       "tag_mercenary_primary": "основний",
       "tag_mercenary_secondary": "додатковий",
       "tag_mercenary_utility": "допоміжний",
-      "tag_filter_group": "Група властивостей"
+      "tag_filter_group": "Група властивостей",
+      "tag_explicit_rareonly": "лише рідкісний"
     },
     "online_filter": {
       "offline_toggle": "Офлайн і онлайн",
@@ -647,6 +655,7 @@
     "White sockets": "Білі гнізда",
     "You": "Ви",
     "Your own listings are marked in the price check.": "Ваші власні пропозиції позначаються в перевірці ціни.",
-    "Σ Mods behind totals": "Σ Моди в сумах"
+    "Σ Mods behind totals": "Σ Моди в сумах",
+    "Twice corrupted": "Twice Corrupted"
   }
 }

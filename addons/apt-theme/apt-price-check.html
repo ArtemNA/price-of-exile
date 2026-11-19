@@ -23,7 +23,9 @@
           (click)="toggleNameAccuracy()">{{ nameLabel() }}</button>
         @if (preset.filters.corrupted) {
           <button class="px-2" (click)="toggleCorrupted()">
-            @if (isCorrupted()) {
+            @if (isTwiceCorrupted()) {
+              <span class="text-[#f56565]">{{ 'item.twice_corrupted' | t }}</span>
+            } @else if (isCorrupted()) {
               <span class="text-[#f56565]">{{ 'item.corrupted' | t }}</span>
             } @else {
               <span class="text-[#718096]">{{ 'item.not_corrupted' | t }}</span>
@@ -389,7 +391,7 @@
       </div>
       @if (!mini) {
       <div class="flex">
-        <div class="flex w-5 items-start">
+        <div class="flex w-5 shrink-0 items-start">
           @if (stat.hidden) {
             <span class="apt-hidden-eye relative cursor-pointer text-xs leading-none text-[#718096]">
               <apt-icon name="eye-slash" />
@@ -397,41 +399,48 @@
             </span>
           }
         </div>
-        <div class="flex min-w-0 flex-1 items-start gap-x-2">
-          @if (stat.not) {
-            <span class="apt-tag apt-tag-not">{{ 'filters.tag_not' | t }}</span>
-          }
-          @if (tagOf(stat); as tag) {
-            <span class="apt-tag" [class]="tag.cls">{{ tag.text }}</span>
-          }
-          @let tierList = tiers(stat);
-          @if (tierList.length) {
-            <div class="flex items-center gap-x-1 text-xs leading-none">
-              @for (tier of tierList; track $index) {
-                <span [class]="tier.cls">{{ 'filters.tier' | t: tier.tier }}</span>
+        <div class="flex min-w-0 flex-1 flex-col">
+          <div class="flex min-w-0">
+            <div class="flex min-w-0 flex-1 items-start gap-x-2">
+              @if (stat.not) {
+                <span class="apt-tag apt-tag-not">{{ 'filters.tag_not' | t }}</span>
+              }
+              @if (tagOf(stat); as tag) {
+                <span class="apt-tag" [class]="tag.cls">{{ tag.text }}</span>
+              }
+              @let tierList = tiers(stat);
+              @if (tierList.length) {
+                <div class="flex items-center gap-x-1 text-xs leading-none">
+                  @for (tier of tierList; track $index) {
+                    <span [class]="tier.cls">{{ 'filters.tier' | t: tier.tier }}</span>
+                  }
+                </div>
+              }
+              @if (emptyAffix(stat) != null) {
+                <div class="flex gap-x-1">
+                  @for (key of emptyAffixKeys; track key; let i = $index) {
+                    <button class="apt-empty-btn" [class.apt-empty-selected]="emptyAffix(stat) === i" type="button" (click)="setEmptyAffix(stat, i)">{{ key | t }}</button>
+                  }
+                </div>
               }
             </div>
-          }
-          @if (emptyAffix(stat) != null) {
-            <div class="flex gap-x-1">
-              @for (key of emptyAffixKeys; track key; let i = $index) {
-                <button class="apt-empty-btn" [class.apt-empty-selected]="emptyAffix(stat) === i" type="button" (click)="setEmptyAffix(stat, i)">{{ key | t }}</button>
-              }
-            </div>
+            @if (stat.roll?.bounds && item().rarity === 'Unique') {
+              @let s = slider(stat);
+              <div #track class="apt-slider mr-4 ml-2" style="width: 12.5rem" [class]="'apt-slider-' + s.mode" (mousedown)="slide($event, stat, track)">
+                <span class="apt-bound" [class.apt-inclusive]="s.minIn">{{ stat.roll.bounds.min }}</span>
+                @if (s.mode !== 'none') {
+                  <div class="apt-fill" [style.--left]="s.left + '%'" [style.--right]="s.right + '%'"></div>
+                }
+                <div class="apt-tick" [style.left]="'max(0.125rem, min(' + s.tick + '% - 0.0625rem, 100% - 0.25rem))'"></div>
+                <span class="apt-bound" [class.apt-inclusive]="s.maxIn">{{ stat.roll.bounds.max }}</span>
+              </div>
+            }
+            <div style="min-width: calc(2 * 3rem + 1px)"></div>
+          </div>
+          @if (stat.reminderText) {
+            <div class="apt-reminder-text"><div>{{ stat.reminderText }}</div></div>
           }
         </div>
-        @if (stat.roll?.bounds && item().rarity === 'Unique') {
-          @let s = slider(stat);
-          <div #track class="apt-slider mr-4 ml-2" style="width: 12.5rem" [class]="'apt-slider-' + s.mode" (mousedown)="slide($event, stat, track)">
-            <span class="apt-bound" [class.apt-inclusive]="s.minIn">{{ stat.roll.bounds.min }}</span>
-            @if (s.mode !== 'none') {
-              <div class="apt-fill" [style.--left]="s.left + '%'" [style.--right]="s.right + '%'"></div>
-            }
-            <div class="apt-tick" [style.left]="'max(0.125rem, min(' + s.tick + '% - 0.0625rem, 100% - 0.25rem))'"></div>
-            <span class="apt-bound" [class.apt-inclusive]="s.maxIn">{{ stat.roll.bounds.max }}</span>
-          </div>
-        }
-        <div style="width: calc(2 * 3rem + 1px)"></div>
       </div>
       }
     </div>

@@ -64,6 +64,7 @@ import {
   pickRollOption,
   rollOptions,
   setCorrupted,
+  isTwiceCorrupted,
   setExactBase,
   sourceLines,
   statCounts,
@@ -159,11 +160,15 @@ export class PriceCheckPanel {
     return active ? corruptedState(active.filters) : null;
   });
 
-  protected readonly corruptedOptions: Array<{ value: CorruptedState; label: string }> = [
-    { value: 'any', label: 'Any' },
-    { value: 'not', label: 'Not corrupted' },
-    { value: 'only', label: 'Corrupted' },
-  ];
+  protected readonly corruptedOptions = computed<Array<{ value: CorruptedState; label: string }>>(() => {
+    const active = this.active();
+    const twice = active ? isTwiceCorrupted(active.filters) : false;
+    return [
+      { value: 'any', label: 'Any' },
+      { value: 'not', label: 'Not corrupted' },
+      { value: 'only', label: twice ? 'Twice corrupted' : 'Corrupted' },
+    ];
+  });
 
   /** Item filters shown as chips in the header; the base, rarity and corrupted have their own controls. */
   protected readonly headerChips = computed(() => this.chips().filter((chip) => !['base', 'rarity', 'corrupted'].includes(chip.key)));

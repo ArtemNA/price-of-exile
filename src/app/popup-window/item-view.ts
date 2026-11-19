@@ -27,7 +27,7 @@ function statLine(text: string, roll?: { value: number; min: number; max: number
 export function toItemView(item: ParsedItem): ItemView {
   const flags = [
     item.isUnidentified && 'Unidentified',
-    item.isCorrupted && 'Corrupted',
+    item.isCorrupted && (item.isCorrupted.twice ? 'Twice corrupted' : 'Corrupted'),
     item.isMirrored && 'Mirrored',
     item.isFractured && 'Fractured',
     item.isSynthesised && 'Synthesised',

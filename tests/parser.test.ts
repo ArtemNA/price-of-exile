@@ -96,7 +96,7 @@ describe('parseClipboard', () => {
     const item = parse(items.UNIDENTIFIED_CORRUPTED);
     expect(item.info.refName).toBe('Onyx Amulet');
     expect(item.isUnidentified).toBe(true);
-    expect(item.isCorrupted).toBe(true);
+    expect(item.isCorrupted).toEqual({});
   });
 
   it('rejects text that is not an item', () => {
