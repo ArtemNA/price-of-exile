@@ -2,6 +2,10 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.18
+
+- **Originator's Exalted Orb** and **Primordial Exalted Orb** (new in 3.30) are priced.
+
 ## v0.1.17
 
 - Fix: the price check hotkey sometimes did nothing until the next alt-tab. The app now checks 4 times a second that it knows the game is in front, and retries a hotkey another app held (for example Awakened PoE Trade with the same key).
