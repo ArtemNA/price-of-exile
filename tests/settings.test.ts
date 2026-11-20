@@ -45,6 +45,13 @@ describe('settings', () => {
     expect(upgradeSettings({ configVersion: 1, stashSearch: groups }).stashSearch).toEqual(groups);
   });
 
+  it('gives old settings Shift+Space to open the settings from the game, as in APT', () => {
+    const settings = upgradeSettings({ configVersion: 1, hotkeys: { 'price-check': 'Ctrl+KeyD' } });
+    expect(settings.hotkeys.settings).toBe('Shift+Space');
+    // Someone who cleared it keeps it cleared.
+    expect(upgradeSettings({ configVersion: 1, hotkeys: { settings: null } }).hotkeys.settings).toBeNull();
+  });
+
   it('fills missing nested fields and survives a damaged file', () => {
     const settings = upgradeSettings({ configVersion: 1, hotkeys: { wiki: 'Alt+KeyW' }, priceCheck: { searchStatRange: 5 } });
     expect(settings.hotkeys).toEqual({ ...DEFAULT_HOTKEYS, wiki: 'Alt+KeyW' });

@@ -15,7 +15,7 @@ use std::collections::HashMap;
 
 use tauri::{AppHandle, Emitter, Manager, WindowEvent};
 
-use constants::{BROWSER_WINDOW, DEV_IDENTIFIER_SUFFIX, LOG_MAX_BYTES, MAIN_WINDOW};
+use constants::{BROWSER_WINDOW, DEV_IDENTIFIER_SUFFIX, FOREGROUND_WATCHDOG_PERIOD, LOG_MAX_BYTES, MAIN_WINDOW};
 use platform::ForegroundInfo;
 use state::AppState;
 
@@ -66,7 +66,6 @@ fn on_foreground(app: &AppHandle, info: ForegroundInfo) {
     }
 
     let is_game = !info.is_own_process && state.is_game_window(&info.title);
-    let was_game = state.game_hwnd().is_some();
     state.set_game_hwnd(is_game.then_some(info.hwnd));
     if is_game {
         // Clicked back into the game while typing in the popup: popup stops taking focus.
@@ -81,12 +80,59 @@ fn on_foreground(app: &AppHandle, info: ForegroundInfo) {
             is_game,
         },
     );
-    if is_game != was_game {
-        hotkeys::set_game_hotkeys(app, is_game);
-    }
+    // Every time, not only when the game state flips: a registration that failed is retried.
+    hotkeys::sync_game_hotkeys(app);
     if !is_game && state.popup_visible() && !state.keep_popup_on_blur {
         popup::hide(app, false);
     }
+}
+
+/// Whether the game state the app keeps no longer matches the window in front, i.e. a
+/// foreground event was missed or handled out of order. The popup and the built-in browser in
+/// front keep the game state as it is (see `on_foreground`), so they never count.
+fn game_state_is_stale(
+    game: Option<platform::RawHwnd>,
+    front: &ForegroundInfo,
+    front_is_game: bool,
+    popup: platform::RawHwnd,
+    browser: Option<platform::RawHwnd>,
+) -> bool {
+    if front.is_own_process && (front.hwnd == popup || Some(front.hwnd) == browser) {
+        return false;
+    }
+    let expected = (front_is_game && !front.is_own_process).then_some(front.hwnd);
+    game != expected
+}
+
+/// Once a second: put right a game state that disagrees with the window in front, and retry
+/// hotkeys another app held. The price check otherwise stayed dead until the next alt-tab.
+fn watch_game_state(app: AppHandle) {
+    std::thread::spawn(move || loop {
+        std::thread::sleep(FOREGROUND_WATCHDOG_PERIOD);
+        let state = app.state::<AppState>();
+        let front = platform::current_foreground();
+        let front_is_game = state.is_game_window(&front.title);
+        let stale = game_state_is_stale(
+            state.game_hwnd(),
+            &front,
+            front_is_game,
+            state.popup_hwnd(),
+            browser::hwnd(&app),
+        );
+        if stale {
+            log_to_ui(
+                &app,
+                format!(
+                    "[focus] game state was out of date (game {}, in front: game {}), fixed",
+                    if state.game_hwnd().is_some() { "active" } else { "inactive" },
+                    if front_is_game { "yes" } else { "no" },
+                ),
+            );
+            on_foreground(&app, front);
+        } else if state.game_hwnd().is_some() {
+            hotkeys::sync_game_hotkeys(&app);
+        }
+    });
 }
 
 #[tauri::command]
@@ -297,6 +343,7 @@ pub fn run() {
             let watcher_handle = handle.clone();
             platform::watch_foreground(move |info| on_foreground(&watcher_handle, info));
             on_foreground(&handle, platform::current_foreground());
+            watch_game_state(handle.clone());
             Ok(())
         })
         .on_window_event(|window, event| {
@@ -317,4 +364,41 @@ pub fn run() {
         })
         .run(tauri::generate_context!())
         .expect("error while building tauri application");
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn front(hwnd: platform::RawHwnd, own: bool) -> ForegroundInfo {
+        ForegroundInfo { hwnd, title: String::new(), is_own_process: own }
+    }
+
+    #[test]
+    fn game_in_front_but_believed_inactive_is_stale() {
+        // The price check hotkey is registered but ignored: the state says the game is not active.
+        assert!(game_state_is_stale(None, &front(7, false), true, 1, None));
+    }
+
+    #[test]
+    fn other_window_in_front_but_believed_game_is_stale() {
+        assert!(game_state_is_stale(Some(7), &front(9, false), false, 1, None));
+    }
+
+    #[test]
+    fn matching_state_is_not_stale() {
+        assert!(!game_state_is_stale(Some(7), &front(7, false), true, 1, None));
+        assert!(!game_state_is_stale(None, &front(9, false), false, 1, None));
+    }
+
+    #[test]
+    fn popup_or_browser_in_front_keep_the_game_state() {
+        assert!(!game_state_is_stale(Some(7), &front(1, true), false, 1, Some(2)));
+        assert!(!game_state_is_stale(Some(7), &front(2, true), false, 1, Some(2)));
+    }
+
+    #[test]
+    fn own_settings_window_in_front_is_not_the_game() {
+        assert!(game_state_is_stale(Some(7), &front(3, true), false, 1, Some(2)));
+    }
 }

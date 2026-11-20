@@ -101,6 +101,10 @@ pub const STASH_SEARCH_FOCUS_DELAY: Duration = Duration::from_millis(60);
 pub const CLIPBOARD_POLL_DELAY: Duration = Duration::from_millis(48);
 pub const CLIPBOARD_POLL_LIMIT: Duration = Duration::from_millis(500);
 
+/// How often (4× a second: one GetForegroundWindow and one GetWindowText) the foreground watchdog compares the window in front with what the app believes
+/// (a missed foreground event or a hotkey another app held left the price check dead until the next alt-tab).
+pub const FOREGROUND_WATCHDOG_PERIOD: Duration = Duration::from_millis(250);
+
 /// Second attempt to give the keyboard back to the game if the first one was intercepted.
 pub const FOCUS_RETRY_DELAY: Duration = Duration::from_millis(150);
 

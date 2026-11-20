@@ -14,7 +14,7 @@ use crate::chat::{self, ChatCommand};
 use crate::constants::{MAIN_WINDOW, POPUP_WINDOW};
 use crate::platform::{self, KeyAction, Point, Rect, vk};
 use crate::state::AppState;
-use crate::{browser, clipboard, log_to_ui, popup, stash};
+use crate::{browser, clipboard, log_to_ui, popup, stash, tray};
 
 /// What a hotkey does with the hovered item.
 /// Declaration order is the priority when two actions share a hotkey.
@@ -35,6 +35,8 @@ pub enum HotkeyAction {
     StashPanel,
     /// Show the built-in browser, or hide it and go back to the game; copies nothing.
     Browser,
+    /// Open the settings window (APT opens its overlay with Shift+Space); copies nothing.
+    Settings,
 }
 
 impl HotkeyAction {
@@ -179,6 +181,7 @@ pub fn plugin() -> TauriPlugin<Wry> {
                 // Clipboard polling and typing sleep, keep them off the event loop.
                 std::thread::spawn(move || match binding {
                     Binding::Item(HotkeyAction::StashPanel) => open_stash_panel(&app),
+                    Binding::Item(HotkeyAction::Settings) => tray::show_settings(&app),
                     Binding::Item(HotkeyAction::Browser) => {
                         let game = app.state::<AppState>().game_hwnd();
                         if let Err(e) = browser::toggle(&app, game) {
@@ -195,29 +198,56 @@ pub fn plugin() -> TauriPlugin<Wry> {
 }
 
 /// RegisterHotKey binds to a window owned by the main thread, so (un)register there.
-fn set_registered(app: &AppHandle, shortcut: Shortcut, enabled: bool) {
+/// A failure (another app holds the keys, e.g. APT with the same price check key) is logged
+/// once; the next sync retries it.
+fn set_registered(app: &AppHandle, shortcuts: Vec<Shortcut>, enabled: bool) {
     let handle = app.clone();
     let _ = app.run_on_main_thread(move || {
         let gs = handle.global_shortcut();
-        if enabled {
-            if !gs.is_registered(shortcut) {
-                if let Err(e) = gs.register(shortcut) {
-                    log_to_ui(
-                        &handle,
-                        format!("Failed to register hotkey {shortcut}: {e}"),
-                    );
+        let state = handle.state::<AppState>();
+        for shortcut in shortcuts {
+            if enabled {
+                if gs.is_registered(shortcut) {
+                    continue;
                 }
+                match gs.register(shortcut) {
+                    Ok(()) => {
+                        if state.set_hotkey_failed(shortcut, false) {
+                            log_to_ui(&handle, format!("Hotkey {shortcut} registered now"));
+                        }
+                    }
+                    Err(e) => {
+                        if state.set_hotkey_failed(shortcut, true) {
+                            log_to_ui(
+                                &handle,
+                                format!("Failed to register hotkey {shortcut}: {e} (retrying while the game is in front)"),
+                            );
+                        }
+                    }
+                }
+            } else if gs.is_registered(shortcut) {
+                let _ = gs.unregister(shortcut);
             }
-        } else if gs.is_registered(shortcut) {
-            let _ = gs.unregister(shortcut);
         }
     });
 }
 
-pub fn set_game_hotkeys(app: &AppHandle, enabled: bool) {
-    for (shortcut, _) in app.state::<AppState>().hotkeys() {
-        set_registered(app, shortcut, enabled);
-    }
+/// Registers every hotkey while the game is the active window and none otherwise. Level-based,
+/// not on a change only: a registration that failed or was lost is put right by the next call.
+pub fn sync_game_hotkeys(app: &AppHandle) {
+    let state = app.state::<AppState>();
+    let enabled = state.game_hwnd().is_some();
+    let shortcuts = state.hotkeys().into_iter().map(|(s, _)| s).collect();
+    set_registered(app, shortcuts, enabled);
+}
+
+/// Shortcuts of `old` that `new` no longer has: only these are unregistered when the settings
+/// change, so saving any setting during play does not drop and re-add the game's hotkeys.
+fn removed_shortcuts(old: &[(Shortcut, Binding)], new: &[(Shortcut, Binding)]) -> Vec<Shortcut> {
+    old.iter()
+        .map(|(s, _)| *s)
+        .filter(|s| !new.iter().any(|(n, _)| n == s))
+        .collect()
 }
 
 /// Parses the hotkeys from the settings. Returns the usable ones and a message for each
@@ -259,7 +289,7 @@ pub fn parse_hotkeys(
     (list, errors)
 }
 
-/// New hotkeys from the settings: unregister the old ones, register the new ones if the game is active.
+/// New hotkeys from the settings: unregister the ones that are gone, register the rest if the game is active.
 pub fn set_hotkeys(
     app: &AppHandle,
     config: &HashMap<HotkeyAction, Option<String>>,
@@ -268,13 +298,13 @@ pub fn set_hotkeys(
 ) -> Vec<String> {
     let (list, errors) = parse_hotkeys(config, commands, stash_presets);
     let state = app.state::<AppState>();
-    let game_active = state.game_hwnd().is_some();
-    for (shortcut, _) in state.replace_hotkeys(list.clone()) {
-        set_registered(app, shortcut, false);
+    let old = state.replace_hotkeys(list.clone());
+    let removed = removed_shortcuts(&old, &list);
+    for shortcut in &removed {
+        state.set_hotkey_failed(*shortcut, false);
     }
-    for (shortcut, _) in list {
-        set_registered(app, shortcut, game_active);
-    }
+    set_registered(app, removed, false);
+    sync_game_hotkeys(app);
     errors
 }
 
@@ -441,6 +471,30 @@ mod tests {
         assert_eq!(list.len(), 1);
         assert!(matches!(list[0].1, Binding::Item(HotkeyAction::PriceCheck)));
         assert_eq!(errors.len(), 1, "{errors:?}");
+    }
+
+    #[test]
+    fn keeps_unchanged_hotkeys_registered_when_settings_change() {
+        let old = config(&[
+            (HotkeyAction::PriceCheck, Some("Ctrl+KeyD")),
+            (HotkeyAction::ItemCheck, Some("Alt+KeyD")),
+        ]);
+        let new = config(&[
+            (HotkeyAction::PriceCheck, Some("Ctrl+KeyD")),
+            (HotkeyAction::ItemCheck, Some("Alt+KeyE")),
+        ]);
+        let (old, _) = parse_hotkeys(&old, &[], &[]);
+        let (new, _) = parse_hotkeys(&new, &[], &[]);
+        let removed = removed_shortcuts(&old, &new);
+        assert_eq!(removed, vec![Shortcut::from_str("Alt+KeyD").unwrap()]);
+    }
+
+    #[test]
+    fn parses_the_settings_hotkey() {
+        let (list, errors) = parse_hotkeys(&config(&[(HotkeyAction::Settings, Some("Shift+Space"))]), &[], &[]);
+        assert!(errors.is_empty());
+        assert_eq!(list[0].0, Shortcut::new(Some(Modifiers::SHIFT), Code::Space));
+        assert!(matches!(list[0].1, Binding::Item(HotkeyAction::Settings)));
     }
 
     #[test]
