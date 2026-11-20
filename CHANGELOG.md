@@ -2,6 +2,11 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.17
+
+- Fix: the price check hotkey sometimes did nothing until the next alt-tab. The app now checks 4 times a second that it knows the game is in front, and retries a hotkey another app held (for example Awakened PoE Trade with the same key).
+- **Shift+Space** opens the settings from the game, as in Awakened PoE Trade (Settings → Hotkeys → Open settings).
+
 ## v0.1.16
 
 Game data and price check updates from Awakened PoE Trade 3.30.102.

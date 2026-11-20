@@ -1,6 +1,6 @@
 [package]
 name = "price-of-exile"
-version = "0.1.16"
+version = "0.1.17"
 description = "Price of Exile: a Path of Exile price check overlay"
 authors = ["ArtemNA"]
 license = "MIT"
