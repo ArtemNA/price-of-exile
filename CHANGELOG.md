@@ -16,7 +16,7 @@ Game data and price check updates from Awakened PoE Trade 3.30.102.
 - Twice Corrupted items: the corrupted switch says so, and a once corrupted item is searched without twice corrupted ones.
 - Rare-only mods are recognized as prefixes or suffixes and tagged.
 - Maps: Atlas Drops and More Threads are read, Atlas Drops can be searched, and maps with 9 mods get the mod count filter.
-- Viscera are prepared for, and will be recognized once the game data has them.
+- **Viscera** are priced: the price check searches the trade category of the body part (head, torso, upper or lower limb).
 - Game data 3.30.0.3.
 
 ## v0.1.15
