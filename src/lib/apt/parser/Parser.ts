@@ -987,7 +987,15 @@ function parseFoulborn (item: ParserState) {
 }
 
 function parseVestigial (item: ParserState) {
-  if (item.rarity !== ItemRarity.Unique || !item.baseType) return
+  // Price of Exile: rare and normal items have Vestigial bases too ("Vestigial Golden Mask",
+  // owner's helmet 21.11.2026); APT strips the prefix only from uniques, so those were unknown.
+  if (!item.baseType) {
+    if (item.rarity === ItemRarity.Normal && _$.VESTIGIAL_NAME.test(item.name)) {
+      item.name = _$.VESTIGIAL_NAME.exec(item.name)![1]
+      item.isVestigial = true
+    }
+    return
+  }
 
   if (_$.VESTIGIAL_NAME.test(item.baseType)) {
     item.baseType = _$.VESTIGIAL_NAME.exec(item.baseType)![1]

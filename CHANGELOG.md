@@ -2,6 +2,10 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.22
+
+- Fix: rare and normal items on Vestigial bases (for example a rare "Vestigial Golden Mask") were not recognised. They are priced by their base, mods and the vestigial implicit.
+
 ## v0.1.21
 
 - The default look is now **Graphite**: neutral graphite with ice-blue tiers, so red, orange and green (map check, price drops, warnings) stand out. It replaces Vaal, whose crimson base swallowed them: if you picked Vaal, you get Graphite; any other choice stays.
