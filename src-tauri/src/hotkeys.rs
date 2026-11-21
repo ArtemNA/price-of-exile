@@ -355,8 +355,9 @@ fn open_stash_panel(app: &AppHandle) {
         game_rect,
         elapsed_ms: 0,
     };
-    let _ = app.emit_to(POPUP_WINDOW, "item-text", payload);
+    // Shown first, then told: see `check_item`.
     popup::show(app, game_rect, cursor, CheckTarget::StashSearch);
+    let _ = app.emit_to(POPUP_WINDOW, "item-text", payload);
 }
 
 fn check_item(app: &AppHandle, shortcut: &Shortcut, action: HotkeyAction) {
@@ -402,8 +403,12 @@ fn check_item(app: &AppHandle, shortcut: &Shortcut, action: HotkeyAction) {
         game_rect,
         elapsed_ms,
     };
-    let _ = app.emit_to(POPUP_WINDOW, "item-text", payload);
+    // Show (new target, default size) before telling the page. The other way round, the page could
+    // ask for its size first: the size was dropped (popup hidden) or put on the old check, and then
+    // `show` set the default size over it, so APT's full-height price check stayed 960 × 590
+    // (owner's screenshot, Nightmare Map, 21.11.2026: «ніби вона не встигла розтягнутись»).
     popup::show(app, game_rect, cursor, target);
+    let _ = app.emit_to(POPUP_WINDOW, "item-text", payload);
 }
 
 #[cfg(test)]

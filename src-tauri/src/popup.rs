@@ -415,6 +415,7 @@ pub fn fit(app: &AppHandle, asked: CheckTarget, width: f64, height: f64) -> &'st
         return "centre";
     };
     if !state.popup_visible() {
+        log::info!("[fit] ignored a size while the popup is hidden");
         return "centre";
     }
     let side = side(game, cursor, target, state.popup_centred());

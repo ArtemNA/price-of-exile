@@ -2,6 +2,10 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.25
+
+- Fix: the price check in the Awakened PoE Trade look could still open squeezed (seen on Nightmare Maps): the window sometimes kept its default size instead of growing to the game's height.
+
 ## v0.1.24
 
 - Fix: the price check could open squeezed in height, its parts over each other, right after a map or item check. The window now ignores a size meant for another check.
