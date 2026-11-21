@@ -5,20 +5,21 @@ stash search presets and chat commands. Downloads: [Releases](https://github.com
 
 ## Screenshots
 
-A rare item: the base, item level and corrupted switches in the header, mods grouped with their tiers,
-trade listings with currency icons and the poe.ninja price with its 7 day trend.
+A rare item in the default **Vaal** look: the base price from poe.ninja with its 7 day trend, mods with their
+tags and tiers, trade listings, and the card of a listed item when the pointer is on the eye next to its price.
 
-![Price check of a rare item](docs/readme/price-check-rare.png)
+![Price check of a rare item with the card of a listing](docs/readme/price-check-rare.png)
 
-Fragments, currency and cards: related items with poe.ninja prices right next to the price, and bulk offers.
+Fragments and currency: bulk offers from the currency exchange with the market ratio from poe.ninja, and what
+your stack is worth.
 
-![The Maven's Writ: related items and bulk offers](docs/readme/related-items-bulk.png)
+![The Maven's Writ: bulk offers](docs/readme/related-items-bulk.png)
 
-A unique: links and corruption decide the price; the set it belongs to is shown alongside.
+A unique: links decide the price; the disenchanting value is shown under the listings.
 
-![Tabula Rasa with related items](docs/readme/unique-related.png)
+![Tabula Rasa](docs/readme/unique-related.png)
 
-Bulk exchange with the market ratio from poe.ninja.
+Divine Orb bulk offers.
 
 ![Divine Orb bulk offers](docs/readme/bulk-currency.png)
 
@@ -26,7 +27,7 @@ The message in the screen corner when the overlay starts:
 
 ![Start message](docs/readme/start-message.png)
 
-Two themes ship with the app (ours and Awakened PoE Trade's look, Settings → Overlay → Theme); how to make your own: [THEMING.md](THEMING.md).
+Three themes ship with the app (Settings → Overlay → Theme): **Vaal**, the default since 0.1.20, with Awakened PoE Trade's layout in near-black, crimson and gold and the game's font; **Awakened PoE Trade**, the same layout in APT's colours; and the earlier two-column **Price of Exile** look. How to make your own: [THEMING.md](THEMING.md).
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.0.
 

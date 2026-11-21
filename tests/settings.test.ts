@@ -93,3 +93,30 @@ describe('listing card setting', () => {
     expect(upgradeSettings({ priceCheck: { listingCard: 'sometimes' } }).priceCheck.listingCard).toBe('eye');
   });
 });
+
+describe('settings version 2 (0.1.20)', () => {
+  const v1 = {
+    configVersion: 1,
+    theme: 'price-of-exile',
+    accountName: 'me',
+    leagueId: 'Keepers',
+    hotkeys: { ...DEFAULT_HOTKEYS, 'price-check': 'Ctrl+Q' },
+    stashSearch: [{ id: 7, title: 'Maps', enableHotkeys: true, entries: [{ id: 1, name: 'T16', text: 'tier:16', hotkey: null }] }],
+    mapCheck: { ...DEFAULT_MAP_CHECK, profile: 2 },
+  };
+
+  it('resets the theme to the default once and keeps everything else', () => {
+    const settings = upgradeSettings(v1);
+    expect(settings.theme).toBe('');
+    expect(settings.configVersion).toBe(SETTINGS_VERSION);
+    expect(settings.accountName).toBe('me');
+    expect(settings.leagueId).toBe('Keepers');
+    expect(settings.hotkeys['price-check']).toBe('Ctrl+Q');
+    expect(settings.stashSearch).toEqual(v1.stashSearch);
+    expect(settings.mapCheck.profile).toBe(2);
+  });
+
+  it('keeps a theme chosen after the reset', () => {
+    expect(upgradeSettings({ ...v1, configVersion: SETTINGS_VERSION, theme: 'apt' }).theme).toBe('apt');
+  });
+});

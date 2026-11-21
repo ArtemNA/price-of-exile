@@ -2,7 +2,7 @@
 // `tauri-plugin-global-shortcut` parses: modifiers, then `KeyboardEvent.code` ("Ctrl+Shift+KeyD").
 
 /** Keys the global shortcut parser knows, by `KeyboardEvent.code`. */
-const KEY_CODE =
+export const KEY_CODE =
   /^(Key[A-Z]|Digit\d|F([1-9]|1\d|2[0-4])|Numpad(\d|Add|Subtract|Multiply|Divide|Decimal)|Backquote|Minus|Equal|BracketLeft|BracketRight|Backslash|Semicolon|Quote|Comma|Period|Slash|Space|Tab|Insert|Delete|Home|End|PageUp|PageDown|Arrow(Up|Down|Left|Right)|Pause)$/;
 
 const MODIFIER_KEYS = new Set(['Control', 'Alt', 'Shift', 'Meta', 'AltGraph']);

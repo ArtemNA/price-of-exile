@@ -12,3 +12,6 @@ export const APT_THEME: Theme = {
   priceCheckSize: { width: 460, fullHeight: true },
   // The popup position setting applies as in our theme; "Opposite the cursor" is APT's own.
 };
+
+/** The APT layout in Vaal black, crimson and gold (theme.css `vaal`); the default theme since 0.1.20. */
+export const VAAL_THEME: Theme = { ...APT_THEME, id: 'vaal', label: 'Vaal' };

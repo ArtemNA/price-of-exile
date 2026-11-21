@@ -214,6 +214,15 @@ fn listing_card_hide(app: AppHandle) {
     card::hide(&app);
 }
 
+/// Awakened PoE Trade's settings file (`%APPDATA%\awakened-poe-trade\apt-data\config.json`), for the
+/// "Import from Awakened PoE Trade" buttons; None when APT is not installed. Only read, never written.
+#[tauri::command]
+fn read_apt_config() -> Option<String> {
+    let dir = std::env::var_os("APPDATA")?;
+    let path = std::path::Path::new(&dir).join(constants::APT_CONFIG_PATH);
+    std::fs::read_to_string(path).ok()
+}
+
 /// A trade request through the built-in browser's page (its cookies, Cloudflare clearance).
 #[tauri::command]
 async fn browser_fetch(
@@ -336,7 +345,8 @@ pub fn run() {
             fit_popup,
             listing_card_show,
             listing_card_ready,
-            listing_card_hide
+            listing_card_hide,
+            read_apt_config
         ])
         .setup(|app| {
             let identifier = &app.config().identifier;

@@ -668,6 +668,14 @@
     "Requires": "Требуется",
     "Twice Corrupted": "Дважды осквернённый",
     "Split": "Расколото",
-    "On the eye icon of a listing": "На иконке глаза у лота"
+    "On the eye icon of a listing": "На иконке глаза у лота",
+    "Import from Awakened PoE Trade": "Импорт из Awakened PoE Trade",
+    "Awakened PoE Trade settings were not found on this computer.": "Настройки Awakened PoE Trade на этом компьютере не найдены.",
+    "Found {0} groups with {1} searches. They replace yours.": "Найдено групп: {0}, поисков: {1}. Они заменят ваши.",
+    "Awakened PoE Trade has no stash search groups.": "В Awakened PoE Trade нет групп поиска в тайнике.",
+    "Found {0} marked map mods (profile {1}). They replace yours.": "Найдено отмеченных модов карт: {0} (профиль {1}). Они заменят ваши.",
+    "Awakened PoE Trade has no map check settings.": "В Awakened PoE Trade нет настроек проверки карт.",
+    "Replace": "Заменить",
+    "Cancel": "Отмена"
   }
 }

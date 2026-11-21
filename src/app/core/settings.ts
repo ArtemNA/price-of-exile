@@ -19,6 +19,7 @@ import {
   SETTINGS_FILE,
   SETTINGS_STORE_KEY,
   SETTINGS_VERSION,
+  THEME_RESET_VERSION,
   MAIN_WINDOW_LABEL,
 } from '../constants';
 
@@ -119,15 +120,19 @@ export function defaultSettings(): Settings {
 /**
  * Brings stored settings of any older version up to `SETTINGS_VERSION` (APT `upgradeConfig`).
  * Version 0 is the localStorage format of stages 2–10: flat, no version, no hotkeys or price check.
+ * Before version 2 the theme resets to the build's default (0.1.20 brings a new default look);
+ * everything else carries over.
  * Unknown or missing fields fall back to the defaults, so a damaged file still loads.
  */
 export function upgradeSettings(raw: unknown): Settings {
   const defaults = defaultSettings();
   if (!raw || typeof raw !== 'object') return defaults;
   const stored = raw as Partial<Settings>;
+  const version = typeof stored.configVersion === 'number' ? stored.configVersion : 0;
   return {
     ...defaults,
     ...stored,
+    ...(version < THEME_RESET_VERSION ? { theme: defaults.theme } : {}),
     configVersion: SETTINGS_VERSION,
     hotkeys: { ...defaults.hotkeys, ...stored.hotkeys },
     commands: Array.isArray(stored.commands) ? stored.commands : defaults.commands,

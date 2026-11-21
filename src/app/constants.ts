@@ -259,8 +259,13 @@ export const LEGACY_SETTINGS_STORAGE_KEY = 'poe-trade-overlay.settings';
 export const SETTINGS_FILE = 'settings.json';
 /** Key of the whole settings object inside the store file. */
 export const SETTINGS_STORE_KEY = 'settings';
-/** Current settings format; `upgradeSettings` brings older files up to it. */
-export const SETTINGS_VERSION = 1;
+/**
+ * Current settings format; `upgradeSettings` brings older files up to it.
+ * 2 (0.1.20): the theme goes back to the build's default once (the new Vaal look); later choices stay.
+ */
+export const SETTINGS_VERSION = 2;
+/** Settings older than this get the default theme once (see SETTINGS_VERSION). */
+export const THEME_RESET_VERSION = 2;
 /** Event the window that changed the settings sends to the other windows. */
 export const SETTINGS_CHANGED_EVENT = 'settings-changed';
 

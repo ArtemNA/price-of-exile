@@ -10,7 +10,7 @@
 <div class="apt-column flex min-h-0 w-[460px] flex-none flex-col">
 <apt-title-bar />
 
-<div class="apt-body relative flex min-h-0 grow flex-col bg-[#2d3748]">
+<div class="apt-body relative flex min-h-0 grow flex-col bg-(--apt-800)">
   @if (error(); as message) {
     <div class="m-4 rounded bg-[#742a2a] p-2 text-[#fed7d7]">{{ message | tr }}</div>
   }
@@ -19,7 +19,7 @@
     <div class="flex min-h-0 grow flex-col p-4">
       <!-- Name bar (FilterName.vue) -->
       <div class="apt-filter-name">
-        <button class="truncate rounded border px-2" [class]="nameExact() ? 'border-[#a0aec0]' : 'border-[#1a202c]'"
+        <button class="truncate rounded border px-2" [class]="nameExact() ? 'border-(--apt-500)' : 'border-(--apt-900)'"
           (click)="toggleNameAccuracy()">{{ nameLabel() }}</button>
         @if (preset.filters.corrupted) {
           <button class="px-2" (click)="toggleCorrupted()">
@@ -28,7 +28,7 @@
             } @else if (isCorrupted()) {
               <span class="text-[#f56565]">{{ 'item.corrupted' | t }}</span>
             } @else {
-              <span class="text-[#718096]">{{ 'item.not_corrupted' | t }}</span>
+              <span class="text-(--apt-600)">{{ 'item.not_corrupted' | t }}</span>
             }
           </button>
         }
@@ -47,15 +47,15 @@
                   } @else if (trend.forecast === 'up') {
                     <apt-icon name="angle-double-up" class="pr-1 text-[#48bb78]" />
                   } @else {
-                    <span class="apt-sans pr-1 leading-none text-[#718096]">±</span>
+                    <span class="apt-sans pr-1 leading-none text-(--apt-600)">±</span>
                   }
                   <span>{{ trend.text }}</span>
                 </div>
-                <div class="text-xs leading-none text-[#a0aec0]">{{ 'trade_result.graph_7d' | t }}</div>
+                <div class="text-xs leading-none text-(--apt-500)">{{ 'trade_result.graph_7d' | t }}</div>
               </div>
               <svg viewBox="0 0 48 32" class="h-8 w-12 overflow-visible" preserveAspectRatio="none">
-                <path [attr.d]="trend.path.area" fill="#4a5568" />
-                <path [attr.d]="trend.path.line" fill="none" stroke="#a0aec0" stroke-width="1" />
+                <path [attr.d]="trend.path.area" style="fill: var(--apt-700)" />
+                <path [attr.d]="trend.path.line" fill="none" style="stroke: var(--apt-500)" stroke-width="1" />
               </svg>
             </div>
           }
@@ -87,7 +87,7 @@
               }
               <span class="pl-1">{{ chip.text }}</span>
               @if (chip.collapse !== undefined && chip.key === 'stats' && statsFolded()) {
-                <apt-icon name="chevron-down" class="pl-2 text-xs text-[#cbd5e0]" />
+                <apt-icon name="chevron-down" class="pl-2 text-xs text-(--apt-400)" />
               }
             </button>
           }
@@ -99,13 +99,13 @@
         <div class="mb-4" [class]="aptPresets().length > 1 ? 'mt-1' : 'mt-4'">
           @if (aptPresets().length > 1) {
             <div class="flex">
-              <div class="w-5 border-b border-[#4a5568]"></div>
-              <div class="flex divide-x divide-[#4a5568] overflow-hidden rounded-t border-x border-t border-[#4a5568]">
+              <div class="w-5 border-b border-(--apt-700)"></div>
+              <div class="flex divide-x divide-(--apt-700) overflow-hidden rounded-t border-x border-t border-(--apt-700)">
                 @for (p of aptPresets(); track p.id) {
                   <button class="apt-preset-btn" [class.apt-preset-active]="p.id === presets()!.active" (click)="selectPreset(p.id)">{{ p.id | t }}</button>
                 }
               </div>
-              <div class="flex-1 border-b border-[#4a5568]"></div>
+              <div class="flex-1 border-b border-(--apt-700)"></div>
             </div>
           }
           @for (entry of aptStats(); track $index) {
@@ -122,10 +122,10 @@
             }
           }
           @if (!aptStats().length && !unknownMods().length) {
-            <div class="border-b border-[#4a5568] py-2">{{ 'filters.empty' | t }}</div>
+            <div class="border-b border-(--apt-700) py-2">{{ 'filters.empty' | t }}</div>
           }
           @for (mod of unknownMods(); track $index) {
-            <div class="flex flex-col border-b border-[#4a5568] py-2">
+            <div class="flex flex-col border-b border-(--apt-700) py-2">
               <div class="flex h-[20px] items-baseline pb-1">
                 <apt-icon name="warning" class="w-5 shrink-0 text-[#f6ad55]" />
                 <div class="apt-search-text relative mr-1 flex min-w-0" style="line-height: 1rem">
@@ -134,14 +134,14 @@
                 </div>
               </div>
               <div class="ml-5 text-xs leading-none">
-                <span class="text-[#718096]">{{ mod.type | t }} &mdash; </span>
+                <span class="text-(--apt-600)">{{ mod.type | t }} &mdash; </span>
                 <span class="text-[#f6ad55]">{{ 'Not recognized modifier' | tr }}</span>
               </div>
             </div>
           }
           <div class="flex gap-x-4">
-            <button class="w-40 rounded-b bg-[#4a5568] px-2 py-1 leading-none text-[#cbd5e0]" (click)="statsFolded.set(true)">
-              {{ 'filters.collapse' | t }} <apt-icon name="chevron-up" class="pl-1 text-xs text-[#718096]" />
+            <button class="w-40 rounded-b bg-(--apt-700) px-2 py-1 leading-none text-(--apt-400)" (click)="statsFolded.set(true)">
+              {{ 'filters.collapse' | t }} <apt-icon name="chevron-up" class="pl-1 text-xs text-(--apt-600)" />
             </button>
             @if (anyHidden()) {
               <ng-container *ngTemplateOutlet="toggle; context: { on: showHidden(), label: 'filters.hidden_toggle', flip: showHidden, cls: 'pt-2' }" />
@@ -171,24 +171,24 @@
 
       <!-- Stack value (StackValue.vue); uniques: the disenchanting value -->
       @if (stackValue(); as value) {
-        <div class="mt-2 rounded border border-dashed border-[#718096] p-2">
-          <div class="flex leading-none text-[#cbd5e0]">
+        <div class="mt-2 rounded border border-dashed border-(--apt-600) p-2">
+          <div class="flex leading-none text-(--apt-400)">
             <div class="w-1/2">
               {{ 'trade_result.you_have' | t }} <span class="apt-sans">×</span> {{ value.have.amount }}
-              <apt-icon name="arrow-right" class="px-1 text-xs text-[#718096]" /> {{ value.have.price }}
+              <apt-icon name="arrow-right" class="px-1 text-xs text-(--apt-600)" /> {{ value.have.price }}
             </div>
             @if (value.stack; as stack) {
               <div class="w-1/2 pl-2">
                 {{ 'trade_result.stack' | t }} <span class="apt-sans">×</span> {{ stack.amount }}
-                <apt-icon name="arrow-right" class="px-1 text-xs text-[#718096]" /> {{ stack.price }}
+                <apt-icon name="arrow-right" class="px-1 text-xs text-(--apt-600)" /> {{ stack.price }}
               </div>
             }
           </div>
         </div>
       } @else if (item().dustEquivalent; as dust) {
-        <div class="mt-2 rounded border border-dashed border-[#718096] p-2">
-          <div class="flex items-center leading-none text-[#cbd5e0]">
-            {{ 'item.disenchanting' | t }} <apt-icon name="arrow-right" class="px-1 text-xs text-[#718096]" /> {{ dust.toLocaleString('en') }}
+        <div class="mt-2 rounded border border-dashed border-(--apt-600) p-2">
+          <div class="flex items-center leading-none text-(--apt-400)">
+            {{ 'item.disenchanting' | t }} <apt-icon name="arrow-right" class="px-1 text-xs text-(--apt-600)" /> {{ dust.toLocaleString('en') }}
             <span class="apt-sans">&nbsp;×&nbsp;</span><span class="apt-dust" [title]="'Thaumaturgic Dust'"></span>
           </div>
         </div>
@@ -200,7 +200,7 @@
   <!-- Rate limiting tab (RateLimiterState.vue): in APT outside the window, at its bottom edge -->
   <button class="apt-rate-tab" [class.apt-rate-limited]="isLimited()" (click)="showRateLimits.set(!showRateLimits())">Rate limiting</button>
   @if (showRateLimits()) {
-    <div class="apt-sans absolute bottom-0 left-0 z-20 mb-8 border-4 border-[#1a202c] bg-[#2d3748] p-4 text-[#cbd5e0]">
+    <div class="apt-sans absolute bottom-0 left-0 z-20 mb-8 border-4 border-(--apt-900) bg-(--apt-800) p-4 text-(--apt-400)">
       @for (limit of rateLimits(); track limit.policy) {
         <div [class.text-[#fc8181]]="limit.hasQueue">Policy: {{ limit.policy }}</div>
         <div>
@@ -231,9 +231,9 @@
       } @else {
         <div class="w-1/2 flex-1 p-2">
           @for (entry of group.related; track entry.name) {
-            <div class="rounded px-1" [class.bg-[#4a5568]]="entry.highlight">
+            <div class="rounded px-1" [class.bg-(--apt-700)]="entry.highlight">
               <ng-container *ngTemplateOutlet="quickPrice; context: { price: relatedQuick(entry.chaos), img: entry.icon, base: false, size: 'w-8 h-8', icon: false }" />
-              <div class="mb-1 overflow-hidden text-left whitespace-nowrap text-[#718096]">{{ entry.name }}</div>
+              <div class="mb-1 overflow-hidden text-left whitespace-nowrap text-(--apt-600)">{{ entry.name }}</div>
             </div>
           }
         </div>
@@ -242,7 +242,7 @@
             @for (entry of group.items; track entry.name) {
               <div>
                 <ng-container *ngTemplateOutlet="quickPrice; context: { price: relatedQuick(entry.chaos), img: entry.icon, base: false, size: 'w-8 h-8', icon: false }" />
-                <div class="mb-1 overflow-hidden text-left whitespace-nowrap text-[#718096]">{{ entry.name }}</div>
+                <div class="mb-1 overflow-hidden text-left whitespace-nowrap text-(--apt-600)">{{ entry.name }}</div>
               </div>
             }
           </div>
@@ -256,18 +256,18 @@
 <ng-template #quickPrice let-price="price" let-img="img" let-base="base" let-size="size" let-icon="icon">
   <div class="flex items-center gap-x-1 text-base" [class.flex-1]="icon" [class.justify-center]="icon">
     @if (base) {
-      <span class="text-[#cbd5e0]">{{ 'trade_result.base_item' | t }}</span>
+      <span class="text-(--apt-400)">{{ 'trade_result.base_item' | t }}</span>
     } @else {
       <div class="flex shrink-0 items-center justify-center" [class]="size">
         <img [src]="img" alt="" class="max-h-full max-w-full overflow-hidden" />
       </div>
     }
-    <apt-icon name="arrow-right" class="px-1 text-sm text-[#718096]" />
+    <apt-icon name="arrow-right" class="px-1 text-sm text-(--apt-600)" />
     <div class="overflow-hidden whitespace-nowrap">
       @if (price) {
         <span [class.apt-golden]="price.div">{{ price.min }}</span>
         @if (price.max) {
-          <span class="apt-sans text-[#718096]"> ~ </span><span [class.apt-golden]="price.div">{{ price.max }}</span>
+          <span class="apt-sans text-(--apt-600)"> ~ </span><span [class.apt-golden]="price.div">{{ price.max }}</span>
         }
         @if (icon) {
           <span class="apt-sans" [class.apt-golden]="price.div"> ×</span>
@@ -288,8 +288,8 @@
 
 <!-- UiToggle.vue -->
 <ng-template #toggle let-on="on" let-label="label" let-flip="flip" let-cls="cls">
-  <button class="flex items-center text-[#cbd5e0]" [class]="cls" style="height: 1.375rem" (click)="flip.set(!on)">
-    <apt-icon [name]="on ? 'toggle-on' : 'toggle-off'" class="pr-1" [class]="on ? 'text-[#e2e8f0]' : 'text-[#718096]'" />
+  <button class="flex items-center text-(--apt-400)" [class]="cls" style="height: 1.375rem" (click)="flip.set(!on)">
+    <apt-icon [name]="on ? 'toggle-on' : 'toggle-off'" class="pr-1" [class]="on ? 'text-(--apt-300)' : 'text-(--apt-600)'" />
     {{ label | t }}
   </button>
 </ng-template>
@@ -297,7 +297,7 @@
 <!-- ItemModifierText.vue: the rolled numbers in Exo 2 white -->
 <ng-template #modText let-parts>
   @for (part of parts; track $index) {
-    <span [class]="part.roll ? 'apt-roll text-white' : 'text-[#edf2f7]'">{{ part.text }}</span>
+    <span [class]="part.roll ? 'apt-roll text-white' : 'text-(--apt-200)'">{{ part.text }}</span>
   }
 </ng-template>
 
@@ -312,12 +312,12 @@
         @for (source of stat.sources; track $index) {
           @let info = sourceInfo(stat, source);
           <div class="py-1 pl-5">
-            <div class="text-[#a0aec0] italic">{{ info.title }}</div>
+            <div class="text-(--apt-500) italic">{{ info.title }}</div>
             @for (line of info.lines; track $index) {
               <div class="flex items-baseline">
                 <span [class.line-through]="!line.contributes"><ng-container *ngTemplateOutlet="modText; context: { $implicit: line.parts }" /></span>
                 @if (line.contributes && line.contribution) {
-                  <div class="ml-auto w-12 shrink-0 rounded border border-[#4a5568] text-center">{{ line.contribution }}</div>
+                  <div class="ml-auto w-12 shrink-0 rounded border border-(--apt-700) text-center">{{ line.contribution }}</div>
                 }
               </div>
             }
@@ -329,7 +329,7 @@
       <div class="flex items-baseline justify-between pb-px">
         <div class="mr-2 flex min-w-0 items-baseline">
           <button class="flex min-w-0 items-baseline text-left" type="button" (click)="toggleStat(stat)">
-            <apt-icon [name]="stat.disabled ? 'square' : 'check-square'" class="w-5 shrink-0" [class.text-[#a0aec0]]="stat.disabled" />
+            <apt-icon [name]="stat.disabled ? 'square' : 'check-square'" class="w-5 shrink-0" [class.text-(--apt-500)]="stat.disabled" />
             @if (stat.mercenary?.icon; as icon) {
               <img [src]="icon" alt="" class="mr-1 w-4 shrink-0 self-center" />
             }
@@ -376,7 +376,7 @@
         } @else {
         <div class="ml-auto flex items-baseline gap-x-1">
           @if (q20(stat); as quality) {
-            <div class="rounded px-2 text-center text-[#a0aec0]">{{ quality }}</div>
+            <div class="rounded px-2 text-center text-(--apt-500)">{{ quality }}</div>
           }
           @if (stat.roll && !stat.oils) {
             <div class="apt-roll-inputs flex gap-x-px">
@@ -393,7 +393,7 @@
       <div class="flex">
         <div class="flex w-5 shrink-0 items-start">
           @if (stat.hidden) {
-            <span class="apt-hidden-eye relative cursor-pointer text-xs leading-none text-[#718096]">
+            <span class="apt-hidden-eye relative cursor-pointer text-xs leading-none text-(--apt-600)">
               <apt-icon name="eye-slash" />
               <span class="apt-tippy apt-hidden-reason">{{ hiddenReason(stat) }}</span>
             </span>
@@ -450,7 +450,7 @@
 <!-- TradeLinks.vue -->
 <ng-template #tradeLinks>
   <div class="flex gap-px">
-    <button class="rounded bg-[#4a5568] px-2 text-[#cbd5e0]" (click)="openTradeSite()">{{ 'trade_result.trade' | t }} <apt-icon name="external-link" class="text-xs" /></button>
+    <button class="rounded bg-(--apt-700) px-2 text-(--apt-400)" (click)="openTradeSite()">{{ 'trade_result.trade' | t }} <apt-icon name="external-link" class="text-xs" /></button>
   </div>
 </ng-template>
 
@@ -458,13 +458,13 @@
 <ng-template #onlineFilter>
   @if (active(); as preset) {
     <span class="relative">
-      <button class="mr-1 truncate rounded px-2" [class]="onlineWarning() ? 'text-[#ed8936]' : 'text-[#a0aec0]'" (click)="onlineOpen.set(!onlineOpen())">
+      <button class="mr-1 truncate rounded px-2" [class]="onlineWarning() ? 'text-[#ed8936]' : 'text-(--apt-500)'" (click)="onlineOpen.set(!onlineOpen())">
         <apt-icon name="history" /> {{ onlineLabel() }}
       </button>
       @if (onlineOpen()) {
         <div class="apt-tippy absolute top-full left-0 z-30 mt-2 p-0!">
           <div class="apt-tippy-arrow left-6"></div>
-          <div class="flex gap-x-8 rounded bg-[#2d3748] p-2 text-[#cbd5e0]">
+          <div class="flex gap-x-8 rounded bg-(--apt-800) p-2 text-(--apt-400)">
             <div class="flex flex-col gap-y-1">
               <div class="mb-1">
                 <ng-container *ngTemplateOutlet="flag; context: { on: preset.filters.trade.offline, label: 'online_filter.offline_toggle', act: 'offline' }" />
@@ -501,7 +501,7 @@
 <ng-template #flag let-on="on" let-label="label" let-act="act" let-useTr="tr">
   <button class="flex items-center whitespace-nowrap" style="height: 1.375rem"
     (click)="act === 'offline' ? setOffline() : act === 'merchant' ? toggleMerchantOnly() : toggleHideBait()">
-    <apt-icon [name]="on ? 'toggle-on' : 'toggle-off'" class="pr-1" [class]="on ? 'text-[#e2e8f0]' : 'text-[#718096]'" />
+    <apt-icon [name]="on ? 'toggle-on' : 'toggle-off'" class="pr-1" [class]="on ? 'text-(--apt-300)' : 'text-(--apt-600)'" />
     {{ useTr ? (label | tr) : (label | t) }}
   </button>
 </ng-template>
@@ -522,12 +522,12 @@
         <div class="apt-legacy-message">{{ 'trade_result.legacy_bulk_xchg_msg' | t }}</div>
       }
       <div class="mb-2 flex pl-2">
-        <div class="mr-2 flex items-baseline text-[#a0aec0]">
+        <div class="mr-2 flex items-baseline text-(--apt-500)">
           <span class="mr-1">{{ 'trade_result.matched' | t: '' }}</span>
           @if (search.searchResult(); as list) {
             <span>{{ list.total }}{{ list.inexact ? '+' : '' }}</span>
           } @else {
-            <span class="text-[#718096]">...</span>
+            <span class="text-(--apt-600)">...</span>
           }
         </div>
         @if (search.searchResult()) {
@@ -566,12 +566,12 @@
                 <tr data-listing-row (mouseenter)="cardHover.pointer($event, row)" (mousemove)="cardHover.pointer($event, row)" (mouseleave)="cardHover.leave()">
                   <td class="px-2 whitespace-nowrap">
                     @if (cardHover.eyes && row.item) {
-                      <span class="-ml-1 mr-1 inline-block cursor-default align-middle text-[#718096] hover:text-[#e2e8f0]" data-test="listing-eye"
+                      <span class="-ml-1 mr-1 inline-block cursor-default align-middle text-(--apt-600) hover:text-(--apt-300)" data-test="listing-eye"
                         (mouseenter)="cardHover.eye($event, row)" (mouseleave)="cardHover.eyeLeave()"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M8 3C4.4 3 1.6 5.6 0.6 8c1 2.4 3.8 5 7.4 5s6.4-2.6 7.4-5C14.4 5.6 11.6 3 8 3zm0 8.2A3.2 3.2 0 1 1 8 4.8a3.2 3.2 0 0 1 0 6.4zm0-1.6a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2z" fill="currentColor"/></svg></span>
                     }
                     <span [class.line-through]="row.priceCurrency === 'exalted'">{{ row.priceAmount }} {{ row.priceCurrency }}</span>
                     @if (row.listedTimes > 2) {
-                      <span class="-mr-2 ml-1 rounded bg-[#cbd5e0] px-1 text-[#2d3748]"><span class="apt-sans">×</span> {{ row.listedTimes }}</span>
+                      <span class="-mr-2 ml-1 rounded bg-(--apt-400) px-1 text-(--apt-800)"><span class="apt-sans">×</span> {{ row.listedTimes }}</span>
                     } @else if (!row.hasFee) {
                       <span class="apt-stash-listing"><span class="apt-stash-icon"></span>
                         @if (!row.hasNote) {
@@ -598,7 +598,7 @@
                       <div class="apt-sans ml-1 text-xs">{{ row.relativeDate }}</div>
                     </div>
                     @if (row.isMine) {
-                      <span class="ml-1 rounded bg-[#cbd5e0] px-1 text-[#2d3748]">{{ 'You' | tr }}</span>
+                      <span class="ml-1 rounded bg-(--apt-400) px-1 text-(--apt-800)">{{ 'You' | tr }}</span>
                     }
                   </td>
                 </tr>
@@ -619,10 +619,10 @@
     <div class="flex min-h-0 flex-col">
       <div class="apt-legacy-message">{{ 'trade_result.legacy_bulk_xchg_msg' | t }}</div>
       <div class="mb-2 flex items-baseline justify-between pl-2" style="min-height: 1.375rem">
-        <div class="flex items-center text-[#a0aec0]">
+        <div class="flex items-center text-(--apt-500)">
           <span class="mr-1">{{ 'trade_result.matched' | t: '' }}</span>
           @if (!bulk.haves().length) {
-            <span class="text-[#718096]">...</span>
+            <span class="text-(--apt-600)">...</span>
           } @else {
             <div class="flex items-center">
               @for (have of bulk.haves(); track have) {
@@ -675,7 +675,7 @@
                   <td class="px-1 text-right">{{ line.row.stock }}</td>
                   <td class="px-1 text-right">
                     @if (line.row.stock < line.row.itemAmount) {
-                      <apt-icon name="warning" class="mr-1 text-[#a0aec0]" />
+                      <apt-icon name="warning" class="mr-1 text-(--apt-500)" />
                     }
                     {{ floor(line.row.stock / line.row.itemAmount) }}
                   </td>
@@ -685,7 +685,7 @@
                       <div class="apt-sans ml-1 text-xs">{{ line.row.relativeDate }}</div>
                     </div>
                     @if (line.row.isMine) {
-                      <span class="ml-1 rounded bg-[#cbd5e0] px-1 text-[#2d3748]">{{ 'You' | tr }}</span>
+                      <span class="ml-1 rounded bg-(--apt-400) px-1 text-(--apt-800)">{{ 'You' | tr }}</span>
                     }
                   </td>
                 </tr>
@@ -700,7 +700,7 @@
 
 <!-- UiErrorBox.vue -->
 <ng-template #errorBox let-message>
-  <div class="mb-4 rounded border border-[#c53030] bg-[#1a202c] p-2">
+  <div class="mb-4 rounded border border-[#c53030] bg-(--apt-900) p-2">
     <div class="mb-1 text-[#fc8181]">{{ 'trade_result.error' | t }}</div>
     @if (message === cloudflareError) {
       <p class="apt-sans">{{ '{0}. Pass the check in the built-in browser; the overlay then searches through it.' | tr: (message | tr) }}</p>

@@ -20,12 +20,13 @@ import {
   UI_LANGS,
   UiLang,
 } from '../constants';
-import { TrPipe } from '../core/i18n';
+import { tr, TrPipe } from '../core/i18n';
 import { Leagues } from '../core/leagues';
 import { type ChatCommand, isFirstStart, type PriceCheckSettings, settings, type StashSearchGroup, updateSettings } from '../core/settings';
 import { updates } from '../core/updates';
 import { ForegroundEvent, host } from '../host';
 import { MapModsEditor } from '../map-check/map-mods-editor';
+import { aptMapCheck, aptStashGroups, parseAptConfig } from './apt-import';
 import { hotkeyConflicts } from './hotkey';
 import { HotkeyInput } from './hotkey-input';
 
@@ -87,6 +88,8 @@ export class SettingsWindow {
   /** The chat placeholder for the last whisperer (an `@` cannot stand in template text). */
   protected readonly lastTarget = '@last';
   protected readonly section = signal<Section>('general');
+  /** "Import from Awakened PoE Trade": what was found, waiting for Replace; or why nothing was. */
+  protected readonly aptImport = signal<{ kind: 'stash' | 'map'; text: string; apply?: () => void } | null>(null);
   protected readonly settings = settings;
   protected readonly leagues = inject(Leagues);
   protected readonly gameActive = signal(false);
@@ -247,6 +250,36 @@ export class SettingsWindow {
 
   protected removeGroup(groupId: number): void {
     updateSettings({ stashSearch: settings().stashSearch.filter((group) => group.id !== groupId) });
+  }
+
+  /** Reads APT's settings and shows what would be imported; Replace applies it. */
+  protected async importFromApt(kind: 'stash' | 'map'): Promise<void> {
+    const config = parseAptConfig(await host.readAptConfig().catch(() => null));
+    if (!config) {
+      this.aptImport.set({ kind, text: tr('Awakened PoE Trade settings were not found on this computer.') });
+      return;
+    }
+    if (kind === 'stash') {
+      const groups = aptStashGroups(config);
+      const searches = groups.reduce((n, group) => n + group.entries.length, 0);
+      this.aptImport.set(
+        groups.length
+          ? { kind, text: tr('Found {0} groups with {1} searches. They replace yours.', groups.length, searches), apply: () => updateSettings({ stashSearch: groups }) }
+          : { kind, text: tr('Awakened PoE Trade has no stash search groups.') },
+      );
+    } else {
+      const maps = aptMapCheck(config);
+      this.aptImport.set(
+        maps
+          ? { kind, text: tr('Found {0} marked map mods (profile {1}). They replace yours.', maps.selectedStats.length, maps.profile), apply: () => updateSettings({ mapCheck: maps }) }
+          : { kind, text: tr('Awakened PoE Trade has no map check settings.') },
+      );
+    }
+  }
+
+  protected applyAptImport(): void {
+    this.aptImport()?.apply?.();
+    this.aptImport.set(null);
   }
 
   /** The log file of the host, in the app's log folder (tauri-plugin-log names it after the app). */

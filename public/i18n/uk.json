@@ -668,6 +668,14 @@
     "Requires": "Потрібно",
     "Twice Corrupted": "Twice Corrupted",
     "Split": "Split",
-    "On the eye icon of a listing": "На іконці ока біля лістингу"
+    "On the eye icon of a listing": "На іконці ока біля лістингу",
+    "Import from Awakened PoE Trade": "Імпорт з Awakened PoE Trade",
+    "Awakened PoE Trade settings were not found on this computer.": "Налаштувань Awakened PoE Trade на цьому комп'ютері не знайдено.",
+    "Found {0} groups with {1} searches. They replace yours.": "Знайдено груп: {0}, пошуків: {1}. Вони замінять ваші.",
+    "Awakened PoE Trade has no stash search groups.": "В Awakened PoE Trade немає груп пошуку в сховищі.",
+    "Found {0} marked map mods (profile {1}). They replace yours.": "Знайдено позначених модів мап: {0} (профіль {1}). Вони замінять ваші.",
+    "Awakened PoE Trade has no map check settings.": "В Awakened PoE Trade немає налаштувань перевірки мап.",
+    "Replace": "Замінити",
+    "Cancel": "Скасувати"
   }
 }

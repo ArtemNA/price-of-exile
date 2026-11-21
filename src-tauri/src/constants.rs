@@ -67,6 +67,8 @@ pub const POPUP_WINDOW: &str = "popup";
 pub const CARD_WINDOW: &str = "card";
 pub const CARD_WIDTH_LOGICAL: f64 = 460.0;
 pub const CARD_EVENT: &str = "listing-card";
+/// Awakened PoE Trade's settings, under %APPDATA%: read for the import buttons (stash search, map check).
+pub const APT_CONFIG_PATH: &str = "awakened-poe-trade/apt-data/config.json";
 
 /// Price check window size in logical pixels (shrinks to fit a smaller game window).
 pub const POPUP_WIDTH_LOGICAL: f64 = 960.0;

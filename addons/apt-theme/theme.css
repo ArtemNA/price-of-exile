@@ -82,32 +82,106 @@ html[data-theme='apt'] {
   --color-fractured: #f6e05e;
   --color-fractured-text: #1a202c;
   --color-fractured-line: #b7791f;
+
+  /* The APT layout's own palette (apt-price-check.*), Tailwind v1 gray scale. */
+  --apt-900: #1a202c;
+  --apt-800: #2d3748;
+  --apt-700: #4a5568;
+  --apt-600: #718096;
+  --apt-500: #a0aec0;
+  --apt-400: #cbd5e0;
+  --apt-300: #e2e8f0;
+  --apt-200: #edf2f7;
+  --apt-stripe: #353f52;
+  --apt-yellow: #ecc94b;
+  --apt-yellow-ink: #000;
+  --apt-700-ink: #000;
 }
 
+/*
+ * "Vaal": the APT layout in near-black with crimson buttons and gold tiers, the default theme
+ * since 0.1.20. Chosen by the owner from the mock-ups of 21.11.2026 (variant 8).
+ */
+html[data-theme='vaal'] {
+  --font-sans: 'FontinSmallCaps', 'Alegreya SC', serif;
+  --font-display: 'FontinSmallCaps', 'Alegreya SC', serif;
+
+  --apt-900: #0b0809; /* title bar, header bar, inputs, chips */
+  --apt-800: #161112; /* window body */
+  --apt-700: #3a2224; /* lines, buttons, tags */
+  --apt-600: #968780; /* dim text, icons */
+  --apt-500: #b7a69e; /* muted text, active borders */
+  --apt-400: #f2e4d8; /* button text */
+  --apt-300: #f2e4d8; /* input text */
+  --apt-200: #e8dfd8; /* text */
+  --apt-stripe: #1e1718; /* odd listing rows */
+  --apt-yellow: #e0b050; /* tiers: gold */
+  --apt-yellow-ink: #0b0809;
+  --apt-700-ink: #e8dfd8;
+
+  --color-chrome: #0b0809;
+  --color-panel: #161112;
+  --color-raised: #3a2224;
+  --color-well: #0b0809;
+  --color-line: #3a2224;
+  --color-line-strong: #5a2e30;
+  --color-frame: #5a2e30;
+  --color-bronze: #8a3a3a;
+  --color-gold: #e0b050;
+  --color-gold-soft: #f0cc80;
+  --color-text: #e8dfd8;
+  --color-bright: #f7efe8;
+  --color-muted: #b7a69e;
+  --color-mod: #8888ff;
+  --color-mod-off: #968780;
+  --color-good: #6fbf73;
+  --color-warn: #e6a94f;
+  --color-bad: #ff6b6b;
+
+  --color-selected: #2a1618;
+  --color-selected-hover: #3a1e20;
+  --color-error-bg: #3a1416;
+  --color-gold-hover: #f0cc80;
+  --color-warn-bg: #2a1f0e;
+  --color-warn-line: #5a3a12;
+  --color-row-line: #2a1c1d;
+  --color-primary-from: #8a2a2a;
+  --color-primary-to: #5a1a1c;
+  --color-primary-text: #f7efe8;
+  --color-ink: #161112;
+  --color-menu: #0b0809;
+  --color-unique: #af6025;
+  --color-tier1: #e0b050;
+  --color-tier1-text: #0b0809;
+  --color-tier2: #161112;
+  --color-tier2-text: #e0b050;
+}
+
+
 /* APT rounds its buttons, fields and chips. */
-html[data-theme='apt'] button,
-html[data-theme='apt'] input,
-html[data-theme='apt'] select {
+html:is([data-theme='apt'], [data-theme='vaal']) button,
+html:is([data-theme='apt'], [data-theme='vaal']) input,
+html:is([data-theme='apt'], [data-theme='vaal']) select {
   border-radius: 0.25rem;
 }
 
 /* The price check brings APT's own title bar (apt-title-bar.ts) and has no window frame. */
-html[data-theme='apt'] section:has(> app-apt-price-check, > app-apt-unidentified-picker) {
+html:is([data-theme='apt'], [data-theme='vaal']) section:has(> app-apt-price-check, > app-apt-unidentified-picker) {
   border: 0;
   box-shadow: none;
   /* Transparent beside the column: related items stand there over the game, as in APT. */
   background: transparent;
 }
-html[data-theme='apt'] section:has(> app-apt-price-check, > app-apt-unidentified-picker) > header {
+html:is([data-theme='apt'], [data-theme='vaal']) section:has(> app-apt-price-check, > app-apt-unidentified-picker) > header {
   display: none;
 }
 
 /* APT (Tailwind 1–3) shows a hand over everything clickable; Tailwind 4 does not by default. */
-html[data-theme='apt'] button:not(:disabled),
-html[data-theme='apt'] [role='button'],
-html[data-theme='apt'] select:not(:disabled),
-html[data-theme='apt'] input[type='checkbox']:not(:disabled),
-html[data-theme='apt'] input[type='radio']:not(:disabled),
-html[data-theme='apt'] label:has(> input[type='checkbox'], > input[type='radio']) {
+html:is([data-theme='apt'], [data-theme='vaal']) button:not(:disabled),
+html:is([data-theme='apt'], [data-theme='vaal']) [role='button'],
+html:is([data-theme='apt'], [data-theme='vaal']) select:not(:disabled),
+html:is([data-theme='apt'], [data-theme='vaal']) input[type='checkbox']:not(:disabled),
+html:is([data-theme='apt'], [data-theme='vaal']) input[type='radio']:not(:disabled),
+html:is([data-theme='apt'], [data-theme='vaal']) label:has(> input[type='checkbox'], > input[type='radio']) {
   cursor: pointer;
 }

@@ -101,6 +101,8 @@ export const host = {
   /** The card page drew the card it was sent (the host logs how long it took). */
   listingCardReady: (generation: number) => invoke<void>('listing_card_ready', { generation }),
   listingCardHide: () => invoke<void>('listing_card_hide'),
+  /** Awakened PoE Trade's settings file as text, or null when it is not installed. */
+  readAptConfig: () => invoke<string | null>('read_apt_config'),
   /** The host took the keyboard back (popup hidden, game clicked). */
   popupLostKeyboard: () => (popupHasKeyboard = false),
 };

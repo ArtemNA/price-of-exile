@@ -2,6 +2,13 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.20
+
+- New default look, **Vaal**: Awakened PoE Trade's price check layout in near-black, crimson and gold, with the game's font. The APT colours and the earlier two-column look stay in Settings → Overlay → Theme.
+- New app icon: a golden eye with a crimson diamond pupil.
+- After this update everyone starts on the new look once; a theme you pick later stays. Other settings carry over.
+- **Import from Awakened PoE Trade** for stash search groups and map check marks (Settings → Stash search / Map check).
+
 ## v0.1.19
 
 - Point at the **eye** next to a listing's price to see the listed item as a game tooltip beside the price check: mods with tiers, sockets, properties (Settings → Price check: the eye, with Shift held, always or never).
