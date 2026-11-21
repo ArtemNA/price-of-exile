@@ -394,8 +394,14 @@ pub fn side(game: Rect, cursor: Point, target: CheckTarget, centred: bool) -> &'
     }
 }
 
-/// Fits the shown popup to `width` × `height`; returns the side it is on (see `side`).
-pub fn fit(app: &AppHandle, width: f64, height: f64) -> &'static str {
+/// Fits the shown popup to `width` × `height`, measured for `asked` (the check the page shows);
+/// returns the side it is on (see `side`).
+///
+/// A size for another check than the one shown is ignored: when a price check opened right after a
+/// map check, the host widened the window, the old map check content reflowed, and the page, not yet
+/// told about the new check, asked for the map check's height, which squeezed the price check
+/// (owner, 21.11.2026: «вікно сжате по висоті там все якось перекривилось»).
+pub fn fit(app: &AppHandle, asked: CheckTarget, width: f64, height: f64) -> &'static str {
     let Some(window) = app.get_webview_window(LABEL) else {
         return "centre";
     };
@@ -411,8 +417,12 @@ pub fn fit(app: &AppHandle, width: f64, height: f64) -> &'static str {
     if !state.popup_visible() {
         return "centre";
     }
-    let scale = game_scale(&state);
     let side = side(game, cursor, target, state.popup_centred());
+    if asked != target {
+        log::info!("[fit] ignored a size for another check than the one shown");
+        return side;
+    }
+    let scale = game_scale(&state);
     place(
         &window,
         state.popup_hwnd(),

@@ -1,6 +1,11 @@
 import { Component, computed, ElementRef, input, output, signal, viewChild } from '@angular/core';
 import { host } from '../host';
 
+/** The field's text for a value: empty for none. */
+export function numText(value: number | '' | undefined): string {
+  return typeof value === 'number' ? String(value) : '';
+}
+
 /**
  * Number field of the price check window. The popup normally never takes focus, so a click
  * first asks the host to give it the keyboard. It goes back to the game on a click elsewhere
@@ -21,7 +26,7 @@ import { host } from '../host';
       [style.min-width.ch]="shown().length + 1.5"
       class="h-5 w-10 border border-line-strong bg-well px-1 text-right text-xs text-bright tabular-nums outline-none placeholder:text-muted/70 focus:border-gold focus:shadow-[0_0_0_2px_rgba(201,161,90,0.25)]"
       (mousedown)="takeFocus($event)"
-      (focus)="editing.set(true)"
+      (focus)="startEditing()"
       (input)="typed(field.value)"
       (keydown)="key($event)"
       (wheel)="wheel($event)"
@@ -41,11 +46,17 @@ export class NumInput {
   /** While typing, show the raw text ("0." stays "0."), not the parsed number. */
   protected readonly editing = signal(false);
   private readonly text = signal('');
-  protected readonly shown = computed(() => {
-    if (this.editing()) return this.text();
-    const value = this.value();
-    return typeof value === 'number' ? String(value) : '';
-  });
+  protected readonly shown = computed(() => (this.editing() ? this.text() : numText(this.value())));
+
+  /**
+   * Editing starts from the number shown. It used to start from the last typed text (empty at
+   * first): the field went blank on a click and Backspace erased nothing, so clearing it took typing
+   * something first (owner, 21.11.2026).
+   */
+  protected startEditing(): void {
+    this.text.set(numText(this.value()));
+    this.editing.set(true);
+  }
 
   protected takeFocus(event: MouseEvent): void {
     event.preventDefault();

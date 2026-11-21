@@ -39,7 +39,7 @@ export class AptUnidentifiedPicker {
     // The same window as the price check: 460 px wide, as tall as the game.
     effect(() => {
       this.variants();
-      void host.fitPopup(themeById(settings().theme).priceCheckSize?.width ?? 460, PRICE_CHECK_FULL_HEIGHT);
+      void host.fitPopup('price-check', themeById(settings().theme).priceCheckSize?.width ?? 460, PRICE_CHECK_FULL_HEIGHT);
     });
   }
 }

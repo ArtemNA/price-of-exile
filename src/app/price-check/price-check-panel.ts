@@ -472,7 +472,7 @@ export class PriceCheckPanel {
     if (size?.fullHeight) {
       effect(() => {
         this.item();
-        void host.fitPopup(this.themeWindowWidth(size.width), PRICE_CHECK_FULL_HEIGHT).then((side) => this.popupSide.set(side));
+        void host.fitPopup('price-check', this.themeWindowWidth(size.width), PRICE_CHECK_FULL_HEIGHT).then((side) => this.popupSide.set(side));
       });
       return;
     }
@@ -492,7 +492,7 @@ export class PriceCheckPanel {
         const height = Math.min(PRICE_CHECK_MAX_HEIGHT, Math.max(PRICE_CHECK_MIN_HEIGHT, wanted));
         if (height === lastHeight) return;
         lastHeight = height;
-        void host.fitPopup(width, height);
+        void host.fitPopup('price-check', width, height);
       });
     };
     const observer = new MutationObserver(fit);

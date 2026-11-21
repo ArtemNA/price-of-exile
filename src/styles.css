@@ -74,3 +74,13 @@ html.popup,
 html.popup body {
   background: transparent;
 }
+
+/*
+ * Scrollbars in every window (settings, map check, stash panel, …): thin, in the theme's colours,
+ * instead of WebView2's wide light grey ones (owner, 21.11.2026). The APT price check list keeps its
+ * own (`.apt-scroll`, apt-price-check.css).
+ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) transparent;
+}

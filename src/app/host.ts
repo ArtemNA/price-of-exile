@@ -81,7 +81,8 @@ export const host = {
   stashSearch: (text: string) => invoke<void>('stash_search', { text }),
   /** Resizes the shown popup to its content (logical pixels), keeping its side and anchor. */
   /** Returns the side of the game the popup is on: 'left' / 'right' (opposite the cursor) or 'centre'. */
-  fitPopup: (width: number, height: number) => invoke<PopupSide>('fit_popup', { width, height }),
+  /** `target`: the check the size was measured for; the host ignores it when another one shows. */
+  fitPopup: (target: CheckTarget, width: number, height: number) => invoke<PopupSide>('fit_popup', { target, width, height }),
   /** The start message in the screen corner, for a few seconds. */
   showToast: (message?: ToastMessage) => invoke<void>('show_toast', { message }),
   /** What the toast should show now (the page may load after it was asked). */

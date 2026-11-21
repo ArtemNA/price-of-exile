@@ -543,6 +543,12 @@
 }
 
 /* Scrollbars of App.vue */
+/* The app-wide thin scrollbar (styles.css) would hide these: WebView2 uses the ::-webkit ones only
+   while scrollbar-width and scrollbar-color are auto. */
+.apt-price-check .apt-scroll {
+  scrollbar-width: auto;
+  scrollbar-color: auto;
+}
 .apt-price-check .apt-scroll::-webkit-scrollbar {
   width: 0.875rem;
 }

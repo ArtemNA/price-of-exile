@@ -59,14 +59,14 @@
   }
 
   @if (target() === 'stash-search') {
-    <div class="min-h-0 flex-1 overflow-y-auto">
+    <div class="min-h-0 flex-1" [class.overflow-y-auto]="!fitting()" [class.overflow-hidden]="fitting()">
       <div #fitContent class="flex flex-col">
         <app-stash-panel />
       </div>
     </div>
   } @else if (parsed(); as parsedItem) {
     @if (target() === 'item-check') {
-      <div class="min-h-0 flex-1 overflow-y-auto">
+      <div class="min-h-0 flex-1" [class.overflow-y-auto]="!fitting()" [class.overflow-hidden]="fitting()">
         <div #fitContent class="flex flex-col">
           @if (mapCheck()) {
             <app-map-check [item]="parsedItem" [view]="item()!" />

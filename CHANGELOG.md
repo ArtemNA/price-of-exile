@@ -2,6 +2,13 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.24
+
+- Fix: the price check could open squeezed in height, its parts over each other, right after a map or item check. The window now ignores a size meant for another check.
+- Fix: a scrollbar flashed for a moment when a map check, item check or the stash panel opened.
+- Scrollbars are thin and in the theme's colours in every window; the Awakened PoE Trade look keeps its own in the listings.
+- Fix: a click into a number field (stat range, item level and others) blanked it, and Backspace erased nothing until you typed something first. The field now keeps its number, so you can erase digits right away, or the whole bound, and search without it.
+
 ## v0.1.23
 
 - Facetor's Lens is priced, with a Stored Experience filter: minimum and maximum start at the lens's own value and can be changed.

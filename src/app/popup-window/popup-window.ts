@@ -35,6 +35,12 @@ import { ItemView, toItemView } from './item-view';
 })
 export class PopupWindow {
   protected readonly target = signal<CheckTarget>('price-check');
+  /**
+   * A new item, map check or stash panel until the window has its height: no scrollbar meanwhile.
+   * The host shows the window at a default size first, so the content overflowed it for a frame
+   * or two and a scrollbar flashed (owner, 21.11.2026).
+   */
+  protected readonly fitting = signal(false);
   protected readonly parsed = signal<ParsedItem | null>(null);
   protected readonly item = signal<ItemView | null>(null);
   protected readonly error = signal<string | null>(null);
@@ -98,6 +104,7 @@ export class PopupWindow {
       this.error.set(null);
       this.languageMismatch.set(null);
       this.target.set(payload.target);
+      this.fitting.set(payload.target !== 'price-check');
       void this.leagues.refreshIfOld();
       if (payload.target === 'stash-search') {
         afterNextRender(() => this.fit(), { injector: this.injector });
@@ -174,7 +181,11 @@ export class PopupWindow {
     if (!content || !section || this.target() === 'price-check') return;
     const chrome = section.offsetHeight - (content.parentElement?.clientHeight ?? 0);
     const width = this.target() === 'stash-search' ? STASH_PANEL_WIDTH : this.mapCheck() ? MAP_CHECK_WIDTH : ITEM_CHECK_WIDTH;
-    void host.fitPopup(width, Math.ceil(content.offsetHeight + chrome));
+    void host
+      .fitPopup(this.target(), width, Math.ceil(content.offsetHeight + chrome))
+      .catch(() => undefined)
+      // The window has its new size; let the page take it before scrolling is allowed again.
+      .finally(() => requestAnimationFrame(() => requestAnimationFrame(() => this.fitting.set(false))));
   }
 
   /** A click outside the number fields ends typing: keyboard back to the game (no-op otherwise). */
