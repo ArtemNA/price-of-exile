@@ -21,6 +21,7 @@ const NUMERIC: Array<[keyof ItemFilters, string]> = [
   ['mapTier', 'item.map_tier'],
   ['areaLevel', 'item.area_level'],
   ['stackSize', 'item.stock'],
+  ['storedExperience', 'item.stored_experience'],
   ['sentinelCharge', 'item.sentinel_charge'],
 ];
 

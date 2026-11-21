@@ -686,3 +686,17 @@
   будь-якої рідкості, а в нормальних — з назви. Магічні («Vestigial … of …») без реального тексту не чіпав.
 - Фільтри як в APT: імпліцит з тегом Vestigial лишається увімкненим, trade-id `implicit.stat_1939175721`; фільтр
   `vestigial` (misc) — лише для унікальних, як і було. Тест `tests/vestigial.test.ts` (3, усі падають без правки).
+
+## F-79. Facetor's Lens і «Stored Experience» (21.11.2026)
+
+- Власник: лінза «не оцінюється», треба фільтр збереженого досвіду, мін і макс за замовчуванням як на предметі.
+  У наших даних (і в APT) лінзи не було; в APT немає ні рядка «Stored Experience», ні фільтра.
+- Дані додано вручну (перезапишуться наступним оновленням з APT — перевірити): рядки `Facetor's Lens` у
+  `public/data/{en,ru}/items.ndjson` з генератора (ru «Линза награнения», з кешу trade API); `STORED_EXPERIENCE` у
+  `client_strings.js` з ClientStrings гри `ItemDisplayStoredExperience` (en «Stored Experience: {0}»,
+  ru «Сохраненный опыт: {0}»).
+- Код: `parseStoredExperience` (лише цифри: роздільник розрядів локалізований, у прикладі пробіли),
+  фільтр `storedExperience` {value = max = значення}, запит `misc_filters.filters.stored_experience.min/max`
+  (звірено з `/api/trade/data/filters` 21.11.2026: `misc_filters` → `{"id":"stored_experience","text":"Stored Experience","minMax":true}`),
+  чіп в обох темах. Поле числа в базовій темі тепер ширшає під 9 цифр (`min-width` у ch), в APT-темі ширину й далі
+  задає `chipInputWidth`. Тест `tests/facetors-lens.test.ts` (3; падає без парсера і без max).

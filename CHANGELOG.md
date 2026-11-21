@@ -2,6 +2,10 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.23
+
+- Facetor's Lens is priced, with a Stored Experience filter: minimum and maximum start at the lens's own value and can be changed.
+
 ## v0.1.22
 
 - Fix: rare and normal items on Vestigial bases (for example a rare "Vestigial Golden Mask") were not recognised. They are priced by their base, mods and the vestigial implicit.

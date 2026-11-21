@@ -119,6 +119,7 @@ export const ITEM_CHIP_SHORT_LABELS: Record<string, string> = {
   mapTier: 'Tier',
   areaLevel: 'Area level',
   stackSize: 'Stack',
+  storedExperience: 'Experience',
   sentinelCharge: 'Charge',
 };
 

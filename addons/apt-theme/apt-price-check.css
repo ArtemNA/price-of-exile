@@ -111,6 +111,7 @@
 }
 .apt-price-check app-num-input.apt-chip-input input {
   width: 100%;
+  min-width: 0 !important; /* the host sets the width (chipInputWidth) */
   height: auto;
   border: 0;
   border-radius: 0;

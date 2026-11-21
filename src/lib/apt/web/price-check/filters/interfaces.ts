@@ -76,6 +76,7 @@ export interface ItemFilters {
   }
   itemLevel?: FilterNumeric
   stackSize?: FilterNumeric
+  storedExperience?: FilterNumeric
   unidentified?: {
     value: true
     disabled: boolean

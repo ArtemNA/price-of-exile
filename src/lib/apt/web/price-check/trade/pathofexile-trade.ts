@@ -140,6 +140,7 @@ interface TradeRequest {
           split?: FilterBoolean
           identified?: FilterBoolean
           stack_size?: FilterRange
+          stored_experience?: FilterRange
           memory_level?: FilterRange
           foulborn_item?: FilterBoolean
           vestigial?: FilterBoolean
@@ -363,6 +364,13 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
   }
   if (filters.notCatalysed && !filters.notCatalysed.disabled) {
     propSet(query.filters, 'misc_filters.filters.quality.max', 0)
+  }
+
+  if (filters.storedExperience && !filters.storedExperience.disabled) {
+    propSet(query.filters, 'misc_filters.filters.stored_experience.min', filters.storedExperience.value)
+    if (filters.storedExperience.max) {
+      propSet(query.filters, 'misc_filters.filters.stored_experience.max', filters.storedExperience.max)
+    }
   }
 
   if (filters.gemLevel && !filters.gemLevel.disabled) {

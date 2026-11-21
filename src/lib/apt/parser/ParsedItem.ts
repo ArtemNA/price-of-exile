@@ -73,6 +73,8 @@ export interface ParsedItem {
     white: number
   }
   stackSize?: { value: number, max: number }
+  /** Price of Exile: Facetor's Lens "Stored Experience: 500 000 000". */
+  storedExperience?: number
   isUnidentified: boolean
   isCorrupted?: { twice?: boolean }
   isUnmodifiable?: boolean

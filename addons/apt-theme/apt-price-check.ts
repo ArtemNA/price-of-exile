@@ -238,6 +238,7 @@ export class AptPriceCheck extends PriceCheckPanel {
     if (filters.mapBlighted?.value) readonly('blighted', t(filters.mapBlighted.value));
     numeric('itemLevel', 'item.item_level');
     numeric('stackSize', 'item.stock');
+    numeric('storedExperience', 'item.stored_experience');
     numeric('whiteSockets', 'item.white_sockets');
     numeric('gemLevel', 'item.gem_level');
     numeric('quality', 'item.quality');

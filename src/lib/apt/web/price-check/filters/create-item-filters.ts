@@ -112,6 +112,14 @@ export function createFilters (
       baseType: item.info.name,
       baseTypeTrade: t(opts, item.info)
     }
+    if (item.storedExperience !== undefined) {
+      // Price of Exile: Facetor's Lens, min and max as on the item (owner, 21.11.2026)
+      filters.storedExperience = {
+        value: item.storedExperience,
+        max: item.storedExperience,
+        disabled: false
+      }
+    }
     if (item.info.refName === 'Chronicle of Atzoatl') {
       filters.areaLevel = {
         value: floorToBracket(item.areaLevel!, [1, 68, 73, 75, 78, 80]),

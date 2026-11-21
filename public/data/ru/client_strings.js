@@ -26,6 +26,7 @@ export default {
   TALISMAN_TIER: 'Уровень талисмана: ',
   GEM_LEVEL: 'Уровень: ',
   STACK_SIZE: 'Размер стопки: ',
+  STORED_EXPERIENCE: 'Сохраненный опыт: ',
   SOCKETS: 'Гнезда: ',
   QUALITY: 'Качество: ',
   MEMORY_STRANDS: 'Пряди воспоминаний: ',

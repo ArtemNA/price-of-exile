@@ -26,6 +26,7 @@ export default {
   TALISMAN_TIER: 'Talisman Tier: ',
   GEM_LEVEL: 'Level: ',
   STACK_SIZE: 'Stack Size: ',
+  STORED_EXPERIENCE: 'Stored Experience: ',
   SOCKETS: 'Sockets: ',
   QUALITY: 'Quality: ',
   MEMORY_STRANDS: 'Memory Strands: ',
