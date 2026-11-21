@@ -120,3 +120,18 @@ describe('settings version 2 (0.1.20)', () => {
     expect(upgradeSettings({ ...v1, configVersion: SETTINGS_VERSION, theme: 'apt' }).theme).toBe('apt');
   });
 });
+
+describe('Vaal replaced by Graphite (0.1.21)', () => {
+  it('moves a stored Vaal choice to Graphite and keeps everything else', () => {
+    const settings = upgradeSettings({ configVersion: SETTINGS_VERSION, theme: 'vaal', accountName: 'me', leagueId: 'Keepers' });
+    expect(settings.theme).toBe('graphite');
+    expect(settings.accountName).toBe('me');
+    expect(settings.leagueId).toBe('Keepers');
+  });
+
+  it('leaves other choices and the default alone', () => {
+    for (const theme of ['', 'apt', 'price-of-exile', 'graphite']) {
+      expect(upgradeSettings({ configVersion: SETTINGS_VERSION, theme }).theme).toBe(theme);
+    }
+  });
+});

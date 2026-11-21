@@ -166,12 +166,12 @@ const CELL = 47;
     .card { position: absolute; right: 12px; display: flex; align-items: flex-start; gap: 4px; max-width: calc(100% - 12px);
       font-family: 'FontinSmallCaps', 'Alegreya SC', serif; font-size: 15px; line-height: 1.25; }
     .card.right { right: auto; left: 12px; flex-direction: row-reverse; }
-    .art { position: relative; flex: none; background: rgba(8, 10, 24, 0.75); border: 1px solid #3a3226; }
+    .art { position: relative; flex: none; background: #0b0c14; border: 1px solid #3a3226; }
     .art img { display: block; }
     .socket { position: absolute; width: 22px; height: 22px; border-radius: 50%; border: 2px solid #1a1a1a;
       box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.45); }
     .link { position: absolute; background: #c8a46a; border: 1px solid #3a2a12; }
-    .text { flex: 1 1 auto; min-width: 220px; background: rgba(0, 0, 0, 0.94); border: 1px solid #3a3226; text-align: center; color: #fff; }
+    .text { flex: 1 1 auto; min-width: 220px; background: #050505; border: 1px solid #3a3226; text-align: center; color: #fff; }
     .title { padding: 4px 10px; font-size: 18px; border-bottom: 1px solid currentColor;
       background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0)); }
     .block { padding: 3px 10px; }

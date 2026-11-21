@@ -288,8 +288,8 @@
   border-radius: 0.25rem;
   padding: 0 0.25rem;
 }
-.apt-price-check .apt-tier-1 { background: var(--apt-yellow); color: var(--apt-yellow-ink); }
-.apt-price-check .apt-tier-2 { border: 1px solid var(--apt-yellow); margin: -1px 0; color: var(--apt-yellow); }
+.apt-price-check .apt-tier-1 { background: var(--apt-tier1-bg, var(--apt-yellow)); color: var(--apt-yellow-ink); }
+.apt-price-check .apt-tier-2 { border: 1px solid var(--apt-tier2, var(--apt-yellow)); margin: -1px 0; color: var(--apt-tier2, var(--apt-yellow)); }
 .apt-price-check .apt-not-tier-1 { background: var(--apt-700); color: var(--apt-700-ink); }
 .apt-price-check .apt-merc-gilded { background: #b7791f; color: #fffff0; }
 

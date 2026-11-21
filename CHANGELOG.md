@@ -2,6 +2,12 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.21
+
+- The default look is now **Graphite**: neutral graphite with ice-blue tiers, so red, orange and green (map check, price drops, warnings) stand out. It replaces Vaal, whose crimson base swallowed them: if you picked Vaal, you get Graphite; any other choice stays.
+- Settings → Overlay → Theme lists Graphite and Awakened PoE Trade first, the earlier two-column look last.
+- Fix: with related items shown beside the price check (for example with "Opposite the cursor"), the listing card stood beyond them, away from its row. It now stands right next to the listings.
+
 ## v0.1.20
 
 - New default look, **Vaal**: Awakened PoE Trade's price check layout in near-black, crimson and gold, with the game's font. The APT colours and the earlier two-column look stay in Settings → Overlay → Theme.

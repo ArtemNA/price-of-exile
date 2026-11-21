@@ -199,8 +199,10 @@ fn listing_card_show(
     card: serde_json::Value,
     row_top: f64,
     row_bottom: f64,
+    row_left: f64,
+    row_right: f64,
 ) -> Result<(), String> {
-    card::show(&app, card, row_top, row_bottom)
+    card::show(&app, card, row_top, row_bottom, row_left, row_right)
 }
 
 /// The card page drew the card of `generation`.

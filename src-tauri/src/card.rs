@@ -30,18 +30,20 @@ pub fn init(app: &AppHandle) -> tauri::Result<()> {
     Ok(())
 }
 
-/// Which side of the popup the card goes and the card window's rect: the side with more room in
-/// the game (at 1920 px a 960 px popup next to the inventory leaves ~290 px on its left and the
-/// inventory's ~660 px on its right), kept inside the game, as tall as the game. With too little
-/// room on both sides it overlaps the popup rather than leave the game.
-pub fn placement(game: Rect, popup: Rect, width: i32) -> (Rect, &'static str) {
+/// Which side the card goes and the card window's rect. The side: the one with more room in the
+/// game beside the whole popup window (at 1920 px a 960 px popup next to the inventory leaves ~290 px
+/// on its left and the inventory's ~660 px on its right). The position: right against the listing
+/// `column`, which the window may flank with related items; the card covers those while it shows
+/// rather than stand beyond them, away from its row (owner, 21.11.2026). Kept inside the game, as
+/// tall as the game; with too little room it overlaps the popup rather than leave the game.
+pub fn placement(game: Rect, popup: Rect, column: Rect, width: i32) -> (Rect, &'static str) {
     let room_left = popup.x - game.x;
     let room_right = (game.x + game.width) - (popup.x + popup.width);
     let left = room_left >= room_right;
     let x = if left {
-        (popup.x - width).max(game.x)
+        (column.x - width).max(game.x)
     } else {
-        (popup.x + popup.width).min(game.x + game.width - width)
+        (column.x + column.width).min(game.x + game.width - width)
     };
     let rect = Rect {
         x,
@@ -57,12 +59,30 @@ fn card_hwnd(app: &AppHandle) -> Option<platform::RawHwnd> {
     Some(window.hwnd().ok()?.0 as platform::RawHwnd)
 }
 
-/// Shows `card` next to the popup row from `row_top` to `row_bottom` (logical px of the popup page).
+/// The listing column's rect on screen: the popup's rows span `row_left`..`row_right` (logical px of
+/// the page). The card goes beside the column, not beside the window: the APT layout's window also
+/// holds related items left or right of the column (owner's bug report 21.11.2026: with "Opposite the
+/// cursor" and related items shown, the card landed beyond them, away from its row).
+pub fn column_rect(popup: Rect, row_left: f64, row_right: f64, scale: f64) -> Rect {
+    let left = (row_left * scale).round() as i32;
+    let right = (row_right * scale).round() as i32;
+    Rect {
+        x: popup.x + left,
+        y: popup.y,
+        width: (right - left).max(1),
+        height: popup.height,
+    }
+}
+
+/// Shows `card` next to the popup row from `row_top` to `row_bottom`, `row_left` to `row_right`
+/// (logical px of the popup page).
 pub fn show(
     app: &AppHandle,
     card: serde_json::Value,
     row_top: f64,
     row_bottom: f64,
+    row_left: f64,
+    row_right: f64,
 ) -> Result<(), String> {
     let state = app.state::<AppState>();
     if !state.popup_visible() {
@@ -72,7 +92,8 @@ pub fn show(
     let popup = platform::window_rect(state.popup_hwnd()).ok_or("no popup rect")?;
     let scale = state.game_hwnd().map_or(1.0, platform::monitor_scale);
     let width = (CARD_WIDTH_LOGICAL * scale).round() as i32;
-    let (rect, side) = placement(game, popup, width);
+    let column = column_rect(popup, row_left, row_right, scale);
+    let (rect, side) = placement(game, popup, column, width);
     let generation = GENERATION.fetch_add(1, Ordering::SeqCst) + 1;
     *ASKED.lock().unwrap() = Some((generation, Instant::now()));
     // Visible before the page draws: a hidden window would draw slowly (see the module docs).
@@ -141,28 +162,74 @@ mod tests {
     #[test]
     fn goes_where_there_is_more_room() {
         // Popup next to the inventory: 294 px free on its left, 666 px (the inventory) on its right.
-        let (rect, side) = placement(GAME, popup(294), 460);
+        let (rect, side) = placement(GAME, popup(294), popup(294), 460);
         assert_eq!(side, "right");
         assert_eq!(
             (rect.x, rect.y, rect.width, rect.height),
             (1254, 0, 460, 1080)
         );
         // Popup next to the stash: over the stash, on its left.
-        let (rect, side) = placement(GAME, popup(666), 460);
+        let (rect, side) = placement(GAME, popup(666), popup(666), 460);
         assert_eq!((side, rect.x), ("left", 206));
+    }
+
+    #[test]
+    fn keeps_the_side_but_stands_against_the_column() {
+        // The owner's case: the window (related items 440 px on its left, then the 460 px column)
+        // at x 900. The window leaves 900 px on its left and 120 on its right: the card goes left,
+        // against the column (x 1340), over the related items, not beyond them (x 900).
+        let window = Rect {
+            x: 900,
+            y: 200,
+            width: 900,
+            height: 700,
+        };
+        let column = column_rect(window, 440.0, 900.0, 1.0);
+        assert_eq!((column.x, column.width), (1340, 460));
+        let (rect, side) = placement(GAME, window, column, 460);
+        assert_eq!((side, rect.x + rect.width), ("left", 1340));
+        // Related items on the right of a centred column (x 625-1085, window to 1468): the side
+        // stays left as before (625 px vs 452 px), the card against the column.
+        let window = Rect {
+            x: 625,
+            y: 0,
+            width: 843,
+            height: 1000,
+        };
+        let column = Rect {
+            x: 625,
+            y: 0,
+            width: 460,
+            height: 1000,
+        };
+        let (rect, side) = placement(GAME, window, column, 460);
+        assert_eq!((side, rect.x), ("left", 165));
+        // Scaled 1.5: page px become screen px.
+        let column = column_rect(
+            Rect {
+                x: 900,
+                y: 200,
+                width: 900,
+                height: 700,
+            },
+            100.0,
+            300.0,
+            1.5,
+        );
+        assert_eq!((column.x, column.width), (1050, 300));
     }
 
     #[test]
     fn stays_inside_the_game() {
         // Centred: 480 px each side, the card fits on the left.
-        let (rect, side) = placement(GAME, popup(480), 460);
+        let (rect, side) = placement(GAME, popup(480), popup(480), 460);
         assert_eq!((side, rect.x), ("left", 20));
         // A small game window: 200 px each side, the card overlaps the popup but stays in the game.
         let small = Rect {
             width: 1360,
             ..GAME
         };
-        let (rect, side) = placement(small, popup(200), 460);
+        let (rect, side) = placement(small, popup(200), popup(200), 460);
         assert_eq!((side, rect.x), ("left", 0));
     }
 }

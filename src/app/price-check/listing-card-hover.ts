@@ -86,7 +86,7 @@ class ListingCardHover {
       if (this.shownId === row.id) return;
       this.shownId = row.id;
       const rect = row.el.getBoundingClientRect();
-      void host.listingCardShow(row.card, rect.top, rect.bottom).catch(() => undefined);
+      void host.listingCardShow(row.card, rect).catch(() => undefined);
     } else if (this.shownId !== null) {
       this.shownId = null;
       void host.listingCardHide().catch(() => undefined);

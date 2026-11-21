@@ -26,7 +26,8 @@ export interface Theme {
 
 export const BASE_THEME: Theme = { id: 'price-of-exile', label: 'Price of Exile' };
 
-export const THEMES: readonly Theme[] = [BASE_THEME, ...ADDON_THEMES];
+/** In the settings' order: the default (Graphite) and APT first, our older two-column look last. */
+export const THEMES: readonly Theme[] = [...ADDON_THEMES, BASE_THEME];
 
 /** The theme a fresh install starts with: an addon built in as the default, or ours. */
 export const DEFAULT_THEME = DEFAULT_THEME_ID ?? BASE_THEME.id;

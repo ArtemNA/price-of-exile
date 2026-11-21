@@ -13,5 +13,5 @@ export const APT_THEME: Theme = {
   // The popup position setting applies as in our theme; "Opposite the cursor" is APT's own.
 };
 
-/** The APT layout in Vaal black, crimson and gold (theme.css `vaal`); the default theme since 0.1.20. */
-export const VAAL_THEME: Theme = { ...APT_THEME, id: 'vaal', label: 'Vaal' };
+/** The APT layout on graphite with ice-blue tiers (theme.css `graphite`); the default theme since 0.1.21 (Vaal before). */
+export const GRAPHITE_THEME: Theme = { ...APT_THEME, id: 'graphite', label: 'Graphite' };

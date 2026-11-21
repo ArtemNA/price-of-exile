@@ -20,6 +20,8 @@ import {
   SETTINGS_STORE_KEY,
   SETTINGS_VERSION,
   THEME_RESET_VERSION,
+  RETIRED_THEME_ID,
+  RETIRED_THEME_REPLACEMENT,
   MAIN_WINDOW_LABEL,
 } from '../constants';
 
@@ -133,6 +135,8 @@ export function upgradeSettings(raw: unknown): Settings {
     ...defaults,
     ...stored,
     ...(version < THEME_RESET_VERSION ? { theme: defaults.theme } : {}),
+    // Vaal (0.1.20) was replaced by Graphite in 0.1.21: who picked it moves over; other choices stay.
+    ...(stored.theme === RETIRED_THEME_ID && version >= THEME_RESET_VERSION ? { theme: RETIRED_THEME_REPLACEMENT } : {}),
     configVersion: SETTINGS_VERSION,
     hotkeys: { ...defaults.hotkeys, ...stored.hotkeys },
     commands: Array.isArray(stored.commands) ? stored.commands : defaults.commands,
@@ -196,7 +200,11 @@ export async function initSettings(): Promise<void> {
   });
   // Only the settings window writes the first file: if the popup did, the settings window
   // (loading a moment later) would no longer see a first start.
-  const outdated = stored === undefined || (stored as Partial<Settings>).configVersion !== SETTINGS_VERSION;
+  const outdated =
+    stored === undefined ||
+    (stored as Partial<Settings>).configVersion !== SETTINGS_VERSION ||
+    // Vaal → Graphite (0.1.21): write the new choice, so the file no longer names a theme that is gone.
+    (stored as Partial<Settings>).theme === RETIRED_THEME_ID;
   if (outdated && label === MAIN_WINDOW_LABEL) {
     await persistence.save(settings);
   }

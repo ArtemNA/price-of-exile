@@ -5,19 +5,20 @@ stash search presets and chat commands. Downloads: [Releases](https://github.com
 
 ## Screenshots
 
-A rare item in the default **Vaal** look: the base price from poe.ninja with its 7 day trend, mods with their
-tags and tiers, trade listings, and the card of a listed item when the pointer is on the eye next to its price.
+A unique ring in the default **Graphite** look: the base price from poe.ninja with its 7 day trend, trade
+listings, the card of a listed item when the pointer is on the eye next to its price, and related items
+with their poe.ninja prices beside the price check.
 
-![Price check of a rare item with the card of a listing](docs/readme/price-check-rare.png)
+![Price check with the card of a listing and related items](docs/readme/price-check-rare.png)
 
-Fragments and currency: bulk offers from the currency exchange with the market ratio from poe.ninja, and what
-your stack is worth.
+Fragments and currency: bulk offers from the currency exchange with the market ratio from poe.ninja, what your
+stack is worth, and related items.
 
-![The Maven's Writ: bulk offers](docs/readme/related-items-bulk.png)
+![The Maven's Writ: bulk offers and related items](docs/readme/related-items-bulk.png)
 
-A unique: links decide the price; the disenchanting value is shown under the listings.
+A unique: links decide the price; the disenchanting value is under the listings, related items beside them.
 
-![Tabula Rasa](docs/readme/unique-related.png)
+![Tabula Rasa with related items](docs/readme/unique-related.png)
 
 Divine Orb bulk offers.
 
@@ -27,7 +28,7 @@ The message in the screen corner when the overlay starts:
 
 ![Start message](docs/readme/start-message.png)
 
-Three themes ship with the app (Settings → Overlay → Theme): **Vaal**, the default since 0.1.20, with Awakened PoE Trade's layout in near-black, crimson and gold and the game's font; **Awakened PoE Trade**, the same layout in APT's colours; and the earlier two-column **Price of Exile** look. How to make your own: [THEMING.md](THEMING.md).
+Three themes ship with the app (Settings → Overlay → Theme): **Graphite**, the default since 0.1.21, with Awakened PoE Trade's layout on neutral graphite with ice-blue tiers and the game's font; **Awakened PoE Trade**, the same layout in APT's colours; and the earlier two-column **Price of Exile** look. How to make your own: [THEMING.md](THEMING.md).
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.0.
 

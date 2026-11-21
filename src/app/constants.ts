@@ -261,11 +261,14 @@ export const SETTINGS_FILE = 'settings.json';
 export const SETTINGS_STORE_KEY = 'settings';
 /**
  * Current settings format; `upgradeSettings` brings older files up to it.
- * 2 (0.1.20): the theme goes back to the build's default once (the new Vaal look); later choices stay.
+ * 2 (0.1.20): the theme goes back to the build's default once (then Vaal, Graphite since 0.1.21); later choices stay.
  */
 export const SETTINGS_VERSION = 2;
 /** Settings older than this get the default theme once (see SETTINGS_VERSION). */
 export const THEME_RESET_VERSION = 2;
+/** The Vaal theme of 0.1.20, replaced by Graphite in 0.1.21: a stored choice of it moves to Graphite. */
+export const RETIRED_THEME_ID = 'vaal';
+export const RETIRED_THEME_REPLACEMENT = 'graphite';
 /** Event the window that changed the settings sends to the other windows. */
 export const SETTINGS_CHANGED_EVENT = 'settings-changed';
 
