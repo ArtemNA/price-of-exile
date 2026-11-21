@@ -360,6 +360,17 @@
                 <span class="flex flex-col"><span class="text-bright">{{ 'Show how many listings a seller has' | tr }}</span>
                   <span class="text-[12px] text-muted">{{ 'Asks the trade site for more results, so the rate limit is reached sooner.' | tr }}</span></span>
               </label>
+              <label class="flex flex-col gap-1">
+                <span class="text-bright">{{ 'Show the item when pointing at a listing' | tr }}</span>
+                <select class="h-7 self-start border border-line-strong bg-well px-2" [value]="settings().priceCheck.listingCard"
+                  (change)="setPriceCheck({ listingCard: $any($event.target).value })">
+                  <option value="eye">{{ 'On the eye icon of a listing' | tr }}</option>
+                  <option value="keybind">{{ 'While Shift is held' | tr }}</option>
+                  <option value="always">{{ 'Always' | tr }}</option>
+                  <option value="off">{{ 'Never' | tr }}</option>
+                </select>
+                <span class="text-[12px] text-muted">{{ 'A card of the listed item, as in the game, beside the price check.' | tr }}</span>
+              </label>
             </div>
           </div>
         }

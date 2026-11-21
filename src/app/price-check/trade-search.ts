@@ -13,6 +13,7 @@ import {
 } from '../../lib/apt/web/price-check/trade/pathofexile-trade';
 import { TRADE_LISTING } from '../constants';
 import { settings } from '../core/settings';
+import { listingCardHover } from './listing-card-hover';
 
 export type GroupedResult = PricingResult & { listedTimes: number };
 
@@ -58,6 +59,7 @@ export class TradeSearch {
     this.searchResult.set(null);
     this.fetchResults.set([]);
     this.isSearching.set(false);
+    listingCardHover.reset();
   }
 
   async search(filters: ItemFilters, stats: FilterOrGroup[]): Promise<void> {

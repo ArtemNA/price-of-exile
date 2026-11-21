@@ -2,6 +2,10 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.19
+
+- Point at the **eye** next to a listing's price to see the listed item as a game tooltip beside the price check: mods with tiers, sockets, properties (Settings → Price check: the eye, with Shift held, always or never).
+
 ## v0.1.18
 
 - **Originator's Exalted Orb** and **Primordial Exalted Orb** (new in 3.30) are priced.

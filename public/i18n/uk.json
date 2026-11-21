@@ -658,6 +658,16 @@
     "Σ Mods behind totals": "Σ Моди в сумах",
     "Twice corrupted": "Twice Corrupted",
     "Open settings": "Відкрити налаштування",
-    "This window, from the game": "Це вікно, просто з гри"
+    "This window, from the game": "Це вікно, просто з гри",
+    "Show the item when pointing at a listing": "Показувати предмет при наведенні на лістинг",
+    "While Shift is held": "Поки затиснуто Shift",
+    "Always": "Завжди",
+    "Never": "Ніколи",
+    "A card of the listed item, as in the game, beside the price check.": "Картка виставленого предмета, як у грі, поруч із прайс-чеком.",
+    "Item Level": "Рівень предмета",
+    "Requires": "Потрібно",
+    "Twice Corrupted": "Twice Corrupted",
+    "Split": "Split",
+    "On the eye icon of a listing": "На іконці ока біля лістингу"
   }
 }

@@ -265,6 +265,8 @@ export interface PricingResult {
   accountName: string
   accountStatus: 'offline' | 'online' | 'afk'
   ign: string
+  /** Ours: the fetched item as the API gave it, for the listing card (src/app/price-check/listing-card.ts). */
+  item?: unknown
 }
 
 export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]) {
@@ -848,6 +850,7 @@ export async function requestResults (
       isMine: (result.listing.account.name === opts.accountName),
       ign: result.listing.account.lastCharacterName,
       accountName: result.listing.account.name,
+      item: result.item,
       accountStatus: (result.listing.fee != null)
         ? 'online'
         : result.listing.account.online

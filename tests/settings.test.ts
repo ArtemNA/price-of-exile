@@ -82,3 +82,14 @@ describe('hotkey recording', () => {
     expect(hotkeyConflicts({ a: 'Ctrl+KeyD', b: 'Ctrl+KeyD', c: 'F5', d: null })).toEqual(new Set(['a', 'b']));
   });
 });
+
+describe('listing card setting', () => {
+  it('defaults to the eye icon and keeps a valid stored value', () => {
+    expect(upgradeSettings({}).priceCheck.listingCard).toBe('eye');
+    expect(upgradeSettings({ priceCheck: { listingCard: 'always' } }).priceCheck.listingCard).toBe('always');
+  });
+
+  it('falls back to the default for an unknown value', () => {
+    expect(upgradeSettings({ priceCheck: { listingCard: 'sometimes' } }).priceCheck.listingCard).toBe('eye');
+  });
+});

@@ -9,6 +9,7 @@ mod shortcuts;
 mod stash;
 mod state;
 mod toast;
+mod card;
 mod tray;
 
 use std::collections::HashMap;
@@ -191,6 +192,28 @@ fn fit_popup(app: AppHandle, width: f64, height: f64) -> &'static str {
     popup::fit(&app, width, height)
 }
 
+/// The popup page: the pointer is over a listing row whose card should show (see `card.rs`).
+#[tauri::command]
+fn listing_card_show(
+    app: AppHandle,
+    card: serde_json::Value,
+    row_top: f64,
+    row_bottom: f64,
+) -> Result<(), String> {
+    card::show(&app, card, row_top, row_bottom)
+}
+
+/// The card page drew the card of `generation`.
+#[tauri::command]
+fn listing_card_ready(generation: u64) {
+    card::ready(generation);
+}
+
+#[tauri::command]
+fn listing_card_hide(app: AppHandle) {
+    card::hide(&app);
+}
+
 /// A trade request through the built-in browser's page (its cookies, Cloudflare clearance).
 #[tauri::command]
 async fn browser_fetch(
@@ -310,7 +333,10 @@ pub fn run() {
             popup_focus_input,
             popup_release_focus,
             stash_search,
-            fit_popup
+            fit_popup,
+            listing_card_show,
+            listing_card_ready,
+            listing_card_hide
         ])
         .setup(|app| {
             let identifier = &app.config().identifier;
@@ -334,6 +360,7 @@ pub fn run() {
             popup::init(&handle)?;
             tray::init(&handle)?;
             toast::init(&handle)?;
+            card::init(&handle)?;
             // The settings window starts hidden (the app lives in the tray); the page shows it on
             // the first start. Dev builds show it right away.
             if cfg!(debug_assertions) {

@@ -73,6 +73,8 @@ export const PRICE_CHECK_DEFAULTS = {
   /** Trade requests through the built-in browser's page, with its login and Cloudflare clearance (APT `builtinBrowser`). */
   builtinBrowser: false,
   showSeller: false as false | 'account' | 'ign',
+  /** The card of a listed item beside its row (EE2 "Show item when hovering over price"): on the row's eye icon, with Shift held, always, never. */
+  listingCard: 'eye' as 'eye' | 'keybind' | 'always' | 'off',
 };
 
 /** pathofexile.com hosts: rate limits, Cloudflare checks and the built-in browser apply to them (F-45, F-60). */
@@ -127,6 +129,8 @@ export const LEAGUES_REFRESH_AFTER = 3 * 60 * 60 * 1000;
 export const UPDATE_CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
 /** Event from the host to the corner message page (src-tauri/src/constants.rs). */
 export const TOAST_MESSAGE_EVENT = 'toast-message';
+/** Event to the card window: the card of a listed item to draw, or null (src-tauri/src/card.rs). */
+export const LISTING_CARD_EVENT = 'listing-card';
 
 /** Upper limit of the stat filter range setting, % (APT `settings-price-check.vue`). */
 export const SEARCH_STAT_RANGE_MAX = 50;

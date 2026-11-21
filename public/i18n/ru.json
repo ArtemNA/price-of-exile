@@ -658,6 +658,16 @@
     "Σ Mods behind totals": "Σ Моды в суммах",
     "Twice corrupted": "Дважды осквернённый",
     "Open settings": "Открыть настройки",
-    "This window, from the game": "Это окно, прямо из игры"
+    "This window, from the game": "Это окно, прямо из игры",
+    "Show the item when pointing at a listing": "Показывать предмет при наведении на лот",
+    "While Shift is held": "Пока зажат Shift",
+    "Always": "Всегда",
+    "Never": "Никогда",
+    "A card of the listed item, as in the game, beside the price check.": "Карточка выставленного предмета, как в игре, рядом с прайс-чеком.",
+    "Item Level": "Уровень предмета",
+    "Requires": "Требуется",
+    "Twice Corrupted": "Дважды осквернённый",
+    "Split": "Расколото",
+    "On the eye icon of a listing": "На иконке глаза у лота"
   }
 }

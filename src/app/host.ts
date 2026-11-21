@@ -95,6 +95,12 @@ export const host = {
   isPortable: () => invoke<boolean>('is_portable'),
   /** Shows the built-in browser (pathofexile.com), on `url` if given. */
   browserOpen: (url?: string) => invoke<void>('browser_open', { url: url ?? null }),
+  /** The card of a listed item beside the popup, at the row from `rowTop` to `rowBottom` (page px). */
+  listingCardShow: (card: unknown, rowTop: number, rowBottom: number) =>
+    invoke<void>('listing_card_show', { card, rowTop, rowBottom }),
+  /** The card page drew the card it was sent (the host logs how long it took). */
+  listingCardReady: (generation: number) => invoke<void>('listing_card_ready', { generation }),
+  listingCardHide: () => invoke<void>('listing_card_hide'),
   /** The host took the keyboard back (popup hidden, game clicked). */
   popupLostKeyboard: () => (popupHasKeyboard = false),
 };

@@ -538,7 +538,7 @@
           <ng-container *ngTemplateOutlet="tradeLinks" />
         }
       </div>
-      <div class="apt-scroll flex min-h-0 flex-col overflow-x-hidden overflow-y-auto">
+      <div class="apt-scroll flex min-h-0 flex-col overflow-x-hidden overflow-y-auto" (scroll)="cardHover.leave()">
         <table class="apt-table w-full">
           <thead>
             <tr class="text-left">
@@ -563,8 +563,12 @@
               @if (!row) {
                 <tr><td colspan="100" class="text-transparent">***</td></tr>
               } @else {
-                <tr>
+                <tr data-listing-row (mouseenter)="cardHover.pointer($event, row)" (mousemove)="cardHover.pointer($event, row)" (mouseleave)="cardHover.leave()">
                   <td class="px-2 whitespace-nowrap">
+                    @if (cardHover.eyes && row.item) {
+                      <span class="-ml-1 mr-1 inline-block cursor-default align-middle text-[#718096] hover:text-[#e2e8f0]" data-test="listing-eye"
+                        (mouseenter)="cardHover.eye($event, row)" (mouseleave)="cardHover.eyeLeave()"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M8 3C4.4 3 1.6 5.6 0.6 8c1 2.4 3.8 5 7.4 5s6.4-2.6 7.4-5C14.4 5.6 11.6 3 8 3zm0 8.2A3.2 3.2 0 1 1 8 4.8a3.2 3.2 0 0 1 0 6.4zm0-1.6a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2z" fill="currentColor"/></svg></span>
+                    }
                     <span [class.line-through]="row.priceCurrency === 'exalted'">{{ row.priceAmount }} {{ row.priceCurrency }}</span>
                     @if (row.listedTimes > 2) {
                       <span class="-mr-2 ml-1 rounded bg-[#cbd5e0] px-1 text-[#2d3748]"><span class="apt-sans">×</span> {{ row.listedTimes }}</span>

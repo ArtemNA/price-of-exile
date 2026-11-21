@@ -63,6 +63,10 @@ pub const TOAST_WAIT_STEP: Duration = Duration::from_millis(50);
 /// Window labels, as declared in `tauri.conf.json`.
 pub const MAIN_WINDOW: &str = "main";
 pub const POPUP_WINDOW: &str = "popup";
+/// The card of a listed item beside the popup (`card.rs`): label, width, event to its page.
+pub const CARD_WINDOW: &str = "card";
+pub const CARD_WIDTH_LOGICAL: f64 = 460.0;
+pub const CARD_EVENT: &str = "listing-card";
 
 /// Price check window size in logical pixels (shrinks to fit a smaller game window).
 pub const POPUP_WIDTH_LOGICAL: f64 = 960.0;

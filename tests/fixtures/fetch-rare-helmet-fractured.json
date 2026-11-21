@@ -1,0 +1,1281 @@
+{
+ "result": [
+  {
+   "id": "7b6c1acf08488813b293a19934200fb6474077cc69e9daf2ce92cfb50f0edb10",
+   "listing": {
+    "method": "psapi",
+    "indexed": "2023-04-04T20:47:00Z",
+    "stash": {
+     "name": "~price",
+     "x": 8,
+     "y": 10
+    },
+    "price": {
+     "type": "~price",
+     "amount": 1,
+     "currency": "alch"
+    },
+    "account": {
+     "name": "seller11#0000",
+     "online": false
+    }
+   },
+   "item": {
+    "verified": true,
+    "w": 2,
+    "h": 2,
+    "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9IZWxtZXRzL0hlbG1ldFN0ckRleDgiLCJ3IjoyLCJoIjoyLCJzY2FsZSI6MSwiZnJhY3R1cmVkIjp0cnVlfV0/a60b56c62b/HelmetStrDex8.png",
+    "league": "Standard",
+    "id": "7b6c1acf08488813b293a19934200fb6474077cc69e9daf2ce92cfb50f0edb10",
+    "fractured": true,
+    "sockets": [
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 1,
+      "attr": "D",
+      "sColour": "G"
+     }
+    ],
+    "name": "Pain Crown",
+    "typeLine": "Fluted Bascinet",
+    "baseType": "Fluted Bascinet",
+    "rarity": "Rare",
+    "ilvl": 82,
+    "identified": true,
+    "properties": [
+     {
+      "name": "Armour",
+      "values": [
+       [
+        "363",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 16
+     },
+     {
+      "name": "Evasion Rating",
+      "values": [
+       [
+        "273",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 17
+     }
+    ],
+    "requirements": [
+     {
+      "name": "Level",
+      "values": [
+       [
+        "62",
+        0
+       ]
+      ],
+      "displayMode": 0,
+      "type": 62
+     },
+     {
+      "name": "Str",
+      "values": [
+       [
+        "64",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 63
+     },
+     {
+      "name": "Dex",
+      "values": [
+       [
+        "64",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 64
+     }
+    ],
+    "explicitMods": [
+     {
+      "description": "+338 to Accuracy Rating",
+      "flags": {
+       "fractured": true
+      },
+      "domain": "fractured",
+      "hash": "stat.fractured.stat_803737631",
+      "mods": [
+       {
+        "name": "of the Marksman",
+        "tier": "S3",
+        "level": 60,
+        "magnitudes": [
+         {
+          "min": "251",
+          "max": "350"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+179 to Armour",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3484657501",
+      "mods": [
+       {
+        "name": "Sturdy",
+        "tier": "P1",
+        "level": 46,
+        "magnitudes": [
+         {
+          "min": "86",
+          "max": "145"
+         }
+        ]
+       },
+       {
+        "name": "Urchin's",
+        "tier": "P2",
+        "level": 46,
+        "magnitudes": [
+         {
+          "min": "33",
+          "max": "48"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+89 to Evasion Rating",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_53045048",
+      "mods": [
+       {
+        "name": "Sturdy",
+        "tier": "P1",
+        "level": 46,
+        "magnitudes": [
+         {
+          "min": "86",
+          "max": "145"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+27 to maximum Life",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3299347043",
+      "mods": [
+       {
+        "name": "Urchin's",
+        "tier": "P2",
+        "level": 46,
+        "magnitudes": [
+         {
+          "min": "24",
+          "max": "28"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "Regenerate 100.7 Life per second",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3325883026",
+      "mods": [
+       {
+        "name": "of Recuperation",
+        "tier": "S1",
+        "level": 78,
+        "magnitudes": [
+         {
+          "min": "96.1",
+          "max": "128"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+8% to Lightning Resistance",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_1671376347",
+      "mods": [
+       {
+        "name": "of the Cloud",
+        "tier": "S8",
+        "magnitudes": [
+         {
+          "min": "6",
+          "max": "11"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "frameType": 2,
+    "frameTypeId": "Rare",
+    "extended": {
+     "base_defence_percentile": 83,
+     "ev": 328,
+     "ev_aug": true,
+     "ar": 436,
+     "ar_aug": true,
+     "hashes": {
+      "explicit": [
+       [
+        "explicit.stat_3484657501",
+        [
+         1,
+         3
+        ]
+       ],
+       [
+        "explicit.stat_53045048",
+        [
+         1
+        ]
+       ],
+       [
+        "explicit.stat_3299347043",
+        [
+         3
+        ]
+       ],
+       [
+        "explicit.stat_3325883026",
+        [
+         0
+        ]
+       ],
+       [
+        "explicit.stat_1671376347",
+        [
+         2
+        ]
+       ]
+      ],
+      "fractured": [
+       [
+        "fractured.stat_803737631",
+        [
+         0
+        ]
+       ]
+      ]
+     },
+     "text": "SXRlbSBDbGFzczogSGVsbWV0cw0KUmFyaXR5OiBSYXJlDQpQYWluIENyb3duDQpGbHV0ZWQgQmFzY2luZXQNCi0tLS0tLS0tDQpBcm1vdXI6IDM2MyAoYXVnbWVudGVkKQ0KRXZhc2lvbiBSYXRpbmc6IDI3MyAoYXVnbWVudGVkKQ0KLS0tLS0tLS0NClJlcXVpcmVtZW50czoNCkxldmVsOiA2Mg0KU3RyOiA2NA0KRGV4OiA2NA0KLS0tLS0tLS0NClNvY2tldHM6IFItUiBHIA0KLS0tLS0tLS0NCkl0ZW0gTGV2ZWw6IDgyDQotLS0tLS0tLQ0KKzMzOCB0byBBY2N1cmFjeSBSYXRpbmcNCisxNzkgdG8gQXJtb3VyDQorODkgdG8gRXZhc2lvbiBSYXRpbmcNCisyNyB0byBtYXhpbXVtIExpZmUNClJlZ2VuZXJhdGUgMTAwLjcgTGlmZSBwZXIgc2Vjb25kDQorOCUgdG8gTGlnaHRuaW5nIFJlc2lzdGFuY2UNCi0tLS0tLS0tDQpGcmFjdHVyZWQgSXRlbQ0K"
+    }
+   }
+  },
+  {
+   "id": "a6131166dd6d5aaaea3c52247b6200effb856c8cc14e2aec6a75211a3eeeb686",
+   "listing": {
+    "method": "psapi",
+    "indexed": "2022-08-17T04:17:07Z",
+    "stash": {
+     "name": "~price",
+     "x": 20,
+     "y": 18
+    },
+    "price": {
+     "type": "~b/o",
+     "amount": 1,
+     "currency": "alch"
+    },
+    "account": {
+     "name": "seller12#0000",
+     "online": false
+    }
+   },
+   "item": {
+    "verified": true,
+    "w": 2,
+    "h": 2,
+    "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9IZWxtZXRzL0hlbG1ldFN0cjgiLCJ3IjoyLCJoIjoyLCJzY2FsZSI6MSwiZnJhY3R1cmVkIjp0cnVlfV0/acafd1a808/HelmetStr8.png",
+    "league": "Standard",
+    "id": "a6131166dd6d5aaaea3c52247b6200effb856c8cc14e2aec6a75211a3eeeb686",
+    "fractured": true,
+    "sockets": [
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     }
+    ],
+    "name": "Dragon Corona",
+    "typeLine": "Samnite Helmet",
+    "baseType": "Samnite Helmet",
+    "rarity": "Rare",
+    "ilvl": 61,
+    "identified": true,
+    "properties": [
+     {
+      "name": "Armour",
+      "values": [
+       [
+        "276",
+        0
+       ]
+      ],
+      "displayMode": 0,
+      "type": 16
+     }
+    ],
+    "requirements": [
+     {
+      "name": "Level",
+      "values": [
+       [
+        "55",
+        0
+       ]
+      ],
+      "displayMode": 0,
+      "type": 62
+     },
+     {
+      "name": "Str",
+      "values": [
+       [
+        "114",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 63
+     }
+    ],
+    "explicitMods": [
+     {
+      "description": "+67 to maximum Life",
+      "flags": {
+       "fractured": true
+      },
+      "domain": "fractured",
+      "hash": "stat.fractured.stat_3299347043",
+      "mods": [
+       {
+        "name": "Rotund",
+        "tier": "P4",
+        "level": 36,
+        "magnitudes": [
+         {
+          "min": "85",
+          "max": "99"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+35 to Intelligence",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_328541901",
+      "mods": [
+       {
+        "name": "of the Sage",
+        "tier": "S5",
+        "level": 55,
+        "magnitudes": [
+         {
+          "min": "33",
+          "max": "37"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "Regenerate 12.1 Life per second",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3325883026",
+      "mods": [
+       {
+        "name": "of the Hydra",
+        "tier": "S5",
+        "level": 44,
+        "magnitudes": [
+         {
+          "min": "24.1",
+          "max": "32"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "23% increased Stun and Block Recovery",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_2511217560",
+      "mods": [
+       {
+        "name": "of Adamantite Skin",
+        "tier": "S2",
+        "level": 56,
+        "magnitudes": [
+         {
+          "min": "23",
+          "max": "25"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "frameType": 2,
+    "frameTypeId": "Rare",
+    "extended": {
+     "base_defence_percentile": 0,
+     "ar": 331,
+     "ar_aug": true,
+     "hashes": {
+      "explicit": [
+       [
+        "explicit.stat_328541901",
+        [
+         1
+        ]
+       ],
+       [
+        "explicit.stat_3325883026",
+        [
+         2
+        ]
+       ],
+       [
+        "explicit.stat_2511217560",
+        [
+         0
+        ]
+       ]
+      ],
+      "fractured": [
+       [
+        "fractured.stat_3299347043",
+        [
+         0
+        ]
+       ]
+      ]
+     },
+     "text": "SXRlbSBDbGFzczogSGVsbWV0cw0KUmFyaXR5OiBSYXJlDQpEcmFnb24gQ29yb25hDQpTYW1uaXRlIEhlbG1ldA0KLS0tLS0tLS0NCkFybW91cjogMjc2DQotLS0tLS0tLQ0KUmVxdWlyZW1lbnRzOg0KTGV2ZWw6IDU1DQpTdHI6IDExNA0KLS0tLS0tLS0NClNvY2tldHM6IFItUiANCi0tLS0tLS0tDQpJdGVtIExldmVsOiA2MQ0KLS0tLS0tLS0NCis2NyB0byBtYXhpbXVtIExpZmUNCiszNSB0byBJbnRlbGxpZ2VuY2UNClJlZ2VuZXJhdGUgMTIuMSBMaWZlIHBlciBzZWNvbmQNCjIzJSBpbmNyZWFzZWQgU3R1biBhbmQgQmxvY2sgUmVjb3ZlcnkNCi0tLS0tLS0tDQpGcmFjdHVyZWQgSXRlbQ0K"
+    }
+   }
+  },
+  {
+   "id": "de3c063a1f65d2e328e924d868cbe33a33c474c989c5767ba0a7b7b4f4321e72",
+   "listing": {
+    "method": "psapi",
+    "indexed": "2022-08-17T09:36:53Z",
+    "stash": {
+     "name": "~price",
+     "x": 4,
+     "y": 0
+    },
+    "price": {
+     "type": "~price",
+     "amount": 1,
+     "currency": "alch"
+    },
+    "account": {
+     "name": "seller13#0000",
+     "online": false
+    }
+   },
+   "item": {
+    "verified": true,
+    "w": 2,
+    "h": 2,
+    "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9IZWxtZXRzL0hlbG1ldFN0ckRleDYiLCJ3IjoyLCJoIjoyLCJzY2FsZSI6MSwiZnJhY3R1cmVkIjp0cnVlfV0/9fbef8aa66/HelmetStrDex6.png",
+    "league": "Standard",
+    "id": "de3c063a1f65d2e328e924d868cbe33a33c474c989c5767ba0a7b7b4f4321e72",
+    "fractured": true,
+    "sockets": [
+     {
+      "group": 0,
+      "attr": "D",
+      "sColour": "G"
+     },
+     {
+      "group": 0,
+      "attr": "D",
+      "sColour": "G"
+     },
+     {
+      "group": 0,
+      "attr": "I",
+      "sColour": "B"
+     }
+    ],
+    "name": "Golem Ward",
+    "typeLine": "Fencer Helm",
+    "baseType": "Fencer Helm",
+    "rarity": "Rare",
+    "ilvl": 61,
+    "identified": true,
+    "properties": [
+     {
+      "name": "Armour",
+      "values": [
+       [
+        "178",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 16
+     },
+     {
+      "name": "Evasion Rating",
+      "values": [
+       [
+        "178",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 17
+     }
+    ],
+    "requirements": [
+     {
+      "name": "Level",
+      "values": [
+       [
+        "48",
+        0
+       ]
+      ],
+      "displayMode": 0,
+      "type": 62
+     },
+     {
+      "name": "Str",
+      "values": [
+       [
+        "49",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 63
+     },
+     {
+      "name": "Dex",
+      "values": [
+       [
+        "49",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 64
+     }
+    ],
+    "explicitMods": [
+     {
+      "description": "+37% to Cold Resistance",
+      "flags": {
+       "fractured": true
+      },
+      "domain": "fractured",
+      "hash": "stat.fractured.stat_4220027924",
+      "mods": [
+       {
+        "name": "of the Polar Bear",
+        "tier": "S3",
+        "level": 60,
+        "magnitudes": [
+         {
+          "min": "36",
+          "max": "41"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+22 to Strength",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_4080418644",
+      "mods": [
+       {
+        "name": "of the Bear",
+        "tier": "S7",
+        "level": 22,
+        "magnitudes": [
+         {
+          "min": "18",
+          "max": "22"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+11 to Dexterity",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3261801346",
+      "mods": [
+       {
+        "name": "of the Mongoose",
+        "tier": "S9",
+        "magnitudes": [
+         {
+          "min": "8",
+          "max": "12"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "52% increased Armour and Evasion",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_2451402625",
+      "mods": [
+       {
+        "name": "Fencer's",
+        "tier": "P5",
+        "level": 30,
+        "magnitudes": [
+         {
+          "min": "43",
+          "max": "55"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "Reflects 6 Physical Damage to Melee Attackers",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3767873853",
+      "mods": [
+       {
+        "name": "Spiny",
+        "tier": "P1",
+        "level": 10,
+        "magnitudes": [
+         {
+          "min": "5",
+          "max": "10"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "frameType": 2,
+    "frameTypeId": "Rare",
+    "extended": {
+     "base_defence_percentile": 0,
+     "ev": 213,
+     "ev_aug": true,
+     "ar": 213,
+     "ar_aug": true,
+     "hashes": {
+      "explicit": [
+       [
+        "explicit.stat_4080418644",
+        [
+         2
+        ]
+       ],
+       [
+        "explicit.stat_3261801346",
+        [
+         1
+        ]
+       ],
+       [
+        "explicit.stat_2451402625",
+        [
+         3
+        ]
+       ],
+       [
+        "explicit.stat_3767873853",
+        [
+         0
+        ]
+       ]
+      ],
+      "fractured": [
+       [
+        "fractured.stat_4220027924",
+        [
+         0
+        ]
+       ]
+      ]
+     },
+     "text": "SXRlbSBDbGFzczogSGVsbWV0cw0KUmFyaXR5OiBSYXJlDQpHb2xlbSBXYXJkDQpGZW5jZXIgSGVsbQ0KLS0tLS0tLS0NCkFybW91cjogMTc4IChhdWdtZW50ZWQpDQpFdmFzaW9uIFJhdGluZzogMTc4IChhdWdtZW50ZWQpDQotLS0tLS0tLQ0KUmVxdWlyZW1lbnRzOg0KTGV2ZWw6IDQ4DQpTdHI6IDQ5DQpEZXg6IDQ5DQotLS0tLS0tLQ0KU29ja2V0czogRy1HLUIgDQotLS0tLS0tLQ0KSXRlbSBMZXZlbDogNjENCi0tLS0tLS0tDQorMzclIHRvIENvbGQgUmVzaXN0YW5jZQ0KKzIyIHRvIFN0cmVuZ3RoDQorMTEgdG8gRGV4dGVyaXR5DQo1MiUgaW5jcmVhc2VkIEFybW91ciBhbmQgRXZhc2lvbg0KUmVmbGVjdHMgNiBQaHlzaWNhbCBEYW1hZ2UgdG8gTWVsZWUgQXR0YWNrZXJzDQotLS0tLS0tLQ0KRnJhY3R1cmVkIEl0ZW0NCg=="
+    }
+   }
+  },
+  {
+   "id": "3a6bd3e7ecace2dc4b82fc47c944bb3c449514913d3c82e16dbe5b6e95e10d0a",
+   "listing": {
+    "method": "psapi",
+    "indexed": "2026-11-13T21:38:19Z",
+    "stash": {
+     "name": "~price",
+     "x": 0,
+     "y": 4
+    },
+    "price": {
+     "type": "~price",
+     "amount": 1,
+     "currency": "alch"
+    },
+    "account": {
+     "name": "seller14#0000",
+     "online": false
+    }
+   },
+   "item": {
+    "verified": true,
+    "w": 2,
+    "h": 2,
+    "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9IZWxtZXRzL0hlbG1ldFN0cjExIiwidyI6MiwiaCI6Miwic2NhbGUiOjEsInNlYXJpbmciOnRydWUsInRhbmdsZWQiOnRydWUsImZyYWN0dXJlZCI6dHJ1ZX1d/1f488eda31/HelmetStr11.png",
+    "league": "Standard",
+    "id": "3a6bd3e7ecace2dc4b82fc47c944bb3c449514913d3c82e16dbe5b6e95e10d0a",
+    "searing": true,
+    "tangled": true,
+    "fractured": true,
+    "sockets": [
+     {
+      "group": 0,
+      "attr": "G",
+      "sColour": "W"
+     },
+     {
+      "group": 0,
+      "attr": "G",
+      "sColour": "W"
+     },
+     {
+      "group": 0,
+      "attr": "G",
+      "sColour": "W"
+     },
+     {
+      "group": 0,
+      "attr": "G",
+      "sColour": "W"
+     }
+    ],
+    "name": "Gale Glance",
+    "typeLine": "Eternal Burgonet",
+    "baseType": "Eternal Burgonet",
+    "rarity": "Rare",
+    "ilvl": 85,
+    "identified": true,
+    "properties": [
+     {
+      "name": "Quality",
+      "values": [
+       [
+        "+20%",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 6
+     },
+     {
+      "name": "Armour",
+      "values": [
+       [
+        "707",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 16
+     }
+    ],
+    "requirements": [
+     {
+      "name": "Level",
+      "values": [
+       [
+        "69",
+        0
+       ]
+      ],
+      "displayMode": 0,
+      "type": 62
+     },
+     {
+      "name": "Str",
+      "values": [
+       [
+        "138",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 63
+     }
+    ],
+    "implicitMods": [
+     {
+      "description": "33% reduced Ignite Duration on you",
+      "domain": "implicit",
+      "hash": "stat.implicit.stat_986397080",
+      "mods": [
+       {
+        "level": 75,
+        "magnitudes": [
+         {
+          "min": "33",
+          "max": "35"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "8% increased Area of Effect",
+      "domain": "implicit",
+      "hash": "stat.implicit.stat_280731498",
+      "mods": [
+       {
+        "level": 75,
+        "magnitudes": [
+         {
+          "min": "7",
+          "max": "8"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "explicitMods": [
+     {
+      "description": "+48% to Cold Resistance",
+      "flags": {
+       "fractured": true
+      },
+      "domain": "fractured",
+      "hash": "stat.fractured.stat_4220027924",
+      "mods": [
+       {
+        "name": "of Haast",
+        "tier": "S1",
+        "level": 84,
+        "magnitudes": [
+         {
+          "min": "46",
+          "max": "48"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+77 to Armour",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3484657501",
+      "mods": [
+       {
+        "name": "Fortified",
+        "tier": "P5",
+        "level": 23,
+        "magnitudes": [
+         {
+          "min": "64",
+          "max": "82"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "18% increased Armour",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_1062208444",
+      "mods": [
+       {
+        "name": "Crab's",
+        "tier": "P5",
+        "level": 17,
+        "magnitudes": [
+         {
+          "min": "14",
+          "max": "20"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+142 to maximum Life",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3299347043",
+      "mods": [
+       {
+        "name": "Fecund",
+        "tier": "P1",
+        "level": 64,
+        "magnitudes": [
+         {
+          "min": "130",
+          "max": "144"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "18% increased Life Regeneration rate",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_44972811",
+      "mods": [
+       {
+        "name": "of Youth",
+        "tier": "S2",
+        "level": 76,
+        "magnitudes": [
+         {
+          "min": "18",
+          "max": "19"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+48% to Fire Resistance",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3372524247",
+      "mods": [
+       {
+        "name": "of Tzteosh",
+        "tier": "S1",
+        "level": 84,
+        "magnitudes": [
+         {
+          "min": "46",
+          "max": "48"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "9% increased Stun and Block Recovery",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_2511217560",
+      "mods": [
+       {
+        "name": "Crab's",
+        "tier": "P5",
+        "level": 17,
+        "magnitudes": [
+         {
+          "min": "8",
+          "max": "9"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "frameType": 2,
+    "frameTypeId": "Rare",
+    "extended": {
+     "base_defence_percentile": 88,
+     "ar": 707,
+     "hashes": {
+      "explicit": [
+       [
+        "explicit.stat_3484657501",
+        [
+         3
+        ]
+       ],
+       [
+        "explicit.stat_1062208444",
+        [
+         4
+        ]
+       ],
+       [
+        "explicit.stat_3299347043",
+        [
+         2
+        ]
+       ],
+       [
+        "explicit.stat_44972811",
+        [
+         1
+        ]
+       ],
+       [
+        "explicit.stat_3372524247",
+        [
+         0
+        ]
+       ],
+       [
+        "explicit.stat_2511217560",
+        [
+         4
+        ]
+       ]
+      ],
+      "implicit": [
+       [
+        "implicit.stat_986397080",
+        [
+         1
+        ]
+       ],
+       [
+        "implicit.stat_280731498",
+        [
+         0
+        ]
+       ]
+      ],
+      "fractured": [
+       [
+        "fractured.stat_4220027924",
+        [
+         0
+        ]
+       ]
+      ]
+     },
+     "text": "SXRlbSBDbGFzczogSGVsbWV0cw0KUmFyaXR5OiBSYXJlDQpHYWxlIEdsYW5jZQ0KRXRlcm5hbCBCdXJnb25ldA0KLS0tLS0tLS0NClF1YWxpdHk6ICsyMCUgKGF1Z21lbnRlZCkNCkFybW91cjogNzA3IChhdWdtZW50ZWQpDQotLS0tLS0tLQ0KUmVxdWlyZW1lbnRzOg0KTGV2ZWw6IDY5DQpTdHI6IDEzOA0KLS0tLS0tLS0NClNvY2tldHM6IFctVy1XLVcgDQotLS0tLS0tLQ0KSXRlbSBMZXZlbDogODUNCi0tLS0tLS0tDQo4JSBpbmNyZWFzZWQgQXJlYSBvZiBFZmZlY3QNCjMzJSByZWR1Y2VkIElnbml0ZSBEdXJhdGlvbiBvbiB5b3UNCi0tLS0tLS0tDQorNDglIHRvIENvbGQgUmVzaXN0YW5jZQ0KKzc3IHRvIEFybW91cg0KMTglIGluY3JlYXNlZCBBcm1vdXINCisxNDIgdG8gbWF4aW11bSBMaWZlDQoxOCUgaW5jcmVhc2VkIExpZmUgUmVnZW5lcmF0aW9uIHJhdGUNCis0OCUgdG8gRmlyZSBSZXNpc3RhbmNlDQo5JSBpbmNyZWFzZWQgU3R1biBhbmQgQmxvY2sgUmVjb3ZlcnkNClNlYXJpbmcgRXhhcmNoIEl0ZW0NCkVhdGVyIG9mIFdvcmxkcyBJdGVtDQotLS0tLS0tLQ0KRnJhY3R1cmVkIEl0ZW0NCg=="
+    }
+   }
+  },
+  {
+   "id": "65dc503ad5ddbac4dd34a8de973d1bff723ff2a09cd0c024367a51bbcedc063a",
+   "listing": {
+    "method": "psapi",
+    "indexed": "2022-08-17T04:17:07Z",
+    "stash": {
+     "name": "~price",
+     "x": 18,
+     "y": 8
+    },
+    "price": {
+     "type": "~b/o",
+     "amount": 1,
+     "currency": "alch"
+    },
+    "account": {
+     "name": "seller15#0000",
+     "online": false
+    }
+   },
+   "item": {
+    "verified": true,
+    "w": 2,
+    "h": 2,
+    "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9IZWxtZXRzL0hlbG1ldERleDgiLCJ3IjoyLCJoIjoyLCJzY2FsZSI6MSwiZnJhY3R1cmVkIjp0cnVlfV0/a6479b4156/HelmetDex8.png",
+    "league": "Standard",
+    "id": "65dc503ad5ddbac4dd34a8de973d1bff723ff2a09cd0c024367a51bbcedc063a",
+    "fractured": true,
+    "sockets": [
+     {
+      "group": 0,
+      "attr": "D",
+      "sColour": "G"
+     }
+    ],
+    "name": "Gale Halo",
+    "typeLine": "Silken Hood",
+    "baseType": "Silken Hood",
+    "rarity": "Rare",
+    "ilvl": 69,
+    "identified": true,
+    "properties": [
+     {
+      "name": "Evasion Rating",
+      "values": [
+       [
+        "574",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 17
+     }
+    ],
+    "requirements": [
+     {
+      "name": "Level",
+      "values": [
+       [
+        "60",
+        0
+       ]
+      ],
+      "displayMode": 0,
+      "type": 62
+     },
+     {
+      "name": "Dex",
+      "values": [
+       [
+        "138",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 64
+     }
+    ],
+    "explicitMods": [
+     {
+      "description": "+23 to maximum Life",
+      "flags": {
+       "fractured": true
+      },
+      "domain": "fractured",
+      "hash": "stat.fractured.stat_3299347043",
+      "mods": [
+       {
+        "name": "Sanguine",
+        "tier": "P8",
+        "level": 11,
+        "magnitudes": [
+         {
+          "min": "25",
+          "max": "39"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+211 to Accuracy Rating",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_803737631",
+      "mods": [
+       {
+        "name": "of the Deadeye",
+        "tier": "S0",
+        "level": 50,
+        "magnitudes": [
+         {
+          "min": "201",
+          "max": "250"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "66% increased Evasion Rating",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_124859000",
+      "mods": [
+       {
+        "name": "Wraith's",
+        "tier": "P4",
+        "level": 44,
+        "magnitudes": [
+         {
+          "min": "56",
+          "max": "67"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+13% to [PlayerItemRarity|Item Rarity]",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3917489142",
+      "mods": [
+       {
+        "name": "Pirate's",
+        "tier": "P2",
+        "level": 39,
+        "magnitudes": [
+         {
+          "min": "13",
+          "max": "18"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "frameType": 2,
+    "frameTypeId": "Rare",
+    "extended": {
+     "base_defence_percentile": 0,
+     "ev": 689,
+     "ev_aug": true,
+     "hashes": {
+      "explicit": [
+       [
+        "explicit.stat_803737631",
+        [
+         2
+        ]
+       ],
+       [
+        "explicit.stat_124859000",
+        [
+         0
+        ]
+       ],
+       [
+        "explicit.stat_3917489142",
+        [
+         1
+        ]
+       ]
+      ],
+      "fractured": [
+       [
+        "fractured.stat_3299347043",
+        [
+         0
+        ]
+       ]
+      ]
+     },
+     "text": "SXRlbSBDbGFzczogSGVsbWV0cw0KUmFyaXR5OiBSYXJlDQpHYWxlIEhhbG8NClNpbGtlbiBIb29kDQotLS0tLS0tLQ0KRXZhc2lvbiBSYXRpbmc6IDU3NCAoYXVnbWVudGVkKQ0KLS0tLS0tLS0NClJlcXVpcmVtZW50czoNCkxldmVsOiA2MA0KRGV4OiAxMzgNCi0tLS0tLS0tDQpTb2NrZXRzOiBHIA0KLS0tLS0tLS0NCkl0ZW0gTGV2ZWw6IDY5DQotLS0tLS0tLQ0KKzIzIHRvIG1heGltdW0gTGlmZQ0KKzIxMSB0byBBY2N1cmFjeSBSYXRpbmcNCjY2JSBpbmNyZWFzZWQgRXZhc2lvbiBSYXRpbmcNCisxMyUgdG8gSXRlbSBSYXJpdHkNCi0tLS0tLS0tDQpGcmFjdHVyZWQgSXRlbQ0K"
+    }
+   }
+  }
+ ]
+}

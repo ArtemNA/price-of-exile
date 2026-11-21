@@ -1,0 +1,1342 @@
+{
+ "result": [
+  {
+   "id": "0d0f713efe0dd5754a6997186c60f6cdc08f1ccad101da5b326508440ef58c4e",
+   "listing": {
+    "method": "psapi",
+    "indexed": "2024-03-25T01:21:09Z",
+    "stash": {
+     "name": "~price",
+     "x": 8,
+     "y": 3
+    },
+    "price": {
+     "type": "~price",
+     "amount": 1,
+     "currency": "alch"
+    },
+    "account": {
+     "name": "seller1#0000",
+     "online": false
+    }
+   },
+   "item": {
+    "verified": true,
+    "w": 2,
+    "h": 3,
+    "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9Cb2R5QXJtb3Vycy9Cb2R5U3RyMkMiLCJ3IjoyLCJoIjozLCJzY2FsZSI6MX1d/429eee131d/BodyStr2C.png",
+    "league": "Standard",
+    "id": "0d0f713efe0dd5754a6997186c60f6cdc08f1ccad101da5b326508440ef58c4e",
+    "sockets": [
+     {
+      "group": 0,
+      "attr": "D",
+      "sColour": "G"
+     },
+     {
+      "group": 1,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 2,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 2,
+      "attr": "S",
+      "sColour": "R"
+     }
+    ],
+    "name": "Rage Wrap",
+    "typeLine": "Gladiator Plate",
+    "baseType": "Gladiator Plate",
+    "rarity": "Rare",
+    "ilvl": 75,
+    "identified": true,
+    "properties": [
+     {
+      "name": "Quality",
+      "values": [
+       [
+        "+20%",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 6
+     },
+     {
+      "name": "Armour",
+      "values": [
+       [
+        "1541",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 16
+     }
+    ],
+    "requirements": [
+     {
+      "name": "Level",
+      "values": [
+       [
+        "65",
+        0
+       ]
+      ],
+      "displayMode": 0,
+      "type": 62
+     },
+     {
+      "name": "Str",
+      "values": [
+       [
+        "177",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 63
+     }
+    ],
+    "explicitMods": [
+     {
+      "description": "74% increased Armour",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_1062208444",
+      "mods": [
+       {
+        "name": "Thickened",
+        "tier": "P4",
+        "level": 60,
+        "magnitudes": [
+         {
+          "min": "68",
+          "max": "79"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+95 to maximum Life",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3299347043",
+      "mods": [
+       {
+        "name": "Fecund",
+        "tier": "P4",
+        "level": 64,
+        "magnitudes": [
+         {
+          "min": "130",
+          "max": "144"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+40% to Fire Resistance",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3372524247",
+      "mods": [
+       {
+        "name": "of the Volcano",
+        "tier": "S3",
+        "level": 60,
+        "magnitudes": [
+         {
+          "min": "36",
+          "max": "41"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+32% to Cold Resistance",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_4220027924",
+      "mods": [
+       {
+        "name": "of the Walrus",
+        "tier": "S4",
+        "level": 50,
+        "magnitudes": [
+         {
+          "min": "30",
+          "max": "35"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+21% to Lightning Resistance",
+      "flags": {
+       "crafted": true
+      },
+      "domain": "crafted",
+      "hash": "stat.crafted.stat_1671376347",
+      "mods": [
+       {
+        "name": "of the Storm",
+        "tier": "S0",
+        "level": 20,
+        "magnitudes": [
+         {
+          "min": "21",
+          "max": "25"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "frameType": 2,
+    "frameTypeId": "Rare",
+    "extended": {
+     "base_defence_percentile": 0,
+     "ar": 1541,
+     "hashes": {
+      "explicit": [
+       [
+        "explicit.stat_1062208444",
+        [
+         3
+        ]
+       ],
+       [
+        "explicit.stat_3299347043",
+        [
+         0
+        ]
+       ],
+       [
+        "explicit.stat_3372524247",
+        [
+         2
+        ]
+       ],
+       [
+        "explicit.stat_4220027924",
+        [
+         1
+        ]
+       ]
+      ],
+      "crafted": [
+       [
+        "crafted.stat_1671376347",
+        [
+         0
+        ]
+       ]
+      ]
+     },
+     "text": "SXRlbSBDbGFzczogQm9keSBBcm1vdXJzDQpSYXJpdHk6IFJhcmUNClJhZ2UgV3JhcA0KR2xhZGlhdG9yIFBsYXRlDQotLS0tLS0tLQ0KUXVhbGl0eTogKzIwJSAoYXVnbWVudGVkKQ0KQXJtb3VyOiAxNTQxIChhdWdtZW50ZWQpDQotLS0tLS0tLQ0KUmVxdWlyZW1lbnRzOg0KTGV2ZWw6IDY1DQpTdHI6IDE3Nw0KLS0tLS0tLS0NClNvY2tldHM6IEcgUiBSLVIgDQotLS0tLS0tLQ0KSXRlbSBMZXZlbDogNzUNCi0tLS0tLS0tDQo3NCUgaW5jcmVhc2VkIEFybW91cg0KKzk1IHRvIG1heGltdW0gTGlmZQ0KKzQwJSB0byBGaXJlIFJlc2lzdGFuY2UNCiszMiUgdG8gQ29sZCBSZXNpc3RhbmNlDQorMjElIHRvIExpZ2h0bmluZyBSZXNpc3RhbmNlDQo="
+    }
+   }
+  },
+  {
+   "id": "81817c358b6f4441eb2c69c8d14c6bc98a9790596b4c696e4dd48d00a9068c1a",
+   "listing": {
+    "method": "psapi",
+    "indexed": "2026-01-30T11:58:45Z",
+    "stash": {
+     "name": "~price",
+     "x": 8,
+     "y": 9
+    },
+    "price": {
+     "type": "~price",
+     "amount": 1,
+     "currency": "alch"
+    },
+    "account": {
+     "name": "seller2#0000",
+     "online": false
+    }
+   },
+   "item": {
+    "verified": true,
+    "w": 2,
+    "h": 3,
+    "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9Cb2R5QXJtb3Vycy9TYWNyaWZpY2lhbEdhcmIiLCJ3IjoyLCJoIjozLCJzY2FsZSI6MSwic2hhcGVyIjp0cnVlfV0/e932c994d0/SacrificialGarb.png",
+    "league": "Standard",
+    "id": "81817c358b6f4441eb2c69c8d14c6bc98a9790596b4c696e4dd48d00a9068c1a",
+    "influences": {
+     "shaper": true,
+     "crusader": true
+    },
+    "shaper": true,
+    "sockets": [
+     {
+      "group": 0,
+      "attr": "I",
+      "sColour": "B"
+     },
+     {
+      "group": 0,
+      "attr": "D",
+      "sColour": "G"
+     },
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 0,
+      "attr": "I",
+      "sColour": "B"
+     },
+     {
+      "group": 0,
+      "attr": "D",
+      "sColour": "G"
+     }
+    ],
+    "name": "Dire Skin",
+    "typeLine": "Sacrificial Garb",
+    "baseType": "Sacrificial Garb",
+    "rarity": "Rare",
+    "ilvl": 86,
+    "identified": true,
+    "properties": [
+     {
+      "name": "Quality",
+      "values": [
+       [
+        "+20%",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 6
+     },
+     {
+      "name": "Armour",
+      "values": [
+       [
+        "536",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 16
+     },
+     {
+      "name": "Evasion Rating",
+      "values": [
+       [
+        "533",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 17
+     },
+     {
+      "name": "Energy Shield",
+      "values": [
+       [
+        "80",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 18
+     }
+    ],
+    "requirements": [
+     {
+      "name": "Level",
+      "values": [
+       [
+        "72",
+        0
+       ]
+      ],
+      "displayMode": 0,
+      "type": 62
+     },
+     {
+      "name": "Str",
+      "values": [
+       [
+        "66",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 63
+     },
+     {
+      "name": "Dex",
+      "values": [
+       [
+        "66",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 64
+     },
+     {
+      "name": "Int",
+      "values": [
+       [
+        "66",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 65
+     }
+    ],
+    "implicitMods": [
+     {
+      "description": "Item sells for much more to vendors",
+      "domain": "implicit",
+      "hash": "stat.implicit.stat_3513534186",
+      "mods": [
+       {
+        "magnitudes": [
+         {
+          "min": "2",
+          "max": "2"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+1 to Level of all Vaal Skill Gems",
+      "domain": "implicit",
+      "hash": "stat.implicit.stat_4180346416",
+      "mods": [
+       {
+        "magnitudes": [
+         {
+          "min": "1",
+          "max": "1"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "explicitMods": [
+     {
+      "description": "+118 to Armour",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3484657501",
+      "mods": [
+       {
+        "name": "Sturdy",
+        "tier": "P4",
+        "level": 46,
+        "magnitudes": [
+         {
+          "min": "86",
+          "max": "145"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+115 to Evasion Rating",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_53045048",
+      "mods": [
+       {
+        "name": "Sturdy",
+        "tier": "P4",
+        "level": 46,
+        "magnitudes": [
+         {
+          "min": "86",
+          "max": "145"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+41% to Cold Resistance",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_4220027924",
+      "mods": [
+       {
+        "name": "of the Polar Bear",
+        "tier": "S3",
+        "level": 60,
+        "magnitudes": [
+         {
+          "min": "36",
+          "max": "41"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+36% to Lightning Resistance",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_1671376347",
+      "mods": [
+       {
+        "name": "of the Maelstrom",
+        "tier": "S3",
+        "level": 60,
+        "magnitudes": [
+         {
+          "min": "36",
+          "max": "41"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "Enemies you Kill have a 27% chance to Explode, dealing a tenth of their maximum Life as Physical Damage",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3295179224",
+      "mods": [
+       {
+        "name": "Crusader's",
+        "tier": "P1",
+        "level": 85,
+        "magnitudes": [
+         {
+          "min": "21",
+          "max": "30"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+1.22% to Spell Critical Strike Chance",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_791835907",
+      "mods": [
+       {
+        "name": "of Shaping",
+        "tier": "S1",
+        "level": 84,
+        "magnitudes": [
+         {
+          "min": "1.1",
+          "max": "1.5"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "7% Chance to Block Attack Damage",
+      "flags": {
+       "crafted": true
+      },
+      "domain": "crafted",
+      "hash": "stat.crafted.stat_2530372417",
+      "mods": [
+       {
+        "name": "Upgraded",
+        "tier": "P0",
+        "level": 60,
+        "magnitudes": [
+         {
+          "min": "5",
+          "max": "7"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "frameType": 2,
+    "frameTypeId": "Rare",
+    "extended": {
+     "base_defence_percentile": 0,
+     "ev": 533,
+     "ar": 536,
+     "es": 80,
+     "hashes": {
+      "explicit": [
+       [
+        "explicit.stat_3484657501",
+        [
+         3
+        ]
+       ],
+       [
+        "explicit.stat_53045048",
+        [
+         3
+        ]
+       ],
+       [
+        "explicit.stat_4220027924",
+        [
+         4
+        ]
+       ],
+       [
+        "explicit.stat_1671376347",
+        [
+         2
+        ]
+       ],
+       [
+        "explicit.stat_3295179224",
+        [
+         1
+        ]
+       ],
+       [
+        "explicit.stat_791835907",
+        [
+         0
+        ]
+       ]
+      ],
+      "implicit": [
+       [
+        "implicit.stat_3513534186",
+        [
+         1
+        ]
+       ],
+       [
+        "implicit.stat_4180346416",
+        [
+         0
+        ]
+       ]
+      ],
+      "crafted": [
+       [
+        "crafted.stat_2530372417",
+        [
+         0
+        ]
+       ]
+      ]
+     },
+     "text": "SXRlbSBDbGFzczogQm9keSBBcm1vdXJzDQpSYXJpdHk6IFJhcmUNCkRpcmUgU2tpbg0KU2FjcmlmaWNpYWwgR2FyYg0KLS0tLS0tLS0NClF1YWxpdHk6ICsyMCUgKGF1Z21lbnRlZCkNCkFybW91cjogNTM2IChhdWdtZW50ZWQpDQpFdmFzaW9uIFJhdGluZzogNTMzIChhdWdtZW50ZWQpDQpFbmVyZ3kgU2hpZWxkOiA4MCAoYXVnbWVudGVkKQ0KLS0tLS0tLS0NClJlcXVpcmVtZW50czoNCkxldmVsOiA3Mg0KU3RyOiA2Ng0KRGV4OiA2Ng0KSW50OiA2Ng0KLS0tLS0tLS0NClNvY2tldHM6IEItRy1SLVItQi1HIA0KLS0tLS0tLS0NCkl0ZW0gTGV2ZWw6IDg2DQotLS0tLS0tLQ0KSXRlbSBzZWxscyBmb3IgbXVjaCBtb3JlIHRvIHZlbmRvcnMNCisxIHRvIExldmVsIG9mIGFsbCBWYWFsIFNraWxsIEdlbXMNCi0tLS0tLS0tDQorMTE4IHRvIEFybW91cg0KKzExNSB0byBFdmFzaW9uIFJhdGluZw0KKzQxJSB0byBDb2xkIFJlc2lzdGFuY2UNCiszNiUgdG8gTGlnaHRuaW5nIFJlc2lzdGFuY2UNCkVuZW1pZXMgeW91IEtpbGwgaGF2ZSBhIDI3JSBjaGFuY2UgdG8gRXhwbG9kZSwgZGVhbGluZyBhIHRlbnRoIG9mIHRoZWlyIG1heGltdW0gTGlmZSBhcyBQaHlzaWNhbCBEYW1hZ2UNCisxLjIyJSB0byBTcGVsbCBDcml0aWNhbCBTdHJpa2UgQ2hhbmNlDQo3JSBDaGFuY2UgdG8gQmxvY2sgQXR0YWNrIERhbWFnZQ0KLS0tLS0tLS0NClNoYXBlciBJdGVtDQpDcnVzYWRlciBJdGVtDQo="
+    }
+   }
+  },
+  {
+   "id": "7f682074a7cfe3cf8da42a37083470c481a31bf45715a90a5e18985a2d5d902c",
+   "listing": {
+    "method": "forum",
+    "indexed": "2022-08-17T01:17:05Z",
+    "thread_id": "2850600",
+    "thread_locale": "en",
+    "price": {
+     "type": "~b/o",
+     "amount": 1,
+     "currency": "alch"
+    },
+    "account": {
+     "name": "seller3#0000",
+     "online": false
+    }
+   },
+   "item": {
+    "verified": true,
+    "w": 2,
+    "h": 3,
+    "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9Cb2R5QXJtb3Vycy9Cb2R5U3RyM0MiLCJ3IjoyLCJoIjozLCJzY2FsZSI6MX1d/09903268a5/BodyStr3C.png",
+    "league": "Standard",
+    "id": "7f682074a7cfe3cf8da42a37083470c481a31bf45715a90a5e18985a2d5d902c",
+    "sockets": [
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     }
+    ],
+    "name": "Morbid Suit",
+    "typeLine": "Majestic Plate",
+    "baseType": "Majestic Plate",
+    "rarity": "Rare",
+    "ilvl": 63,
+    "identified": true,
+    "properties": [
+     {
+      "name": "Armour",
+      "values": [
+       [
+        "742",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 16
+     }
+    ],
+    "requirements": [
+     {
+      "name": "Level",
+      "values": [
+       [
+        "53",
+        0
+       ]
+      ],
+      "displayMode": 0,
+      "type": 62
+     },
+     {
+      "name": "Str",
+      "values": [
+       [
+        "145",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 63
+     }
+    ],
+    "explicitMods": [
+     {
+      "description": "40% increased Armour",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_1062208444",
+      "mods": [
+       {
+        "name": "Layered",
+        "tier": "P7",
+        "level": 17,
+        "magnitudes": [
+         {
+          "min": "27",
+          "max": "42"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+44 to maximum Life",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3299347043",
+      "mods": [
+       {
+        "name": "Essences",
+        "tier": "P0",
+        "level": 26,
+        "magnitudes": [
+         {
+          "min": "31",
+          "max": "45"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+41% to Cold Resistance",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_4220027924",
+      "mods": [
+       {
+        "name": "of the Polar Bear",
+        "tier": "S3",
+        "level": 60,
+        "magnitudes": [
+         {
+          "min": "36",
+          "max": "41"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "Reflects 20 Physical Damage to Melee Attackers",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3767873853",
+      "mods": [
+       {
+        "name": "Barbed",
+        "tier": "P2",
+        "level": 20,
+        "magnitudes": [
+         {
+          "min": "11",
+          "max": "24"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+10 to all Attributes",
+      "flags": {
+       "crafted": true
+      },
+      "domain": "crafted",
+      "hash": "stat.crafted.stat_1379411836",
+      "mods": [
+       {
+        "name": "of Craft",
+        "tier": "R2",
+        "level": 50,
+        "magnitudes": [
+         {
+          "min": "10",
+          "max": "13"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "frameType": 2,
+    "frameTypeId": "Rare",
+    "extended": {
+     "base_defence_percentile": 0,
+     "ar": 890,
+     "ar_aug": true,
+     "hashes": {
+      "explicit": [
+       [
+        "explicit.stat_1062208444",
+        [
+         1
+        ]
+       ],
+       [
+        "explicit.stat_3299347043",
+        [
+         0
+        ]
+       ],
+       [
+        "explicit.stat_4220027924",
+        [
+         2
+        ]
+       ],
+       [
+        "explicit.stat_3767873853",
+        [
+         3
+        ]
+       ]
+      ],
+      "crafted": [
+       [
+        "crafted.stat_1379411836",
+        [
+         0
+        ]
+       ]
+      ]
+     },
+     "text": "SXRlbSBDbGFzczogQm9keSBBcm1vdXJzDQpSYXJpdHk6IFJhcmUNCk1vcmJpZCBTdWl0DQpNYWplc3RpYyBQbGF0ZQ0KLS0tLS0tLS0NCkFybW91cjogNzQyIChhdWdtZW50ZWQpDQotLS0tLS0tLQ0KUmVxdWlyZW1lbnRzOg0KTGV2ZWw6IDUzDQpTdHI6IDE0NQ0KLS0tLS0tLS0NClNvY2tldHM6IFItUi1SLVItUiANCi0tLS0tLS0tDQpJdGVtIExldmVsOiA2Mw0KLS0tLS0tLS0NCjQwJSBpbmNyZWFzZWQgQXJtb3VyDQorNDQgdG8gbWF4aW11bSBMaWZlDQorNDElIHRvIENvbGQgUmVzaXN0YW5jZQ0KUmVmbGVjdHMgMjAgUGh5c2ljYWwgRGFtYWdlIHRvIE1lbGVlIEF0dGFja2Vycw0KKzEwIHRvIGFsbCBBdHRyaWJ1dGVzDQo="
+    }
+   }
+  },
+  {
+   "id": "1995b1d7868feaef39bbedca68020b87adb8141ffef503a0286b36013af5ab1b",
+   "listing": {
+    "method": "psapi",
+    "indexed": "2022-08-17T05:04:32Z",
+    "stash": {
+     "name": "~price",
+     "x": 4,
+     "y": 9
+    },
+    "price": {
+     "type": "~price",
+     "amount": 1,
+     "currency": "alch"
+    },
+    "account": {
+     "name": "seller4#0000",
+     "online": false
+    }
+   },
+   "item": {
+    "verified": true,
+    "w": 2,
+    "h": 3,
+    "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9Cb2R5QXJtb3Vycy9Cb2R5SW50MkIiLCJ3IjoyLCJoIjozLCJzY2FsZSI6MX1d/3689be0ddd/BodyInt2B.png",
+    "league": "Standard",
+    "id": "1995b1d7868feaef39bbedca68020b87adb8141ffef503a0286b36013af5ab1b",
+    "sockets": [
+     {
+      "group": 0,
+      "attr": "I",
+      "sColour": "B"
+     },
+     {
+      "group": 0,
+      "attr": "I",
+      "sColour": "B"
+     },
+     {
+      "group": 1,
+      "attr": "S",
+      "sColour": "R"
+     }
+    ],
+    "name": "Dragon Suit",
+    "typeLine": "Necromancer Silks",
+    "baseType": "Necromancer Silks",
+    "rarity": "Rare",
+    "ilvl": 74,
+    "identified": true,
+    "note": "~price 1 alch",
+    "properties": [
+     {
+      "name": "Energy Shield",
+      "values": [
+       [
+        "123",
+        0
+       ]
+      ],
+      "displayMode": 0,
+      "type": 18
+     }
+    ],
+    "requirements": [
+     {
+      "name": "Level",
+      "values": [
+       [
+        "59",
+        0
+       ]
+      ],
+      "displayMode": 0,
+      "type": 62
+     },
+     {
+      "name": "Int",
+      "values": [
+       [
+        "131",
+        1
+       ]
+      ],
+      "displayMode": 1,
+      "type": 65
+     }
+    ],
+    "explicitMods": [
+     {
+      "description": "18% reduced Attribute Requirements",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3639275092",
+      "mods": [
+       {
+        "name": "of the Worthy",
+        "tier": "S2",
+        "level": 36,
+        "magnitudes": [
+         {
+          "min": "-18",
+          "max": "-18"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+47 to maximum Life",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3299347043",
+      "mods": [
+       {
+        "name": "Stout",
+        "tier": "P9",
+        "level": 24,
+        "magnitudes": [
+         {
+          "min": "55",
+          "max": "69"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+33% to Fire Resistance",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3372524247",
+      "mods": [
+       {
+        "name": "of the Furnace",
+        "tier": "S4",
+        "level": 48,
+        "magnitudes": [
+         {
+          "min": "30",
+          "max": "35"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "Regenerate 90 Energy Shield per second while a Rare or Unique Enemy is within 6 metres",
+      "flags": {
+       "crafted": true
+      },
+      "domain": "crafted",
+      "hash": "stat.crafted.stat_2238019079",
+      "mods": [
+       {
+        "name": "of Craft",
+        "tier": "S0",
+        "level": 72,
+        "magnitudes": [
+         {
+          "min": "120",
+          "max": "120"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "frameType": 2,
+    "frameTypeId": "Rare",
+    "extended": {
+     "base_defence_percentile": 0,
+     "es": 148,
+     "es_aug": true,
+     "hashes": {
+      "explicit": [
+       [
+        "explicit.stat_3639275092",
+        [
+         1
+        ]
+       ],
+       [
+        "explicit.stat_3299347043",
+        [
+         0
+        ]
+       ],
+       [
+        "explicit.stat_3372524247",
+        [
+         2
+        ]
+       ]
+      ],
+      "crafted": [
+       [
+        "crafted.stat_2238019079",
+        [
+         0
+        ]
+       ]
+      ]
+     },
+     "text": "SXRlbSBDbGFzczogQm9keSBBcm1vdXJzDQpSYXJpdHk6IFJhcmUNCkRyYWdvbiBTdWl0DQpOZWNyb21hbmNlciBTaWxrcw0KLS0tLS0tLS0NCkVuZXJneSBTaGllbGQ6IDEyMw0KLS0tLS0tLS0NClJlcXVpcmVtZW50czoNCkxldmVsOiA1OQ0KSW50OiAxMzEgKGF1Z21lbnRlZCkNCi0tLS0tLS0tDQpTb2NrZXRzOiBCLUIgUiANCi0tLS0tLS0tDQpJdGVtIExldmVsOiA3NA0KLS0tLS0tLS0NCjE4JSByZWR1Y2VkIEF0dHJpYnV0ZSBSZXF1aXJlbWVudHMNCis0NyB0byBtYXhpbXVtIExpZmUNCiszMyUgdG8gRmlyZSBSZXNpc3RhbmNlDQpSZWdlbmVyYXRlIDkwIEVuZXJneSBTaGllbGQgcGVyIHNlY29uZCB3aGlsZSBhIFJhcmUgb3IgVW5pcXVlIEVuZW15IGlzIHdpdGhpbiA2IG1ldHJlcw0KLS0tLS0tLS0NCk5vdGU6IH5wcmljZSAxIGFsY2gNCg=="
+    }
+   }
+  },
+  {
+   "id": "61110327425c58389df16319e230cc02703497a191df4ac329bab915c30c38fd",
+   "listing": {
+    "method": "psapi",
+    "indexed": "2022-08-17T06:04:02Z",
+    "stash": {
+     "name": "~price",
+     "x": 10,
+     "y": 0
+    },
+    "price": {
+     "type": "~price",
+     "amount": 1,
+     "currency": "alch"
+    },
+    "account": {
+     "name": "seller5#0000",
+     "online": false
+    }
+   },
+   "item": {
+    "verified": true,
+    "w": 2,
+    "h": 3,
+    "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9Cb2R5QXJtb3Vycy9Cb2R5U3RyMkMiLCJ3IjoyLCJoIjozLCJzY2FsZSI6MX1d/429eee131d/BodyStr2C.png",
+    "league": "Standard",
+    "id": "61110327425c58389df16319e230cc02703497a191df4ac329bab915c30c38fd",
+    "sockets": [
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 0,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 1,
+      "attr": "S",
+      "sColour": "R"
+     },
+     {
+      "group": 2,
+      "attr": "D",
+      "sColour": "G"
+     }
+    ],
+    "name": "Gloom Carapace",
+    "typeLine": "Colosseum Plate",
+    "baseType": "Colosseum Plate",
+    "rarity": "Rare",
+    "ilvl": 49,
+    "identified": true,
+    "properties": [
+     {
+      "name": "Armour",
+      "values": [
+       [
+        "621",
+        1
+       ]
+      ],
+      "displayMode": 0,
+      "type": 16
+     }
+    ],
+    "requirements": [
+     {
+      "name": "Level",
+      "values": [
+       [
+        "49",
+        0
+       ]
+      ],
+      "displayMode": 0,
+      "type": 62
+     },
+     {
+      "name": "Str",
+      "values": [
+       [
+        "134",
+        0
+       ]
+      ],
+      "displayMode": 1,
+      "type": 63
+     }
+    ],
+    "explicitMods": [
+     {
+      "description": "+40 to Armour",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3484657501",
+      "mods": [
+       {
+        "name": "Ribbed",
+        "tier": "P9",
+        "level": 17,
+        "magnitudes": [
+         {
+          "min": "36",
+          "max": "63"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "17% increased Armour",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_1062208444",
+      "mods": [
+       {
+        "name": "Crab's",
+        "tier": "P5",
+        "level": 17,
+        "magnitudes": [
+         {
+          "min": "14",
+          "max": "20"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+37 to maximum Life",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_3299347043",
+      "mods": [
+       {
+        "name": "Stalwart",
+        "tier": "P10",
+        "level": 18,
+        "magnitudes": [
+         {
+          "min": "40",
+          "max": "54"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+35% to Lightning Resistance",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_1671376347",
+      "mods": [
+       {
+        "name": "of the Tempest",
+        "tier": "S4",
+        "level": 49,
+        "magnitudes": [
+         {
+          "min": "30",
+          "max": "35"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "9% increased Stun and Block Recovery",
+      "domain": "explicit",
+      "hash": "stat.explicit.stat_2511217560",
+      "mods": [
+       {
+        "name": "Crab's",
+        "tier": "P5",
+        "level": 17,
+        "magnitudes": [
+         {
+          "min": "8",
+          "max": "9"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "description": "+22 to Dexterity",
+      "flags": {
+       "crafted": true
+      },
+      "domain": "crafted",
+      "hash": "stat.crafted.stat_3261801346",
+      "mods": [
+       {
+        "name": "of the Lynx",
+        "tier": "S0",
+        "level": 15,
+        "magnitudes": [
+         {
+          "min": "20",
+          "max": "25"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "frameType": 2,
+    "frameTypeId": "Rare",
+    "extended": {
+     "base_defence_percentile": 0,
+     "ar": 746,
+     "ar_aug": true,
+     "hashes": {
+      "explicit": [
+       [
+        "explicit.stat_3484657501",
+        [
+         3
+        ]
+       ],
+       [
+        "explicit.stat_1062208444",
+        [
+         2
+        ]
+       ],
+       [
+        "explicit.stat_3299347043",
+        [
+         0
+        ]
+       ],
+       [
+        "explicit.stat_1671376347",
+        [
+         1
+        ]
+       ],
+       [
+        "explicit.stat_2511217560",
+        [
+         2
+        ]
+       ]
+      ],
+      "crafted": [
+       [
+        "crafted.stat_3261801346",
+        [
+         0
+        ]
+       ]
+      ]
+     },
+     "text": "SXRlbSBDbGFzczogQm9keSBBcm1vdXJzDQpSYXJpdHk6IFJhcmUNCkdsb29tIENhcmFwYWNlDQpDb2xvc3NldW0gUGxhdGUNCi0tLS0tLS0tDQpBcm1vdXI6IDYyMSAoYXVnbWVudGVkKQ0KLS0tLS0tLS0NClJlcXVpcmVtZW50czoNCkxldmVsOiA0OQ0KU3RyOiAxMzQNCi0tLS0tLS0tDQpTb2NrZXRzOiBSLVIgUiBHIA0KLS0tLS0tLS0NCkl0ZW0gTGV2ZWw6IDQ5DQotLS0tLS0tLQ0KKzQwIHRvIEFybW91cg0KMTclIGluY3JlYXNlZCBBcm1vdXINCiszNyB0byBtYXhpbXVtIExpZmUNCiszNSUgdG8gTGlnaHRuaW5nIFJlc2lzdGFuY2UNCjklIGluY3JlYXNlZCBTdHVuIGFuZCBCbG9jayBSZWNvdmVyeQ0KKzIyIHRvIERleHRlcml0eQ0K"
+    }
+   }
+  }
+ ]
+}

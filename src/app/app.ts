@@ -3,6 +3,7 @@ import { getCurrentWindow } from '@tauri-apps/api/window';
 import { SettingsWindow } from './settings/settings-window';
 import { PopupWindow } from './popup-window/popup-window';
 import { ToastWindow } from './toast-window/toast-window';
+import { CardWindow } from './card-window/card-window';
 import { interfaceLanguage, loadUiLanguage, tr } from './core/i18n';
 import { host } from './host';
 import { poeWebApi } from '@/web/Config';
@@ -12,12 +13,14 @@ import { themeById } from './themes';
 /** Both Tauri windows load the same app; the window label picks the view. */
 @Component({
   selector: 'app-root',
-  imports: [SettingsWindow, PopupWindow, ToastWindow],
+  imports: [SettingsWindow, PopupWindow, ToastWindow, CardWindow],
   template: `
     @if (label === 'popup') {
       <app-popup-window />
     } @else if (label === 'toast') {
       <app-toast-window />
+    } @else if (label === 'card') {
+      <app-card-window />
     } @else {
       <app-settings-window />
     }
@@ -27,7 +30,7 @@ export class App {
   protected readonly label = getCurrentWindow().label;
 
   constructor() {
-    if (this.label === 'popup' || this.label === 'toast') {
+    if (this.label === 'popup' || this.label === 'toast' || this.label === 'card') {
       document.documentElement.classList.add('popup');
     }
     // The theme's tokens apply under html[data-theme], in every window.
@@ -40,7 +43,7 @@ export class App {
       loadUiLanguage(lang).catch((err) => console.error('Loading the interface language failed', err));
     });
     // The tray belongs to the host: the settings window gives it the labels.
-    if (this.label !== 'popup' && this.label !== 'toast') {
+    if (this.label !== 'popup' && this.label !== 'toast' && this.label !== 'card') {
       effect(() => {
         interfaceLanguage();
         void host.setTrayLabels({ settings: tr('Settings'), browser: tr('Built-in browser'), quit: tr('Quit') });

@@ -31,6 +31,7 @@ export interface PriceCheckSettings {
   defaultCurrency: string | null;
   smartInitialSearch: boolean;
   builtinBrowser: boolean;
+  listingCard: 'eye' | 'keybind' | 'always' | 'off';
 }
 
 /** A chat command (APT `Config.commands`): `text` is typed into the chat, `send` presses Enter. */
@@ -85,6 +86,7 @@ export function defaultSettings(): Settings {
     defaultCurrency,
     smartInitialSearch,
     builtinBrowser,
+    listingCard,
   } = PRICE_CHECK_DEFAULTS;
   return {
     configVersion: SETTINGS_VERSION,
@@ -108,6 +110,7 @@ export function defaultSettings(): Settings {
       defaultCurrency,
       smartInitialSearch,
       builtinBrowser,
+      listingCard,
     },
     mapCheck: DEFAULT_MAP_CHECK,
   };
@@ -129,9 +132,15 @@ export function upgradeSettings(raw: unknown): Settings {
     hotkeys: { ...defaults.hotkeys, ...stored.hotkeys },
     commands: Array.isArray(stored.commands) ? stored.commands : defaults.commands,
     stashSearch: Array.isArray(stored.stashSearch) ? stored.stashSearch : defaults.stashSearch,
-    priceCheck: { ...defaults.priceCheck, ...stored.priceCheck },
+    priceCheck: withValidListingCard({ ...defaults.priceCheck, ...stored.priceCheck }, defaults.priceCheck.listingCard),
     mapCheck: { ...defaults.mapCheck, ...stored.mapCheck },
   };
+}
+
+/** An unknown `listingCard` value (an older or edited settings file) falls back to the default. */
+function withValidListingCard(priceCheck: PriceCheckSettings, fallback: PriceCheckSettings['listingCard']): PriceCheckSettings {
+  const valid = ['eye', 'keybind', 'always', 'off'].includes(priceCheck.listingCard);
+  return valid ? priceCheck : { ...priceCheck, listingCard: fallback };
 }
 
 const state = signal<Settings>(defaultSettings());

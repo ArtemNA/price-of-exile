@@ -271,16 +271,22 @@
       }
       <span class="text-right">{{ detailHeader(rows) }}</span><span class="text-right">{{ 'Listed' | tr }}</span>
     </div>
-    <div class="min-h-0 flex-1 overflow-y-auto">
+    <div class="min-h-0 flex-1 overflow-y-auto" (scroll)="cardHover.leave()">
       @for (row of rows; track row.id; let odd = $odd) {
         <div
           class="grid items-center gap-2 border-b border-row-line px-3 py-1 tabular-nums"
+          data-listing-row
+          (mouseenter)="cardHover.pointer($event, row)" (mousemove)="cardHover.pointer($event, row)" (mouseleave)="cardHover.leave()"
           [style.grid-template-columns]="columns"
           [class.bg-white/[0.015]]="odd"
           [class.opacity-60]="row.accountStatus === 'offline'"
           [class.text-gold-soft]="row.isMine"
         >
           <span class="flex min-w-0 items-center gap-1.5 text-bright">
+            @if (cardHover.eyes && row.item) {
+              <span class="listing-eye -my-1 flex-none cursor-default p-1 text-muted hover:text-gold-soft" data-test="listing-eye"
+                (mouseenter)="cardHover.eye($event, row)" (mouseleave)="cardHover.eyeLeave()"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M8 3C4.4 3 1.6 5.6 0.6 8c1 2.4 3.8 5 7.4 5s6.4-2.6 7.4-5C14.4 5.6 11.6 3 8 3zm0 8.2A3.2 3.2 0 1 1 8 4.8a3.2 3.2 0 0 1 0 6.4zm0-1.6a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2z" fill="currentColor"/></svg></span>
+            }
             <span class="size-[9px] flex-none rounded-full" [style.background]="dot(row)"></span>
             {{ row.priceAmount }} <app-currency [tag]="row.priceCurrency" />
             @if (row.listedTimes > 1) {

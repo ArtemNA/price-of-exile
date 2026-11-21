@@ -1,4 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
+import { listingCardHover } from './listing-card-hover';
 import { Component, computed, DestroyRef, effect, ElementRef, inject, input, signal, untracked, viewChild } from '@angular/core';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { ItemCategory, type ParsedItem } from '@/parser';
@@ -105,6 +106,8 @@ export class PriceCheckPanel {
   readonly view = input.required<ItemView>();
 
   protected readonly cloudflareError = CLOUDFLARE_CHECK_ERROR;
+  /** Pointer over a listing row → the listed item's card beside the popup. */
+  protected readonly cardHover = listingCardHover;
   protected readonly presets = signal<Presets | null>(null);
   protected readonly error = signal<string | null>(null);
   /** Filters changed since the last search: the user starts the next one. */

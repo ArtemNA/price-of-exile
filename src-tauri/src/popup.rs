@@ -449,6 +449,7 @@ pub fn hide(app: &AppHandle, return_focus: bool) {
     // focused text field let the Windows text input host grab the foreground instead.
     platform::hide(state.popup_hwnd());
     state.set_popup_visible(false);
+    crate::card::hide_window(app);
     release_focus(app, return_focus);
 }
 

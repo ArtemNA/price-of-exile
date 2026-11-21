@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Price of Exile",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "identifier": "com.artemna.poe-trade-overlay",
   "build": {
     "frontendDist": "../dist/price-of-exile/browser",
@@ -24,6 +24,20 @@
         "title": "Price of Exile — popup",
         "width": 820,
         "height": 590,
+        "visible": false,
+        "focus": false,
+        "decorations": false,
+        "transparent": true,
+        "shadow": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "resizable": false
+      },
+      {
+        "label": "card",
+        "title": "Price of Exile — item card",
+        "width": 460,
+        "height": 600,
         "visible": false,
         "focus": false,
         "decorations": false,
