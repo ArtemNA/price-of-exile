@@ -2,6 +2,10 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.27
+
+- Number fields: the first click selects the whole number, so typing replaces it. After that, clicks place the caret, the mouse selects part or all of the text, and Ctrl+A selects all.
+
 ## v0.1.26
 
 - Fix: in the Awakened PoE Trade look, a click left of a centred price check (with related items on its right) did not close it.
