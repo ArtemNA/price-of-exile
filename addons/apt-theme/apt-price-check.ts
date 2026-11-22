@@ -80,9 +80,13 @@ export class AptPriceCheck extends PriceCheckPanel {
     return !!group && !('error' in group);
   });
 
-  /** A click on the transparent part beside the column is a click into the game: it closes. */
+  /**
+   * A click on the transparent part beside the column is a click into the game: it closes.
+   * That includes the spacer left of a centred column, which did not close it (owner, 22.11.2026).
+   */
   protected backdropDown(event: MouseEvent): void {
-    if (event.target === event.currentTarget) void host.hidePopup();
+    const target = event.target as HTMLElement;
+    if (target === event.currentTarget || target.hasAttribute('data-apt-backdrop')) void host.hidePopup();
   }
 
   /**

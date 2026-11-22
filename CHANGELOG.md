@@ -2,6 +2,10 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## Unreleased
+
+- Fix: in the Awakened PoE Trade look, a click left of a centred price check (with related items on its right) did not close it.
+
 ## v0.1.25
 
 - Fix: the price check in the Awakened PoE Trade look could still open squeezed (seen on Nightmare Maps): the window sometimes kept its default size instead of growing to the game's height.
