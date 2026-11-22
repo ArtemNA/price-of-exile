@@ -2,7 +2,7 @@
 
 Each release takes its "What's new" from the section of its tag.
 
-## Unreleased
+## v0.1.26
 
 - Fix: in the Awakened PoE Trade look, a click left of a centred price check (with related items on its right) did not close it.
 
