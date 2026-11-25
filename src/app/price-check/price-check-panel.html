@@ -262,6 +262,10 @@
     }
     }
 
+    @if (sacrificeCount() != null) {
+      <p class="mx-3 my-2 border border-warn-line bg-warn-bg px-2.5 py-1.5 text-warn">{{ sacrificeCountNote | tr }}</p>
+    }
+
     @let rows = search.rows();
     @let columns = mixedCurrencies() ? 'minmax(0,1fr) 70px 52px 84px' : 'minmax(0,1fr) 52px 84px';
     <div class="grid gap-2 border-b border-line px-3 py-1 text-[11px] text-muted" [style.grid-template-columns]="columns">
@@ -296,7 +300,7 @@
           @if (mixedCurrencies()) {
             <span class="text-right" [class]="isCheapest(row) ? 'text-good' : 'text-muted'">{{ equivalent(row) }}</span>
           }
-          <span class="text-right">{{ detail(row) }}</span>
+          <span class="text-right" [class.text-good]="sameSacrifice(row)">{{ detail(row) }}</span>
           <span class="text-right text-muted">{{ row.relativeDate }}</span>
         </div>
       }

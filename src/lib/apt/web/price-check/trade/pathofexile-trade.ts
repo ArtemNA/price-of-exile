@@ -179,6 +179,13 @@ interface TradeRequest {
           chart_sulphur?: FilterRange
         }
       }
+      ultimatum_filters?: {
+        filters: {
+          ultimatum_reward?: { option?: string }
+          ultimatum_input?: { option?: string }
+          ultimatum_output?: { option?: string }
+        }
+      }
       heist_filters?: {
         filters: {
           heist_wings?: FilterRange
@@ -234,7 +241,8 @@ interface FetchResult {
       78 | // Corpse Level (Filled Coffin)
       30 | // Spawns a Level %0 Monster when Harvested
       6 | // Quality
-      5 // Level
+      5 | // Level
+      51 // Requires Sacrifice: {0} {1} (Inscribed Ultimatum)
     }>
     note?: string
   }
@@ -253,6 +261,8 @@ interface FetchResult {
 export interface PricingResult {
   id: string
   itemLevel?: string
+  /** Price of Exile: an Inscribed Ultimatum's sacrifice count ("x4" → 4); the trade site cannot filter it. */
+  sacrificeCount?: number
   stackSize?: number
   corrupted?: boolean
   quality?: string
@@ -414,6 +424,18 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
       propSet(query.filters, 'map_filters.filters.map_blighted.option', String(false))
       propSet(query.filters, 'map_filters.filters.map_uberblighted.option', String(false))
     }
+  }
+
+  // Price of Exile: Inscribed Ultimatum (trade site "Ultimatum Filters"; "Required Item" and
+  // "Reward Unique" are known-item options like Map Completion Reward)
+  if (filters.ultimatumReward && !filters.ultimatumReward.disabled) {
+    propSet(query.filters, 'ultimatum_filters.filters.ultimatum_reward.option', filters.ultimatumReward.type)
+    if (filters.ultimatumReward.uniqueTrade) {
+      propSet(query.filters, 'ultimatum_filters.filters.ultimatum_output.option', filters.ultimatumReward.uniqueTrade)
+    }
+  }
+  if (filters.ultimatumSacrifice && !filters.ultimatumSacrifice.disabled) {
+    propSet(query.filters, 'ultimatum_filters.filters.ultimatum_input.option', filters.ultimatumSacrifice.nameTrade)
   }
 
   if (filters.mapCompletionReward) {
@@ -846,6 +868,7 @@ export async function requestResults (
     return {
       id: result.id,
       itemLevel: result.item.properties?.find(prop => prop.type === 78)?.values[0][0] ?? String(result.item.ilvl),
+      sacrificeCount: listedSacrificeCount(result.item.properties),
       stackSize: result.item.stackSize,
       corrupted: result.item.corrupted,
       quality: result.item.properties?.find(prop => prop.type === 6)?.values[0][0],
@@ -866,6 +889,12 @@ export async function requestResults (
           : 'offline'
     }
   })
+}
+
+/** Inscribed Ultimatum "Requires Sacrifice: {0} {1}" (trade property type 51): the count in "x4". */
+export function listedSacrificeCount (properties: Array<{ type?: number, values: Array<[string, number]> }> | undefined): number | undefined {
+  const count = /^x(\d+)$/.exec(properties?.find(prop => prop.type === 51)?.values[1]?.[0] ?? '')
+  return count ? Number(count[1]) : undefined
 }
 
 function getMinMax (roll: StatFilter['roll'], divisor: number) {

@@ -51,6 +51,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseTincture,
   parseStackSize,
   parseStoredExperience,
+  parseUltimatum,
   parseCorrupted,
   parseImbuedGem,
   parseFoil,
@@ -574,6 +575,44 @@ function parseStoredExperience (section: string[], item: ParsedItem) {
     return 'SECTION_PARSED'
   }
   return 'SECTION_SKIPPED'
+}
+
+// Price of Exile: Inscribed Ultimatum (owner, 25.11.2026). Line formats from the game's
+// ClientStrings ("Requires Sacrifice: {0} {1}", "Reward: {0}", count "x{0}") and reward texts from
+// UltimatumItemisedRewards; the mods do not matter for the price.
+function parseUltimatum (section: string[], item: ParsedItem) {
+  if (item.info.refName !== 'Inscribed Ultimatum') return 'PARSER_SKIPPED'
+  let sacrifice: RegExpExecArray | null = null
+  let reward: RegExpExecArray | null = null
+  for (const line of section) {
+    sacrifice ??= _$.ULTIMATUM_SACRIFICE.exec(line)
+    reward ??= _$.ULTIMATUM_REWARD.exec(line)
+  }
+  if (!sacrifice || !reward) return 'SECTION_SKIPPED'
+
+  const known = (name: string) =>
+    ITEM_BY_TRANSLATED('ITEM', name)?.[0] ??
+    ITEM_BY_TRANSLATED('DIVINATION_CARD', name)?.[0] ??
+    ITEM_BY_TRANSLATED('UNIQUE', name)?.[0]
+  const rewardText = reward[1]
+  const rewardUnique = ITEM_BY_TRANSLATED('UNIQUE', rewardText)?.[0]
+  const rewardType =
+    rewardText === _$.ULTIMATUM_DOUBLE_CURRENCY ? 'DoubleCurrency'
+      : rewardText === _$.ULTIMATUM_DOUBLE_DIV_CARDS ? 'DoubleDivCards'
+        : rewardText === _$.ULTIMATUM_MIRROR_RARE ? 'MirrorRare'
+          : rewardUnique ? 'ExchangeUnique'
+            : undefined
+  if (!rewardType) return 'SECTION_SKIPPED'
+
+  item.ultimatum = {
+    rewardType,
+    rewardText,
+    rewardUnique,
+    sacrificeText: sacrifice[1],
+    sacrifice: known(sacrifice[1]),
+    sacrificeCount: sacrifice[2] ? Number(sacrifice[2]) : undefined
+  }
+  return 'SECTION_PARSED'
 }
 
 function parseSockets (section: string[], item: ParsedItem) {

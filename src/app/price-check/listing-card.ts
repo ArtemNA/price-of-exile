@@ -144,7 +144,7 @@ function value(raw: unknown): CardValue {
   return { text: String(text), colour: Number(colour) || 0 };
 }
 
-/** One property in the game's layout (`displayMode` 0: "Name: v", 1: "v Name", 3: "%0" placeholders). */
+/** One property in the game's layout (`displayMode` 0: "Name: v", 1: "v Name", 3: "%0" or "{0}" placeholders). */
 function property(prop: Json): CardProperty {
   const name = stripMarkup(String(prop.name ?? ''));
   const values: CardValue[] = (prop.values ?? []).map(value);
@@ -155,9 +155,11 @@ function property(prop: Json): CardProperty {
     case 3: {
       const parts: Array<string | CardValue> = [];
       let rest = name;
-      for (let match = /%(\d+)/.exec(rest); match; match = /%(\d+)/.exec(rest)) {
+      // "%0" or "{0}" (Inscribed Ultimatum: "Requires Sacrifice: {0} {1}", trade API 25.11.2026)
+      const placeholder = /%(\d+)|\{(\d+)\}/;
+      for (let match = placeholder.exec(rest); match; match = placeholder.exec(rest)) {
         if (match.index > 0) parts.push(rest.slice(0, match.index));
-        const v = values[Number(match[1])];
+        const v = values[Number(match[1] ?? match[2])];
         if (v) parts.push(v);
         rest = rest.slice(match.index + match[0].length);
       }

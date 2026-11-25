@@ -150,6 +150,11 @@ export interface TranslationDict {
   GEM_LEVEL: string
   STACK_SIZE: string
   STORED_EXPERIENCE: string
+  ULTIMATUM_SACRIFICE: RegExp
+  ULTIMATUM_REWARD: RegExp
+  ULTIMATUM_DOUBLE_CURRENCY: string
+  ULTIMATUM_DOUBLE_DIV_CARDS: string
+  ULTIMATUM_MIRROR_RARE: string
   SOCKETS: string
   QUALITY: string
   MEMORY_STRANDS: string

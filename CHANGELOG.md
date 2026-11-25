@@ -2,6 +2,11 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## v0.1.28
+
+- Inscribed Ultimatum: the price check searches by its reward and its sacrifice (each can be switched off), not just by the name. Beside it, the sacrifice and the reward are shown with their poe.ninja prices for their counts. The trade site cannot filter by the sacrifice count, so listings with x1 and x8 show too; a "Sacrifice" column shows each listing's count, and those with the item's count stand out. A note above the listings says so.
+- Fix: listing cards showed "{0} {1}" instead of the values on some lines (the ultimatum's sacrifice and reward).
+
 ## v0.1.27
 
 - Number fields: the first click selects the whole number, so typing replaces it. After that, clicks place the caret, the mouse selects part or all of the text, and Ctrl+A selects all.

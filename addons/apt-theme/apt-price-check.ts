@@ -265,6 +265,8 @@ export class AptPriceCheck extends PriceCheckPanel {
         chips.push({ kind: 'logical', key, text, active: always || !filter.disabled, toggle: () => (filter.disabled = !filter.disabled) });
       }
     };
+    if (filters.ultimatumReward) logical('ultimatumReward', filters.ultimatumReward, t('item.ultimatum_reward', filters.ultimatumReward.text));
+    if (filters.ultimatumSacrifice) logical('ultimatumSacrifice', filters.ultimatumSacrifice, t('item.ultimatum_sacrifice', filters.ultimatumSacrifice.text));
     if (filters.rarity?.value === 'magic') logical('rarity', filters.rarity, t('Magic'));
     logical('unidentified', filters.unidentified, t('item.unidentified'));
     logical('veiled', filters.veiled, t('item.veiled'));

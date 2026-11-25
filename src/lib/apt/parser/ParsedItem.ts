@@ -20,6 +20,22 @@ export enum ItemInfluence {
   Warlord = 'Warlord'
 }
 
+/** Reward types as the trade site names them (Ultimatum Filters → Reward Type). */
+export type UltimatumRewardType = 'DoubleCurrency' | 'DoubleDivCards' | 'MirrorRare' | 'ExchangeUnique'
+
+export interface UltimatumTrial {
+  rewardType: UltimatumRewardType
+  /** The reward line as shown ("Doubles sacrificed Currency", a unique's name). */
+  rewardText: string
+  /** The unique given for ExchangeUnique. */
+  rewardUnique?: BaseType
+  /** The line after "Requires Sacrifice:" without the count ("Divine Orb", "Mirrorable, Rare Item"). */
+  sacrificeText: string
+  /** The sacrificed item when it is a known one (currency, card, unique). */
+  sacrifice?: BaseType
+  sacrificeCount?: number
+}
+
 export interface ParsedItem {
   rarity?: ItemRarity
   itemLevel?: number
@@ -75,6 +91,8 @@ export interface ParsedItem {
   stackSize?: { value: number, max: number }
   /** Price of Exile: Facetor's Lens "Stored Experience: 500 000 000". */
   storedExperience?: number
+  /** Price of Exile: Inscribed Ultimatum "Requires Sacrifice: …" and "Reward: …" (owner, 25.11.2026). */
+  ultimatum?: UltimatumTrial
   isUnidentified: boolean
   isCorrupted?: { twice?: boolean }
   isUnmodifiable?: boolean

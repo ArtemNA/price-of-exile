@@ -521,6 +521,10 @@
       @if (item().info.exchangeable) {
         <div class="apt-legacy-message">{{ 'trade_result.legacy_bulk_xchg_msg' | t }}</div>
       }
+      @if (sacrificeCount() != null) {
+        <!-- Price of Exile: Inscribed Ultimatum, the trade site has no count filter (owner, 25.11.2026) -->
+        <div class="apt-legacy-message">{{ sacrificeCountNote | tr }}</div>
+      }
       <div class="mb-2 flex pl-2">
         <div class="mr-2 flex items-baseline text-(--apt-500)">
           <span class="mr-1">{{ 'trade_result.matched' | t: '' }}</span>
@@ -545,6 +549,9 @@
               <th><div class="px-2">{{ 'trade_result.price' | t }}</div></th>
               @if (item().stackSize) {
                 <th><div class="px-2">{{ 'trade_result.stock' | t }}</div></th>
+              }
+              @if (sacrificeCount() != null) {
+                <th><div class="px-2">{{ 'Sacrifice' | tr }}</div></th>
               }
               @if (active()!.filters.itemLevel) {
                 <th><div class="px-2">{{ 'trade_result.item_level' | t }}</div></th>
@@ -582,6 +589,10 @@
                   </td>
                   @if (item().stackSize) {
                     <td class="px-2 text-right">{{ row.stackSize }}</td>
+                  }
+                  @if (sacrificeCount() != null) {
+                    <!-- Price of Exile: the trade site cannot filter the count; the checked item's count stands out -->
+                    <td class="px-2 text-right whitespace-nowrap" [class.apt-same-count]="sameSacrifice(row)">{{ row.sacrificeCount != null ? 'x' + row.sacrificeCount : '' }}</td>
                   }
                   @if (active()!.filters.itemLevel) {
                     <td class="px-2 text-right whitespace-nowrap">{{ row.itemLevel }}</td>

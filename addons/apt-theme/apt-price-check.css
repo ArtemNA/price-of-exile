@@ -617,3 +617,8 @@
 .apt-price-check .apt-reminder-text::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to left, var(--apt-800), transparent 6rem); }
 .apt-price-check .apt-filter:not(:hover) .apt-reminder-text { overflow: hidden; }
 .apt-price-check .apt-filter:hover .apt-reminder-text::after { opacity: 0; }
+/* Price of Exile: Inscribed Ultimatum listings with the checked item's sacrifice count */
+.apt-price-check .apt-same-count {
+  color: var(--apt-50, #fff);
+  font-weight: 700;
+}

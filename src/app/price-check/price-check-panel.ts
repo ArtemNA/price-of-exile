@@ -33,6 +33,7 @@ import {
   queryId,
   relatedItems,
   sparkline,
+  ultimatumItems,
 } from '../core/ninja-prices';
 import { t, tr, TranslatePipe, TrPipe } from '../core/i18n';
 import { settings, updateSettings } from '../core/settings';
@@ -348,6 +349,9 @@ export class PriceCheckPanel {
   });
 
   protected readonly related = computed(() => {
+    // Inscribed Ultimatum: what it takes and what it gives, at poe.ninja prices (owner, 25.11.2026).
+    const trial = this.item().ultimatum;
+    if (trial) return ultimatumItems(trial, currencyRates.prices());
     const query = this.ninja()?.query;
     return query ? relatedItems(queryId(query), currencyRates.prices()) : null;
   });
@@ -677,13 +681,26 @@ export class PriceCheckPanel {
     return `${row.priceAmount} ${row.priceCurrency}` === this.summary().cheapest?.price;
   }
 
+  /** Inscribed Ultimatum: the sacrifice count the checked item asks for (the trade site cannot filter it). */
+  protected readonly sacrificeCount = computed(() => this.item().ultimatum?.sacrificeCount);
+
+  /** Shown above the listings of an ultimatum with a count (currency, cards), like the exchange note. */
+  protected readonly sacrificeCountNote = "The trade site can't filter by sacrifice count, so listings may ask for a different amount. Check the Sacrifice column.";
+
+  /** A listed ultimatum with the same sacrifice count as the checked one. */
+  protected sameSacrifice(row: GroupedResult): boolean {
+    return this.sacrificeCount() != null && row.sacrificeCount === this.sacrificeCount();
+  }
+
   protected detailHeader(rows: GroupedResult[]): string {
+    if (this.sacrificeCount() != null) return tr('Sacrifice');
     if (rows.some((r) => r.stackSize != null)) return tr('Stack');
     if (rows.some((r) => r.level != null)) return tr('Lvl / Q');
     return 'iLvl';
   }
 
   protected detail(row: GroupedResult): string {
+    if (this.sacrificeCount() != null) return row.sacrificeCount != null ? `x${row.sacrificeCount}` : '';
     if (row.stackSize != null) return String(row.stackSize);
     if (row.level != null) return [row.level, row.quality].filter(Boolean).join(' / ');
     return row.itemLevel ?? '';

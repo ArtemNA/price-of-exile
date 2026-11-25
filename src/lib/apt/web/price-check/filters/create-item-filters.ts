@@ -120,6 +120,23 @@ export function createFilters (
         disabled: false
       }
     }
+    if (item.ultimatum) {
+      // Price of Exile: Inscribed Ultimatum by reward and sacrifice, both on (owner, 25.11.2026)
+      const { rewardType, rewardText, rewardUnique, sacrifice, sacrificeText, sacrificeCount } = item.ultimatum
+      filters.ultimatumReward = {
+        type: rewardType,
+        text: rewardText,
+        uniqueTrade: rewardUnique && t(opts, rewardUnique),
+        disabled: false
+      }
+      if (sacrifice) {
+        filters.ultimatumSacrifice = {
+          text: sacrificeCount ? `${sacrificeText} x${sacrificeCount}` : sacrificeText,
+          nameTrade: t(opts, sacrifice),
+          disabled: false
+        }
+      }
+    }
     if (item.info.refName === 'Chronicle of Atzoatl') {
       filters.areaLevel = {
         value: floorToBracket(item.areaLevel!, [1, 68, 73, 75, 78, 80]),

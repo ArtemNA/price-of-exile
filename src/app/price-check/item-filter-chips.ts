@@ -60,6 +60,16 @@ export function itemFilterChips(filters: ItemFilters): ItemFilterChip[] {
     });
   }
 
+  // Inscribed Ultimatum: what it gives and what it takes, each can be left out.
+  const reward = filters.ultimatumReward;
+  if (reward) {
+    chips.push({ key: 'ultimatumReward', label: t('item.ultimatum_reward', reward.text), enabled: !reward.disabled, toggle: () => (reward.disabled = !reward.disabled) });
+  }
+  const sacrifice = filters.ultimatumSacrifice;
+  if (sacrifice) {
+    chips.push({ key: 'ultimatumSacrifice', label: t('item.ultimatum_sacrifice', sacrifice.text), enabled: !sacrifice.disabled, toggle: () => (sacrifice.disabled = !sacrifice.disabled) });
+  }
+
   const notCatalysed = filters.notCatalysed;
   if (notCatalysed) {
     chips.push({ key: 'notCatalysed', label: t('item.not_catalysed'), enabled: !notCatalysed.disabled, toggle: () => (notCatalysed.disabled = !notCatalysed.disabled) });

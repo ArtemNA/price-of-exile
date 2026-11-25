@@ -1,4 +1,5 @@
 import type { ItemInfluence, ItemCategory } from '@/parser'
+import type { UltimatumRewardType } from '@/parser/ParsedItem'
 import { ModifierType, ModifierMechanic, type StatCalculated } from '@/parser/modifiers'
 
 export interface FilterPreset {
@@ -77,6 +78,19 @@ export interface ItemFilters {
   itemLevel?: FilterNumeric
   stackSize?: FilterNumeric
   storedExperience?: FilterNumeric
+  /** Price of Exile: Inscribed Ultimatum reward type, and the unique for ExchangeUnique. */
+  ultimatumReward?: {
+    type: UltimatumRewardType
+    text: string
+    uniqueTrade?: string
+    disabled: boolean
+  }
+  /** Price of Exile: Inscribed Ultimatum required item (the trade site has no filter for the count). */
+  ultimatumSacrifice?: {
+    text: string
+    nameTrade: string
+    disabled: boolean
+  }
   unidentified?: {
     value: true
     disabled: boolean

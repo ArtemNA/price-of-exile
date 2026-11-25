@@ -4,6 +4,7 @@
 
 import { BaseType, ITEM_BY_REF, ITEM_DROP } from '@/assets/data';
 import type { ParsedItem } from '@/parser';
+import type { UltimatumTrial } from '@/parser/ParsedItem';
 import { getDetailsId, isValuableBasetype } from '../../lib/apt/web/price-check/trends/getDetailsId';
 import { NINJA_DIVINE_ROUNDING, POE_NINJA_NAMESPACES, POE_NINJA_SITE } from '../constants';
 
@@ -225,6 +226,43 @@ function findItemById(id: string): BaseType | undefined {
     if (filtered.length) found = filtered;
   }
   return found?.[0];
+}
+
+/** poe.ninja chaos price of an item: its plain line, else its cheapest variant (a unique's links). */
+function ninjaChaos(item: BaseType, db: PriceDb): number | undefined {
+  if (item.refName === 'Chaos Orb') return 1;
+  const id = `${item.namespace}::${item.refName}`;
+  const exact = db.get(id)?.chaos;
+  if (exact != null) return exact;
+  const variant = `${id} // `;
+  let cheapest: number | undefined;
+  for (const [key, price] of db) {
+    if (key.startsWith(variant) && (cheapest == null || price.chaos < cheapest)) cheapest = price.chaos;
+  }
+  return cheapest;
+}
+
+/**
+ * Price of Exile: an Inscribed Ultimatum shown like related items (owner, 25.11.2026): the
+ * sacrifice on the left, the reward on the right (twice the sacrifice, or the unique), each
+ * priced for its count. Null when the sacrifice is not a known item (a mirrorable rare).
+ */
+export function ultimatumItems(trial: UltimatumTrial, db: PriceDb): RelatedItems | null {
+  const priced = (item: BaseType | undefined, count: number): RelatedEntry | null => {
+    if (!item) return null;
+    const chaos = ninjaChaos(item, db);
+    return { name: count > 1 ? `${item.name} x${count}` : item.name, icon: item.icon, chaos: chaos == null ? undefined : chaos * count, highlight: false };
+  };
+  const count = trial.sacrificeCount ?? 1;
+  const sacrifice = priced(trial.sacrifice, count);
+  if (!sacrifice) return null;
+  const reward =
+    trial.rewardType === 'ExchangeUnique'
+      ? priced(trial.rewardUnique, 1)
+      : trial.rewardType === 'DoubleCurrency' || trial.rewardType === 'DoubleDivCards'
+        ? priced(trial.sacrifice, count * 2)
+        : null;
+  return { related: [sacrifice], items: reward ? [reward] : [] };
 }
 
 /**

@@ -741,3 +741,24 @@
 - **Правило:** спершу `popup::show` (ціль, стандартний розмір, видимість), потім подія сторінці. Те саме для панелі
   пошуку в схованці. `fit` для прихованого вікна пише `[fit] ignored a size while the popup is hidden`.
 - **Перевірено:** `cargo test` 29/29 двічі. Живої перевірки нема: гонка рідкісна, гра відкрита.
+## F-83. Inscribed Ultimatum: пошук за нагородою й жертвою, ціни жертви й нагороди (25.11.2026)
+
+- **Запит власника:** прайсчек ультиматуму за reward / reward + sacrifice, моди не важливі; ціни унікальних
+  предметів жертви й нагороди з poe.ninja, як related.
+- **Рядки:** з файлів гри (лише читання): ClientStrings `UltimatumItemisedTrialItemRequirement(Quantity)` «Requires
+  Sacrifice: {0} {1}», `UltimatumItemisedTrialReward` «Reward: {0}», кількість «x{0}»; тексти нагород з
+  `UltimatumItemisedRewards` (en/ru); клас ru «Прочие предметы карт» з `ItemClasses`.
+- **Трейд:** `ultimatum_filters`: `ultimatum_reward` (DoubleCurrency / DoubleDivCards / MirrorRare / ExchangeUnique),
+  `ultimatum_input` і `ultimatum_output` (knownItem, як `map_completion_reward`, тому назва предмета). **Фільтра
+  кількості немає**: «Divine Orb x4» шукається разом з x1 і x8.
+- **Звірено запитом** (25.11.2026, з дозволу: 1 search + 1 fetch, Covens): `ultimatum_reward` = DoubleCurrency,
+  `ultimatum_input` = "Divine Orb" прийнято без помилки, усі 10 перших лотів «Divine Orb», але **x1** (30–40 chaos), а не
+  x4: кількість справді не фільтрується, дешеві лоти — з меншою жертвою. `ultimatum_output` не звірявся.
+- **Картка лоту:** трейд дає ці рядки як `displayMode` 3 з плейсхолдерами `{0} {1}`, а не `%0`; картка показувала
+  «Requires Sacrifice: {0} {1}». Тепер підставляє обидва формати (тест на справжніх властивостях).
+- **Код:** `parseUltimatum`, `ParsedItem.ultimatum`, фільтри `ultimatumReward` / `ultimatumSacrifice`, чіпи в обох
+  темах, `ultimatumItems` у `ninja-prices.ts` (жертва зліва, нагорода справа, ціна × кількість). Тести
+  `tests/ultimatum.test.ts`, `tests/ultimatum-ru.test.ts`; падають на зіпсованому тексті нагороди.
+- **Кількість у рядку:** відсіювати лоти з іншою кількістю на боці застосунку відмовились: догрузка до 100 лотів (до 10 fetch на
+  прайсчек) впреться в ліміт (власник). Замість цього колонка «Жертва» з `xN` кожного лоту (властивість type 51),
+  рядки з кількістю предмета виділені.
