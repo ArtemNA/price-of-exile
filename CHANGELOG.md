@@ -2,13 +2,13 @@
 
 Each release takes its "What's new" from the section of its tag.
 
-## v0.1.30
+## v0.1.31
 
-- Fix: the map rolling regex let through maps whose mod the game shows with a sign the mod's wording has not ("Monsters have +50% Chance to Block Attack Damage"): a number in a token now takes the sign too.
+Replaces v0.1.29 and v0.1.30: their map rolling regex let some deadly maps through and dimmed some clean ones.
 
-## v0.1.29
-
-- Map check settings: two buttons make a stash search regex that skips maps with the current profile's deadly mods, or deadly and warning mods, into the "Map rolling" group as "Non-deadly 1" / "Non warn-deadly 1" (one pair per profile): added the first time, updated after that. Entries are named once in the interface language. Each mod gets the shortest piece of its text that no other map line has; works in English and Russian.
+- Map check settings: two buttons make a stash search regex that skips maps with the current profile's deadly mods, or deadly and warning mods. It goes into the "Map rolling" group as "Non-deadly 1" / "Non warn-deadly 1" (one pair per profile): added the first time, updated after that, named once in the interface language. The result under the buttons shows the regex, its length out of 250 and whether the entry was added or updated; a regex longer than 250 characters is not written.
+- Each mod gets the shortest piece of its text that nothing else on a map can match. The stash search reads a map's full (advanced) text, so the regex steers clear of base, rare, magic and unique map names, affix names and tags, reminder texts, roll ranges ("35(35-45)%"), signs ("+50%") and " — Unscalable Value", all taken from the game files. Works with the game in English or Russian.
+- Fix: with the game in Russian, the map check settings listed English mods.
 - Fix: in Russian and Ukrainian, the update banner in the settings, the version row in "About" and the map check settings ran out of their space (text out of buttons, column titles run together, profile III cut off).
 
 ## v0.1.28

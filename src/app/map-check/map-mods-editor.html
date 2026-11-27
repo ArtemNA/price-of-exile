@@ -25,26 +25,31 @@
 <div class="flex flex-col gap-1">
   <div class="flex flex-wrap items-center gap-2 whitespace-nowrap">
     <span class="text-muted" [title]="'A stash search that skips maps with the marked mods of this profile, added to the &quot;{0}&quot; group' | tr: groupName">{{ 'Stash regex for map rolling' | tr }}</span>
-    <button class="h-7 border border-line-strong bg-raised px-2.5 hover:border-gold" data-test="regex-no-warning"
-      (click)="generateRegex(true)">{{ 'Without warning or deadly' | tr }}</button>
-    <button class="h-7 border border-line-strong bg-raised px-2.5 hover:border-gold" data-test="regex-no-deadly"
-      (click)="generateRegex(false)">{{ 'Without deadly' | tr }}</button>
+    <button class="h-7 border border-line-strong bg-raised px-2.5 hover:border-gold disabled:opacity-50" data-test="regex-no-warning"
+      [disabled]="!ready()" [title]="ready() ? '' : ('Loading the game data…' | tr)" (click)="generateRegex(true)">{{ 'Without warning or deadly' | tr }}</button>
+    <button class="h-7 border border-line-strong bg-raised px-2.5 hover:border-gold disabled:opacity-50" data-test="regex-no-deadly"
+      [disabled]="!ready()" [title]="ready() ? '' : ('Loading the game data…' | tr)" (click)="generateRegex(false)">{{ 'Without deadly' | tr }}</button>
   </div>
   @if (regexResult(); as result) {
-    @if (!result.text) {
-      <p class="text-muted">{{ 'No mods with these marks in this profile.' | tr }}</p>
+    @if (!result.text && !result.missing.length) {
+      <p class="text-muted">{{ 'No mods with these marks in this profile; the stash search entry is unchanged.' | tr }}</p>
+    } @else if (!result.text) {
+      <p class="text-muted">{{ 'The stash search entry is unchanged.' | tr }}</p>
+    } @else if (result.tooLong) {
+      <p class="flex min-w-0 items-baseline gap-2 text-warn" data-test="regex-result">
+        <code class="min-w-0 truncate" [title]="result.text">{{ result.text }}</code>
+        <span class="flex-none tabular-nums">{{ result.text.length }}/{{ maxLength }}</span>
+      </p>
+      <p class="text-warn">{{ 'Longer than the game takes: mark fewer mods. The stash search entry is unchanged.' | tr }}</p>
     } @else {
       <p class="flex min-w-0 items-baseline gap-2 text-muted" data-test="regex-result">
-        <span class="flex-none">{{ 'Added to "{0}" as "{1}":' | tr: groupName : result.name }}</span>
+        <span class="flex-none">{{ (result.updated ? 'Updated in "{0}" as "{1}":' : 'Added to "{0}" as "{1}":') | tr: groupName : result.name }}</span>
         <code class="min-w-0 truncate text-bright" [title]="result.text">{{ result.text }}</code>
-        <span class="flex-none tabular-nums" [class.text-warn]="result.tooLong">{{ result.text.length }}/{{ maxLength }}</span>
+        <span class="flex-none tabular-nums">{{ result.text.length }}/{{ maxLength }}</span>
       </p>
-      @if (result.tooLong) {
-        <p class="text-warn">{{ 'Longer than the game takes: mark fewer mods, or the search is cut off.' | tr }}</p>
-      }
     }
     @if (result.missing.length) {
-      <p class="text-warn" [title]="result.missing.join('\n')">{{ 'Not in the regex (wording no longer in the game): {0}' | tr: result.missing.length }}</p>
+      <p class="text-warn" [title]="result.missing.join('\n')">{{ 'Not in the regex (no token: wording no longer in the game, or nothing unique in it): {0}' | tr: result.missing.length }}</p>
     }
   }
 </div>

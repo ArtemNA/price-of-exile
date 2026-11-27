@@ -368,6 +368,13 @@ export const MEMORY_MAPS = ['Courtyard of Wasting', 'Chambers of Impurity', 'The
 /** Map check profiles, shown as roman numerals; decisions are stored one character per profile. */
 export const MAP_CHECK_PROFILES = ['I', 'II', 'III'];
 /**
+ * Map lines the stash search reads that no client string holds (the owner's map text, 27.11.2026).
+ * English only (the rest comes per language from the game files); extra lines only make tokens stricter.
+ */
+export const MAP_SEARCH_EXTRA_LINES = ['Modifiable with Limited Currency', 'Note: ~price # chaos', 'Note: ~b/o # divine', '+#% (augmented)'];
+/** Ranks of the Eldritch implicit headers ("Searing Exarch Implicit Modifier (Perfect)"). */
+export const ELDRITCH_IMPLICIT_RANKS = ['Lesser', 'Greater', 'Grand', 'Exceptional', 'Exquisite', 'Perfect'];
+/**
  * Names of the map rolling regex entries, "<name> <profile>" (owner, 27.11.2026). The interface
  * language picks the name once, when the entry is made; later clicks find it by any of these and
  * update its text only.
