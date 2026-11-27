@@ -2,6 +2,10 @@
 
 Each release takes its "What's new" from the section of its tag.
 
+## Unreleased
+
+- Map check settings: two buttons make a stash search regex that skips maps with the current profile's deadly mods, or deadly and warning mods, into the "Map rolling" group as "Non-deadly 1" / "Non warn-deadly 1" (one pair per profile): added the first time, updated after that. Entries are named once in the interface language. Each mod gets the shortest piece of its text that no other map line has; works in English and Russian.
+
 ## v0.1.28
 
 - Inscribed Ultimatum: the price check searches by its reward and its sacrifice (each can be switched off), not just by the name. Beside it, the sacrifice and the reward are shown with their poe.ninja prices for their counts. The trade site cannot filter by the sacrifice count, so listings with x1 and x8 show too; a "Sacrifice" column shows each listing's count, and those with the item's count stand out. A note above the listings says so.

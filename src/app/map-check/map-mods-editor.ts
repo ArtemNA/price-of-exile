@@ -1,10 +1,11 @@
 import { Component, computed, signal } from '@angular/core';
 import type { StatMatcher } from '@/web/map-check/common';
-import { MAP_CHECK_PROFILES } from '../constants';
-import { TrPipe } from '../core/i18n';
+import { MAP_CHECK_PROFILES, STASH_SEARCH_MAX_LENGTH } from '../constants';
+import { interfaceLanguage, TrPipe } from '../core/i18n';
 import { settings, updateSettings } from '../core/settings';
 import { loadGameData } from '../game-data';
 import { allAreaMods, decisionHasColor, decisionOf, filterAreaMods, StatTag, withDecision } from './map-check';
+import { MAP_ROLLING_GROUP, type MapRegex, mapRollingEntryName, mapRollingRegex, withMapRollingEntry } from './map-regex';
 
 /** Marks the user can set per mod in the editor; the order of APT's columns. `label` is English, the template translates it. */
 const COLUMNS = [
@@ -57,4 +58,35 @@ export class MapModsEditor {
   protected setShowNewStats(showNewStats: boolean): void {
     updateSettings({ mapCheck: { ...this.config(), showNewStats } });
   }
+
+  /** What the last regex button did, shown under the buttons. */
+  protected readonly regexResult = signal<RegexResult | null>(null);
+
+  /**
+   * Stash search regex skipping maps with the current profile's deadly (and warning) mods, put into
+   * the "Map rolling" group (owner, 27.11.2026): added the first time, its text updated after that.
+   * The entry's name carries the profile, so each profile keeps its own pair.
+   */
+  protected generateRegex(withWarnings: boolean): void {
+    const config = this.config();
+    const regex = mapRollingRegex(config, withWarnings ? ['d', 'w'] : ['d'], settings().language);
+    if (!regex.text) {
+      this.regexResult.set({ name: '', ...regex });
+      return;
+    }
+    const { name, known } = mapRollingEntryName(withWarnings, config.profile, interfaceLanguage());
+    const stashSearch = withMapRollingEntry(settings().stashSearch, name, regex.text, known);
+    updateSettings({ stashSearch });
+    // The entry keeps the name it was made with (maybe another interface language): show that one.
+    const shown = stashSearch.find((g) => g.title === MAP_ROLLING_GROUP)?.entries.find((e) => known.includes(e.name))?.name ?? name;
+    this.regexResult.set({ name: shown, ...regex });
+  }
+
+  protected readonly maxLength = STASH_SEARCH_MAX_LENGTH;
+  protected readonly groupName = MAP_ROLLING_GROUP;
+}
+
+interface RegexResult extends MapRegex {
+  /** The stash search entry written; empty when nothing was marked. */
+  name: string;
 }

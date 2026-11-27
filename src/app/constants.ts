@@ -368,6 +368,16 @@ export const MEMORY_MAPS = ['Courtyard of Wasting', 'Chambers of Impurity', 'The
 /** Map check profiles, shown as roman numerals; decisions are stored one character per profile. */
 export const MAP_CHECK_PROFILES = ['I', 'II', 'III'];
 /**
+ * Names of the map rolling regex entries, "<name> <profile>" (owner, 27.11.2026). The interface
+ * language picks the name once, when the entry is made; later clicks find it by any of these and
+ * update its text only.
+ */
+export const MAP_ROLLING_ENTRY_NAMES: Record<UiLang, { deadly: string; warnDeadly: string }> = {
+  en: { deadly: 'Non-deadly', warnDeadly: 'Non warn-deadly' },
+  uk: { deadly: 'Без deadly', warnDeadly: 'Без warn-deadly' },
+  ru: { deadly: 'Без deadly', warnDeadly: 'Без warn-deadly' },
+};
+/**
  * Default map check marks (APT `WidgetItemCheck.vue initInstance`). APT also marks physical and
  * elemental reflect, which left the game and would show the "outdated wording" banner (FINDINGS F-39):
  * here the less recovery mod takes their place.

@@ -155,6 +155,8 @@ export interface TranslationDict {
   ULTIMATUM_DOUBLE_CURRENCY: string
   ULTIMATUM_DOUBLE_DIV_CARDS: string
   ULTIMATUM_MIRROR_RARE: string
+  /** Price of Exile: the description every map has (ClientStrings ItemDescriptionMap), for map regexes. */
+  MAP_DESCRIPTION: string
   SOCKETS: string
   QUALITY: string
   MEMORY_STRANDS: string

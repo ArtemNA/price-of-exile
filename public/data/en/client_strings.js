@@ -143,6 +143,7 @@ export default {
   VESTIGIAL_NAME: /^Vestigial (.*)$/,
   VESTIGIAL_IMPLICIT: 'Vestigial Implicit Modifier',
   MAP_AREA: 'Map Area: ',
+  MAP_DESCRIPTION: 'Travel to a Map of this tier or lower by using this in a personal Map Device. Maps can only be used once.',
   CHART_SULPHUR: "Dead Man's Sulphur: ",
   MERCENARY_LEVEL: 'Mercenary Level: ',
   MERCENARY_BUILD: 'Build: ',
