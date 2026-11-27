@@ -2,9 +2,10 @@
 
 Each release takes its "What's new" from the section of its tag.
 
-## Unreleased
+## v0.1.29
 
 - Map check settings: two buttons make a stash search regex that skips maps with the current profile's deadly mods, or deadly and warning mods, into the "Map rolling" group as "Non-deadly 1" / "Non warn-deadly 1" (one pair per profile): added the first time, updated after that. Entries are named once in the interface language. Each mod gets the shortest piece of its text that no other map line has; works in English and Russian.
+- Fix: in Russian and Ukrainian, the update banner in the settings, the version row in "About" and the map check settings ran out of their space (text out of buttons, column titles run together, profile III cut off).
 
 ## v0.1.28
 

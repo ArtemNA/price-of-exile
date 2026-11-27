@@ -1,4 +1,4 @@
-<div class="flex items-center gap-3 whitespace-nowrap">
+<div class="flex flex-wrap items-center gap-x-3 gap-y-2 whitespace-nowrap">
   <input class="h-8 min-w-32 flex-1 border border-line-strong bg-well px-2 text-bright outline-none focus:border-gold"
     [placeholder]="'Search…' | tr" [value]="search()" (input)="search.set($any($event.target).value)" />
   <label class="flex items-center gap-1.5">
@@ -9,18 +9,21 @@
     <input type="checkbox" class="accent-gold" [checked]="config().showNewStats" (change)="setShowNewStats($any($event.target).checked)" />
     {{ 'Show icon for new mods' | tr }}
   </label>
-  <span class="text-muted">{{ 'Profile' | tr }}</span>
-  <div class="flex gap-1">
-    @for (profile of profiles; track profile; let i = $index) {
-      <button class="h-7 w-9 border font-display"
-        [class]="config().profile === i + 1 ? 'border-gold bg-selected text-gold-soft' : 'border-line-strong bg-raised hover:border-gold'"
-        (click)="selectProfile(i + 1)">{{ profile }}</button>
-    }
+  <!-- The label wraps together with its buttons when the row is too narrow (Ukrainian). -->
+  <div class="flex items-center gap-3">
+    <span class="text-muted">{{ 'Profile' | tr }}</span>
+    <div class="flex gap-1">
+      @for (profile of profiles; track profile; let i = $index) {
+        <button class="h-7 w-9 border font-display"
+          [class]="config().profile === i + 1 ? 'border-gold bg-selected text-gold-soft' : 'border-line-strong bg-raised hover:border-gold'"
+          (click)="selectProfile(i + 1)">{{ profile }}</button>
+      }
+    </div>
   </div>
 </div>
 
 <div class="flex flex-col gap-1">
-  <div class="flex items-center gap-2 whitespace-nowrap">
+  <div class="flex flex-wrap items-center gap-2 whitespace-nowrap">
     <span class="text-muted" [title]="'A stash search that skips maps with the marked mods of this profile, added to the &quot;{0}&quot; group' | tr: groupName">{{ 'Stash regex for map rolling' | tr }}</span>
     <button class="h-7 border border-line-strong bg-raised px-2.5 hover:border-gold" data-test="regex-no-warning"
       (click)="generateRegex(true)">{{ 'Without warning or deadly' | tr }}</button>
@@ -49,7 +52,7 @@
 <div class="flex items-center border-b border-line pb-1 text-muted">
   <span class="flex-1 px-2">{{ 'Mod (found: {0})' | tr: list().length }}</span>
   @for (column of columns; track column.decision) {
-    <span class="w-16 text-center">{{ column.label | tr }}</span>
+    <span class="w-24 text-center">{{ column.label | tr }}</span>
   }
   <span class="w-8"></span>
 </div>
@@ -69,7 +72,7 @@
         <span class="truncate" [title]="mod.matchStr">{{ mod.matchStr }}</span>
       </span>
       @for (column of columns; track column.decision) {
-        <span class="flex w-16 justify-center group-hover:visible" [class.invisible]="!marked(mod.matchStr)">
+        <span class="flex w-24 justify-center group-hover:visible" [class.invisible]="!marked(mod.matchStr)">
           <input type="radio" [class]="column.class" [attr.aria-label]="(column.label | tr) + ': ' + mod.matchStr"
             [name]="mod.matchStr" [checked]="decision(mod.matchStr) === column.decision" (change)="set(mod.matchStr, column.decision)" />
         </span>
