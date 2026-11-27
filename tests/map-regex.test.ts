@@ -3,12 +3,10 @@
 // numbers filled in: it must match its own mod and nothing else.
 import { beforeAll, describe, expect, it } from 'vitest';
 import { allAreaMods } from '../src/app/map-check/map-check';
-import { mapLines, mapModToken, mapRollingEntryName, mapRollingRegex, withMapRollingEntry } from '../src/app/map-check/map-regex';
+import { mapLines, mapModToken, mapRollingEntryName, mapRollingRegex, shownLines, withMapRollingEntry } from '../src/app/map-check/map-regex';
 import { DEFAULT_STASH_SEARCH, STASH_SEARCH_MAX_LENGTH } from '../src/app/constants';
 import { loadGameDataFromDisk, loadGameDataInLanguage } from './game-data';
 
-/** A line as the game shows it: numbers in place of `#`. */
-const shown = (line: string) => line.replaceAll('#', '17');
 
 function checkAllTokens(language: string): { mods: number; without: string[]; shared: string[] } {
   const { lines, own, siblings } = mapLines();
@@ -24,13 +22,16 @@ function checkAllTokens(language: string): { mods: number; without: string[]; sh
     }
     const regex = new RegExp(token, 'i');
     const mine = own.get(mod.matchStr)!;
-    expect(mine.some((line) => regex.test(shown(line))), `${token} ⇢ own ${mod.matchStr}`).toBe(true);
+    // The game may show the number signed although the wording has none ("+50% Chance to Block").
+    for (const number of [0, 1, 2]) {
+      expect(mine.some((line) => regex.test(shownLines(line)[number])), `${token} ⇢ own ${mod.matchStr} (${number})`).toBe(true);
+    }
     // Other wordings of the same stat only when this one has no token of its own ("# раз(-а)"): listed.
     const sibling = siblings.get(mod.matchStr)!.filter((line) => !mine.includes(line));
-    if (sibling.some((line) => regex.test(shown(line)))) shared.push(mod.matchStr);
+    if (sibling.some((line) => shownLines(line).some((text) => regex.test(text)))) shared.push(mod.matchStr);
     for (const line of lines) {
       if (mine.includes(line) || sibling.includes(line)) continue;
-      expect(regex.test(shown(line)), `${token} (${mod.matchStr}) also matches "${line}"`).toBe(false);
+      expect(shownLines(line).some((text) => regex.test(text)), `${token} (${mod.matchStr}) also matches "${line}"`).toBe(false);
     }
   }
   return { mods, without, shared };
@@ -82,6 +83,15 @@ describe('map rolling regex, English', () => {
     ];
     expect(map.some((line) => alternatives.test(line))).toBe(true);
     expect(map.filter((line) => !line.includes('Recovery')).some((line) => alternatives.test(line))).toBe(false);
+  });
+
+  it("the owner's stash: a deadly mod the game shows signed is excluded (27.11.2026)", () => {
+    const regex = mapRollingRegex(config([['Monsters have #% Chance to Block Attack Damage', 'd--']]), ['d', 'w'], 'en');
+    const alternatives = new RegExp(regex.text.slice(2, -1), 'i');
+    expect(alternatives.test('Monsters have +50% Chance to Block Attack Damage')).toBe(true);
+    expect(alternatives.test('Monsters have 50% chance to Block Attack Damage')).toBe(true);
+    const clean = ['Area contains Labyrinth Hazards', 'Monsters have 680% increased Critical Strike Chance', '+75% to Monster Critical Strike Multiplier', 'Players have 30% less Armour', 'Players have 40% reduced Chance to Block', 'Monsters Maim on Hit with Attacks'];
+    expect(clean.filter((line) => alternatives.test(line))).toEqual([]);
   });
 
   it('says when the regex is longer than the game takes', () => {

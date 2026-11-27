@@ -18,10 +18,20 @@ const UNSAFE = /[.*?^${}()|[\]\\"\d]/;
 /** A line as the index keeps it: lowercased, every number (rolled or literal) as `#`. */
 const normalise = (text: string) => text.toLowerCase().replace(/\d+(?:\.\d+)?/g, '#');
 
-/** A piece of a mod line as a regex: numbers (`#`) as `\d+`, a literal `+` escaped. */
+/**
+ * A number in a token. The game may show a sign the data's wording leaves out: "Monsters have #%
+ * Chance to Block" is "+50%" on the map, so a plain `\d+` after the space never matched (owner's
+ * stash, 27.11.2026). One optional character before the digits takes the sign.
+ */
+const NUMBER = '.?\\d+';
+
+/** A piece of a mod line as a regex: numbers (`#`) as {@link NUMBER}, a literal `+` escaped. */
 function toToken(piece: string): string {
-  return piece.replaceAll('+', '\\+').replaceAll('#', '\\d+');
+  return piece.replaceAll('+', '\\+').replaceAll('#', NUMBER);
 }
+
+/** How the game may show a line's numbers: plain, signed. */
+const SHOWN_NUMBERS = ['17', '+17', '-17'];
 /** Substrings indexed up to this length; longer candidates are checked line by line. */
 const INDEXED = 16;
 
@@ -130,9 +140,23 @@ function shortestToken(corpus: Corpus, matcher: string): string | null {
   return tokenWithin(corpus, ownLines, new Set(ownLines)) ?? tokenWithin(corpus, ownLines, new Set(corpus.siblings.get(matcher)));
 }
 
+/** A line with its numbers as the game may show them. */
+export function shownLines(line: string): string[] {
+  return SHOWN_NUMBERS.map((number) => line.replaceAll('#', number));
+}
+
+/** True when `token` matches no line outside `mine`, with numbers filled in as the game shows them. */
+function matchesNoOther(corpus: Corpus, token: string, mine: Set<string>): boolean {
+  const regex = new RegExp(token, 'i');
+  return corpus.lines.every((line) => mine.has(line) || !shownLines(line).some((shown) => regex.test(shown)));
+}
+
 /** The shortest token found in ownLines that no line outside mine holds. */
 function tokenWithin(corpus: Corpus, ownLines: string[], mine: Set<string>): string | null {
-  const unique = (piece: string, where: Where) => [...holders(corpus, piece, where)].every((line) => mine.has(line));
+  // The index compares text; a number's `.?` also takes one more character ("+#" of another mod), so
+  // such a token is run as the game runs it over every other line too.
+  const unique = (piece: string, where: Where, token: string) =>
+    [...holders(corpus, piece, where)].every((line) => mine.has(line)) && (!piece.includes('#') || matchesNoOther(corpus, token, mine));
   let best: string | null = null;
   for (const line of ownLines) {
     // Any piece of the line; a number placeholder inside it becomes `\d+` in the token.
@@ -151,7 +175,7 @@ function tokenWithin(corpus: Corpus, ownLines: string[], mine: Set<string>): str
         if (at + length === line.length && !numberFirst) options.push([`${token}$`, 'end']);
         if (at === 0 && at + length === line.length) options.push([`^${token}$`, 'exact']);
         for (const [candidate, where] of options) {
-          if ((!best || candidate.length < best.length) && unique(piece, where)) best = candidate;
+          if ((!best || candidate.length < best.length) && unique(piece, where, candidate)) best = candidate;
         }
       }
     }
